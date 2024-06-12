@@ -1,26 +1,25 @@
 {
-  "domain": "ecomplus-storefront.netlify.app",
+  "domain": "festpan.netlify.app",
   "currency_symbol": "R$",
-  "primary_color": "",
+  "primary_color": "#28a745",
   "theme": {
     "bootswatch": "_",
     "custom": "_"
   },
-  "icons_font": "_",
-  "font_family": "_",
   "bg_color": "#ffffff",
-  "repository": "",
-  "logo": "/img/uploads/logo.png",
-  "name": "My Shop",
-  "short_name": "My Shop",
+  "logo": "/img/uploads/logo-festpan-45-anos.-300x158.png",
+  "name": "Festpan Alimentos",
+  "short_name": "Festpan Alimentos",
   "lang": "pt_br",
   "currency": "BRL",
   "mini_logo": "",
-  "favicon": "/img/uploads/favicon.png",
+  "font_family": "_",
+  "favicon": "/img/uploads/688db3f550.png",
+  "icons_font": "_",
   "country_code": "BR",
-  "secondary_color": "",
-  "icon": "/img/icon.png",
+  "secondary_color": "#e00c19",
+  "icon": "/img/uploads/logo-festpan-45-anos.-300x158.png",
   "store_id": 51491,
-  "description": "My PWA Shop",
-  "large_icon": "/img/large-icon.png"
+  "description": "A Festpan Alimentos tem tudo para sua padaria e confeitaria. Com mais de 45 anos no mercado a Festpan  está perto de você. ",
+  "large_icon": "/img/uploads/logo-festpan-45-anos.-300x158.png"
 }

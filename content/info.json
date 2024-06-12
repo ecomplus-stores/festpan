@@ -1,18 +1,22 @@
 {
   "shipping": {
     "show": true,
-    "text": "Entregamos para todo o Brasil"
+    "title": "Entrega rápida",
+    "text": "para todo o Brasil"
   },
   "installments": {
     "show": true,
-    "text": "Parcele sem juros"
+    "title": "Parcele sem juros",
+    "text": "em até 3x"
   },
   "exchange": {
-    "show": true,
+    "show": false,
+    "title": "Não gostou? A primeira troca é gratuita",
     "text": "Não gostou? A primeira troca é gratuita"
   },
   "promo": {
     "show": true,
-    "text": "Diferentes promoções ao longo do ano!"
+    "title": "5% de desconto",
+    "text": "Em pagamentos à vista"
   }
 }

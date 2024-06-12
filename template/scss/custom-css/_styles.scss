@@ -1,1 +1,45 @@
 // Add your custom CSS here.
+.rounded-icon {
+    border: 1px solid #ff0000;
+}
+
+.info-bar {
+    background: #ffffff;
+    color: #3b3a3a;
+}
+
+.i-shipping-fast, .i-credit-card, .i-exchange, .i-percent {
+    color: #ff0000;
+}
+
+.icone-place {
+    display: flex;
+    height: inherit;
+    fill: inherit;
+}
+
+.header__nav a {
+    color: #222;
+}
+
+.info-bar__item {
+    text-transform: none;
+    font-weight: 400;
+}
+
+.info-bar__item:after {
+    background: #e9e9e9;
+}
+
+.header__logo {
+    max-height: 80px;
+}
+
+.top-bar__countdown {
+    font-size: var(--font-size-sm);
+    font-weight: bold
+}
+
+.product-card__buy.fade {
+  opacity: 1
+}
