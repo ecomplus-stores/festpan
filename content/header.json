@@ -8,7 +8,9 @@
   "centralized_logo": false,
   "marketing_stripe": {
     "text": "Pague com pix e ganhe 5% de desconto",
-    "link": ""
+    "link": "",
+    "background": "#090909",
+    "color": "#ffffff"
   },
   "alphabetical_order_submenu": false,
   "name_all_departments": "",
