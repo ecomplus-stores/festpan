@@ -28,6 +28,10 @@
       {
         "source": "/checkout.?*.css",
         "destination": "/checkout.css"
+      },
+      {
+        "source": "/festpan-:slug",
+        "destination": "/:slug"
       }
     ],
     "headers": [
