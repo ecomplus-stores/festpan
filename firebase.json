@@ -1,6 +1,11 @@
 {
   "hosting": {
     "redirects": [
+      {
+        "regex": "/festpan-*",
+        "destination": "/*",
+        "type": 302
+      }
     ],
     "public": "dist",
     "ignore": [
