@@ -15,8 +15,12 @@
     ],
     "rewrites": [
       {
+        "source": "/festpan-:slug",
+        "destination": "/:slug"
+      },
+      {
         "source": "**/!(*(*.)js|*(*.)css|*(*.)ico|*(*.)png|*(*.)gif|*(*.)jpg|*(*.)jpeg|*(*.)webp|*(*.)svg|*(*.)woff|*(*.)woff2|*(*.)otf|*(*.)ttf|*(*.)eot)",
-        "function": "rewriteAndSSR"
+        "function": "ssr"
       },
       {
         "source": "/storefront.?*.js",
@@ -33,10 +37,6 @@
       {
         "source": "/checkout.?*.css",
         "destination": "/checkout.css"
-      },
-      {
-        "source": "/festpan-:slug",
-        "destination": "/:slug"
       }
     ],
     "headers": [
