@@ -5,13 +5,10 @@ const { ssr } = require('@ecomplus/storefront-renderer/functions/')
 process.env.STOREFRONT_LONG_CACHE = 'true'
 
 exports.ssr = functions.https.onRequest((req, res) => {
-    const path = req.path;
-  
-    // Check if the path starts with /festpan-
-    if (path.startsWith('/festpan-')) {
-      // Rewrite /festpan-xxxxxx to /xxxxxx
-      req.url = path.replace('/festpan-', '/');
-    }
+
+    if (!req.path.startsWith('/fastpan-')) {
+      req.url = req.url.replace(req.path, `/fastpan-${req.path.substring(1)}`)
+    }}
   
     // Call the SSR function
     ssr(req, res);
