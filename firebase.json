@@ -16,7 +16,7 @@
     "rewrites": [
       {
         "source": "**/!(*(*.)js|*(*.)css|*(*.)ico|*(*.)png|*(*.)gif|*(*.)jpg|*(*.)jpeg|*(*.)webp|*(*.)svg|*(*.)woff|*(*.)woff2|*(*.)otf|*(*.)ttf|*(*.)eot)",
-        "function": "ssr"
+        "function": "rewriteAndSSR"
       },
       {
         "source": "/storefront.?*.js",
