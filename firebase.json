@@ -15,11 +15,7 @@
     ],
     "rewrites": [
       {
-        "source": "/festpan-:slug",
-        "destination": "/:slug"
-      },
-      {
-        "source": "**/!(*(*.)js|*(*.)css|*(*.)ico|*(*.)png|*(*.)gif|*(*.)jpg|*(*.)jpeg|*(*.)webp|*(*.)svg|*(*.)woff|*(*.)woff2|*(*.)otf|*(*.)ttf|*(*.)eot)",
+        "source": "**/!(*(*.)js|*(*.)css|*(*.)ico|*(*.)png|*(*.)gif|*(*.)jpg|*(*.)jpeg|*(*.)webp|*(*.)svg|*(*.)woff|*(*.)woff2|*(*.)otf|*(*.)ttf|*(*.)eot|festpan-*)",
         "function": "ssr"
       },
       {
@@ -37,6 +33,10 @@
       {
         "source": "/checkout.?*.css",
         "destination": "/checkout.css"
+      },
+      {
+        "source": "/festpan-:slug",
+        "destination": "/:slug"
       }
     ],
     "headers": [
