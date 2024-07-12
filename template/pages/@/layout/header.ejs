@@ -3,27 +3,7 @@
 const header = _.cms('header') || {}
 const contacts = _.cms('contacts') || {}
 const themeCustom = _.settings.theme.custom || ''
-const store = _.settings.short_name && _.settings.short_name.toLowerCase()
-
-const promises = _.categories.map((category) => new Promise(async (resolve) => {
-  let res
-  try {
-    res = await _.ecomClient.store({
-      url: `/categories/${category._id}.json`
-    })
-
-  } catch (err) {
-    console.error(err)
-  }
-  if (res) {
-    return resolve(res.data)
-  }
-  resolve(null)
-}))
-const multFront = (await Promise.all(promises))
-  .filter((data) => {
-    return data && data.grids && data.grids.store && data.grids.store.title && data.grids.store.title.toLowerCase() === store
-  })
+const multFront = _.categories.filter(({ slug }) => /^\w*p\w*\//.test(slug))
 _.multFront = multFront
 // social networks handled by contacts
 const networks = [
