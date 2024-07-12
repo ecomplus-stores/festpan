@@ -4,16 +4,4 @@ const { ssr } = require('@ecomplus/storefront-renderer/functions/')
 
 process.env.STOREFRONT_LONG_CACHE = 'true'
 
-exports.ssr = functions.https.onRequest((req, res) => {
-  if (
-    req.path.length > 1
-    && !req.path.startsWith('/festpan-')
-    && !req.path.startsWith('/app/')
-    && !req.path.startsWith('/admin/')
-    && !req.path.startsWith('/blog')
-    && !req.path.startsWith('/404')
-  ) {
-    req.url = req.url.replace(req.path, `/festpan-${req.path.substring(1)}`)
-  }
-  ssr(req, res);
-});
+exports.ssr = functions.https.onRequest((req, res) => ssr(req, res))
