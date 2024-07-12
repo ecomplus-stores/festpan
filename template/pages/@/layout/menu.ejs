@@ -2,27 +2,7 @@
 // load menu options and contacts from content
 const menu = _.cms('menu') || {}
 const contacts = _.cms('contacts') || {}
-const store = _.settings.short_name && _.settings.short_name.toLowerCase()
 
-const promises = _.categories.map((category) => new Promise(async (resolve) => {
-  let res
-  try {
-    res = await _.ecomClient.store({
-      url: `/categories/${category._id}.json`
-    })
-
-  } catch (err) {
-    console.error(err)
-  }
-  if (res) {
-    return resolve(res.data)
-  }
-  resolve(null)
-}))
-const multFront = (await Promise.all(promises))
-  .filter((data) => {
-    return data && data.grids && data.grids.store && data.grids.store.title && data.grids.store.title.toLowerCase() === store
-  })
 // some social networks handled by contacts
 const networksWithColors = [
   ['facebook', '#3b5998'],
@@ -33,8 +13,8 @@ const networksWithColors = [
 
 // start grouping categories by parent slug
 const allCategories = menu.alphabetical_order
-  ? _.lodash.sortBy(multFront, ['name'])
-  : multFront
+  ? _.lodash.sortBy(_.categories, ['name'])
+  : _.categories
 const categoryParents = _.lodash.groupBy(allCategories, ({ parent }) => {
   return !parent || !parent.slug ? '_' : parent.slug
 })
@@ -85,7 +65,7 @@ if (mainCategories) {
         >
 
           <% if (slug !== '_') { %>
-            <% category = multFront.find(category => category.slug === slug) %>
+            <% category = _.categories.find(category => category.slug === slug) %>
             <% parent = category && category.parent %>
             <button
               class="menu__btn btn"
