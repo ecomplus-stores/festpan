@@ -13,7 +13,7 @@ exports.ssr = functions.https.onRequest((req, res) => {
     && !req.path.startsWith('/blog')
     && !req.path.startsWith('/404')
   ) {
-    req.url = req.url.replace(req.path, `/fastpan-${req.path.substring(1)}`)
+    req.url = req.url.replace(req.path, `/festpan-${req.path.substring(1)}`)
   }
   ssr(req, res);
 });
