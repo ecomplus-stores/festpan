@@ -6,8 +6,10 @@ process.env.STOREFRONT_LONG_CACHE = 'true'
 
 exports.ssr = functions.https.onRequest((req, res) => {
   if (/^\/[fk]+\/c\//.test(req.path)) {
-    const slug = req.path.replace(/^\/[fk]+\/c\//, '')
-    res.status(301).set('Location', `/${slug}`).end()
+    res
+      .status(301)
+      .set('Location', req.path.replace(/^\/[fk]+\//, '/'))
+      .end()
     return
   }
   ssr(req, res);
