@@ -2,8 +2,8 @@
   "hosting": {
     "redirects": [
       {
-        "regex": "/festpan-*",
-        "destination": "/*",
+        "regex": "/festpan-(.*)",
+        "destination": "/:1",
         "type": 302
       }
     ],
