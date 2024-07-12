@@ -3,8 +3,7 @@
 const header = _.cms('header') || {}
 const contacts = _.cms('contacts') || {}
 const themeCustom = _.settings.theme.custom || ''
-const multFront = _.categories.filter(({ slug }) => /^\w*p\w*\//.test(slug))
-_.multFront = multFront
+
 // social networks handled by contacts
 const networks = [
   'facebook',
@@ -37,7 +36,7 @@ if (header.categories_list) {
   }
   if (header.categories_list.random) {
     // add up to `random` main categories
-    const mainCategories = multFront.filter(({ parent }) => !parent || !parent.slug)
+    const mainCategories = _.categories.filter(({ parent }) => !parent || !parent.slug)
     for (let i = 0; i < header.categories_list.random && i < mainCategories.length; i++) {
       if (!categories.find(({ slug }) => mainCategories[i].slug === slug)) {
         categories.push(mainCategories[i])
@@ -51,7 +50,6 @@ const isAlphabeticalOrderSubmenu = header.alphabetical_order_submenu
 const fullWidthSubmenu = header.full_width_submenu
 const isCentralizedLogo = header.centralized_logo
 const hasAllDepartments = header.menu_all_departments
-
 %>
 
 <div id="overlay" class="fade"></div>
@@ -284,7 +282,7 @@ const hasAllDepartments = header.menu_all_departments
                 </a>
                 <nav class="header__submenu header__submenu--full" id="s-all">
                   <div class="row">
-                    <% multFront.forEach(({ name, slug, parent, _id }) => { %>
+                    <% _.categories.forEach(({ name, slug, parent, _id }) => { %>
                       <% if (!parent) { 
                         %>
                         <div class="col-12 col-lg-<%- isCategoriesNavFull ? '2' : '4' %>">
@@ -294,7 +292,7 @@ const hasAllDepartments = header.menu_all_departments
                           >
                             <%= name %>
                           </a>
-                        <% const subcategories = multFront.filter(({ parent }) => parent && parent.slug === slug) %>
+                        <% const subcategories = _.categories.filter(({ parent }) => parent && parent.slug === slug) %>
                         <% if (subcategories.length) { %>
                           <div id="header__submenu-<%= slug %>">
                             <ul class="header__links">
@@ -330,7 +328,7 @@ const hasAllDepartments = header.menu_all_departments
                 </a>
                 <%- $categoryLink %>
                 <%  if (slug && hasMegamenu) { %>
-                  <% const subcategories = multFront.filter(({ parent }) => parent && parent.slug === slug) %>
+                  <% const subcategories = _.categories.filter(({ parent }) => parent && parent.slug === slug) %>
                   <% if (subcategories.length) { %>
                     <%
                       if (isAlphabeticalOrderSubmenu) {
@@ -343,7 +341,7 @@ const hasAllDepartments = header.menu_all_departments
                       <% subcategories.forEach(subcategory => { %>
                         <div>               
                           <a id="sd-<%= subcategory._id %>" href="/<%= subcategory.slug %>"><%= subcategory.name %></a>
-                          <% const thirdCategories = multFront.filter(({ parent }) => parent && parent.slug === subcategory.slug) %>
+                          <% const thirdCategories = _.categories.filter(({ parent }) => parent && parent.slug === subcategory.slug) %>
                           <%
                             if (isAlphabeticalOrderSubmenu) {
                               thirdCategories.sort((a, b)=> {
