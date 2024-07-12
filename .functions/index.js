@@ -7,7 +7,7 @@ process.env.STOREFRONT_LONG_CACHE = 'true'
 exports.ssr = functions.https.onRequest((req, res) => {
   if (
     req.path.length > 1
-    && !req.path.startsWith('/fastpan-')
+    && !req.path.startsWith('/festpan-')
     && !req.path.startsWith('/app/')
     && !req.path.startsWith('/admin/')
     && !req.path.startsWith('/blog')
