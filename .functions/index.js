@@ -5,7 +5,12 @@ const { ssr } = require('@ecomplus/storefront-renderer/functions/')
 process.env.STOREFRONT_LONG_CACHE = 'true'
 
 exports.ssr = functions.https.onRequest((req, res) => {
-  if (!req.path.startsWith('/fastpan-')) {
+  if (
+    req.path.length > 1
+    && !req.path.startsWith('/fastpan-')
+    && !req.path.startsWith('/app/')
+    && !req.path.startsWith('/admin/')
+  ) {
     req.url = req.url.replace(req.path, `/fastpan-${req.path.substring(1)}`)
   }
   ssr(req, res);
