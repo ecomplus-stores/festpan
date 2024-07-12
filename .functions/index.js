@@ -10,6 +10,8 @@ exports.ssr = functions.https.onRequest((req, res) => {
     && !req.path.startsWith('/fastpan-')
     && !req.path.startsWith('/app/')
     && !req.path.startsWith('/admin/')
+    && !req.path.startsWith('/blog')
+    && !req.path.startsWith('/404')
   ) {
     req.url = req.url.replace(req.path, `/fastpan-${req.path.substring(1)}`)
   }
