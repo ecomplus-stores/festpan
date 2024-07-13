@@ -11,6 +11,7 @@ exports.ssr = functions.https.onRequest((req, res) => {
     && !req.path.startsWith('/app/')
     && !req.path.startsWith('/admin/')
     && !req.path.startsWith('/blog')
+    && !req.path.startsWith('/search')
     && !req.path.startsWith('/pages')
     && !req.path.startsWith('/404')
   ) {
