@@ -1,1 +1,48 @@
-{"meta_title":"","meta_description":"","sections":[{"type":"banner-slider","autoplay":4000,"full_width":true,"slides":[{"img":"template/public/img/uploads/30.jpg","link":"","alt":"6","start":"","end":"","mobile_img":""}],"enabled":null,"shuffle":null,"collection_id":null,"sort":null,"title":null,"headless":null,"limit":null,"page":null},{"type":"info-bar","autoplay":0,"full_width":false,"slides":null,"enabled":true,"shuffle":null,"collection_id":null,"sort":null,"title":null,"headless":null,"limit":null,"page":null},{"type":"collection-shelf","autoplay":0,"full_width":false,"slides":null,"enabled":null,"shuffle":true,"collection_id":null,"sort":"offers","title":"","headless":false,"limit":12,"page":1}]}
+{
+  "meta_title": "",
+  "meta_description": "",
+  "sections": [
+    {
+      "enabled": null,
+      "slides": [],
+      "autoplay": 4000,
+      "page": null,
+      "full_width": true,
+      "title": null,
+      "shuffle": null,
+      "headless": null,
+      "type": "banner-slider",
+      "limit": null,
+      "collection_id": null,
+      "sort": null
+    },
+    {
+      "enabled": true,
+      "slides": null,
+      "autoplay": 0,
+      "page": null,
+      "full_width": false,
+      "title": null,
+      "shuffle": null,
+      "headless": null,
+      "type": "info-bar",
+      "limit": null,
+      "collection_id": null,
+      "sort": null
+    },
+    {
+      "enabled": null,
+      "slides": null,
+      "autoplay": 0,
+      "page": 1,
+      "full_width": false,
+      "title": "",
+      "shuffle": true,
+      "headless": false,
+      "type": "collection-shelf",
+      "limit": 12,
+      "collection_id": null,
+      "sort": "offers"
+    }
+  ]
+}
