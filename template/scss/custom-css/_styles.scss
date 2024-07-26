@@ -48,27 +48,47 @@
   display: none !important;
 }
 
+.prices {
+  &__value {
+    color: var(--primary);
+  }
+}
+
 .product-card {
   &__name {
     color: var(--secondary);
-    text-align: center;
     font-weight: 500;
-    padding-top: var(--spacer-3);
-    @media (min-width: 992px) {
-      min-height: 50px;
+  }
+}
+.product-card:not(.product-card--small) {
+  .product-card {
+    &__name {
+      text-align: center;
+      padding-top: var(--spacer-3);
+      @media (min-width: 992px) {
+        min-height: 50px;
+      }
+    }
+    &__buy {
+      opacity: .75;
     }
   }
-  &__buy:not(.show) {
-    opacity: .75;
+  &:hover {
+    .fade {
+      opacity: 1;
+    }
   }
-  span:has([data-trustvox-product-code]),
+  span:has([data-trustvox-product-code]) {
+    min-height: 26px;
+    text-align: center;
+  }
   .prices {
     text-align: center;
   }
 }
 
-.prices {
-  &__value {
-    color: var(--primary);
+.search-engine {
+  &__retail > .row {
+    row-gap: var(--spacer-4);
   }
 }
