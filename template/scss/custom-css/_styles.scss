@@ -91,4 +91,8 @@
   &__retail > .row {
     row-gap: var(--spacer-4);
   }
+  &__filter--Categories,
+  &__filter--store {
+    display: none;
+  }
 }
