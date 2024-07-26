@@ -1,0 +1,7 @@
+{
+  "recommendations": [
+    "standard.vscode-standard",
+    "octref.vetur",
+    "digitalbrainstem.javascript-ejs-support"
+  ]
+}
