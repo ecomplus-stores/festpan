@@ -1,10 +1,10 @@
 {
   "domain": "festpan.netlify.app",
   "currency_symbol": "R$",
-  "primary_color": "#1a1a1a",
+  "primary_color": "#cc0106",
   "theme": {
     "bootswatch": "_",
-    "custom": "clean-gray"
+    "custom": "_"
   },
   "bg_color": "#ffffff",
   "logo": "/img/uploads/logo-final-festpan-45-anos.png",
@@ -15,9 +15,9 @@
   "mini_logo": "",
   "font_family": "Roboto",
   "favicon": "/img/uploads/688db3f550.png",
-  "icons_font": "_",
+  "icons_font": "line-awesome",
   "country_code": "BR",
-  "secondary_color": "#444444",
+  "secondary_color": "#374151",
   "icon": "/img/uploads/logo-festpan-45-anos.-300x158.png",
   "store_id": 51491,
   "description": "Festpan Alimentos Distribuidora está 45 anos transportando qualidade para restaurantes, padarias, mercados, hotéis desde a entrada até a sobremesa e agora para você.",
