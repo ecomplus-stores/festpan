@@ -48,6 +48,13 @@
   display: none !important;
 }
 
+.banner-slider {
+  &--full-width {
+    max-height: calc(1440px * var(--banner-aspect-ratio));
+    max-width: 1440px;
+  }
+}
+
 .prices {
   &__value {
     color: var(--primary);
