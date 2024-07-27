@@ -3,7 +3,7 @@
   "currency_symbol": "R$",
   "primary_color": "#cc0106",
   "theme": {
-    "bootswatch": "lumen",
+    "bootswatch": "_",
     "custom": "niche-game"
   },
   "bg_color": "#ffffff",
