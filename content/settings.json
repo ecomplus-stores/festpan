@@ -3,8 +3,8 @@
   "currency_symbol": "R$",
   "primary_color": "#cc0106",
   "theme": {
-    "bootswatch": "_",
-    "custom": "_"
+    "bootswatch": "lumen",
+    "custom": "niche-game"
   },
   "bg_color": "#ffffff",
   "logo": "/img/uploads/logofestpannovo.png",
@@ -17,7 +17,7 @@
   "favicon": "/img/uploads/688db3f550.png",
   "icons_font": "line-awesome",
   "country_code": "BR",
-  "secondary_color": "#374151",
+  "secondary_color": "",
   "icon": "/img/uploads/logofestpannovo.png",
   "store_id": 51491,
   "description": "Festpan Alimentos Distribuidora está 45 anos transportando qualidade para restaurantes, padarias, mercados, hotéis desde a entrada até a sobremesa e agora para você.",
