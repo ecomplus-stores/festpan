@@ -336,23 +336,32 @@ const hasAllDepartments = header.menu_all_departments
                           return b.name > a.name ? -1 : 1
                         })
                       }
+                      const submenuCols = [[], [], [], [], []]
+                      for (let i = 0; i < subcategories.length; i++) {
+                        submenuCols[i % 5].push(subcategories[i])
+                      }
                     %>
                     <nav class="header__submenu<%= fullWidthSubmenu ? ' header__submenu--full' : '' %>" id="<%= `s-${slug.replace(/\//g, '_')}` %>">
-                      <% subcategories.forEach(subcategory => { %>
-                        <div>               
-                          <a id="sd-<%= subcategory._id %>" href="/<%= subcategory.slug %>"><%= subcategory.name %></a>
-                          <% const thirdCategories = _.categories.filter(({ parent }) => parent && parent.slug === subcategory.slug) %>
-                          <%
-                            if (isAlphabeticalOrderSubmenu) {
-                              thirdCategories.sort((a, b)=> {
-                                return b.name > a.name ? -1 : 1
-                              })
-                            }
-                          %>
-                          <% thirdCategories.forEach(thirdCategory => { %>
-                            <a id="td-<%= thirdCategory._id %>" class="header__submenu-subcategory" href="/<%= thirdCategory.slug %>">
-                              <%= thirdCategory.name %>
-                            </a>
+                      <% submenuCols.forEach(colSubcategories => { %>
+                        <% if (!colSubcategories.length) return %>
+                        <div>
+                          <% colSubcategories.forEach(subcategory => { %>
+                            <a id="sd-<%= subcategory._id %>" href="/<%= subcategory.slug %>"><%= subcategory.name %></a>
+                            <div>
+                              <% const thirdCategories = _.categories.filter(({ parent }) => parent && parent.slug === subcategory.slug) %>
+                              <%
+                                if (isAlphabeticalOrderSubmenu) {
+                                  thirdCategories.sort((a, b)=> {
+                                    return b.name > a.name ? -1 : 1
+                                  })
+                                }
+                              %>
+                              <% thirdCategories.forEach(thirdCategory => { %>
+                                <a id="td-<%= thirdCategory._id %>" class="header__submenu-subcategory" href="/<%= thirdCategory.slug %>">
+                                  <%= thirdCategory.name %>
+                                </a>
+                              <% }) %>
+                            </div>
                           <% }) %>
                         </div>
                       <% }) %>

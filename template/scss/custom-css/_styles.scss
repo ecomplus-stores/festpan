@@ -48,6 +48,25 @@
   display: none !important;
 }
 
+.header__submenu {
+  grid-template-columns: repeat(auto-fit, minmax(20%, 1fr));
+  gap: 0;
+  > div {
+    &:not(:last-child) {
+      padding-right: var(--spacer-2);
+    }
+    &:not(:first-child) {
+      padding-left: var(--spacer-2);
+    }
+    > a {
+      font-weight: 600;
+    }
+    > div:not(:last-child) {
+      margin-bottom: var(--spacer-4);
+    }
+  }
+}
+
 .banner-slider {
   &--full-width {
     max-height: calc(1440px * var(--banner-aspect-ratio));
