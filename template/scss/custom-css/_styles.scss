@@ -75,8 +75,17 @@
 }
 
 .prices {
-  &__value {
+  &__value,
+  &__discount {
     color: var(--primary);
+  }
+  &--big {
+    .prices {
+      &__discount {
+        margin-top: var(--spacer-1);
+        font-size: 1.5rem;
+      }
+    }
   }
 }
 
@@ -110,6 +119,9 @@
   }
   .prices {
     text-align: center;
+    &__discount {
+      font-size: 1.15rem;
+    }
   }
 }
 
