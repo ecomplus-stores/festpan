@@ -1,3 +1,7 @@
 {
+  "files.associations": {
+    "**/html/*.html": "vue-html",
+    "**/components/*.html": "vue-html"
+  },
   "css.validate": false
 }
