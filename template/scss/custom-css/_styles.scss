@@ -44,10 +44,6 @@
   display: block;
 }
 
-.search__count {
-  display: none !important;
-}
-
 .header__submenu {
   grid-template-columns: repeat(auto-fit, minmax(20%, 1fr));
   gap: 0;
