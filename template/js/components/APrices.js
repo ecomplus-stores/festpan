@@ -30,6 +30,45 @@ const getPriceWithDiscount = (price, discount) => {
   }
 }
 
+const checkDiscountDomain = (product) => {
+  const discountRulesDomain = typeof window === 'object' && window.$discountsDomain &&
+    window.$discountsDomain.discount_rules
+
+  if (discountRulesDomain && discountRulesDomain.length) {
+    const productId = product.product_id || product._id
+    const categories = product && product.categories
+    let discount
+    discountRulesDomain.forEach(rule => {
+      let isRuleValid = !rule.product_ids && !rule.excluded_product_ids && !rule.category_ids
+
+      if (rule.product_ids && rule.product_ids.length) {
+        isRuleValid = productId && rule.product_ids.includes(productId)
+      }
+
+      if (rule.excluded_product_ids && rule.excluded_product_ids.length) {
+        isRuleValid = productId && !rule.excluded_product_ids.includes(productId)
+      }
+
+      if (rule.category_ids && rule.category_ids.length) {
+        const category = categories && categories.length && categories.find(categoryFind => rule.category_ids.includes(categoryFind._id))
+        isRuleValid = Boolean(category)
+      }
+
+      if (isRuleValid) {
+        if (!discount) {
+          discount = rule.discount
+        }
+
+        if (discount && discount.value < rule.discount.value) {
+          discount = rule.discount
+        }
+      }
+    })
+
+    return discount
+  }
+}
+
 export default {
   name: 'APrices',
 
@@ -66,6 +105,11 @@ export default {
         value: 0,
         min_amount: 0
       },
+      domainDiscount: {
+        type: null,
+        value: 0,
+        min_amount: 0
+      },
       discountLabel: this.discountText,
       pointsProgramName: null,
       pointsMinPrice: 0,
@@ -89,6 +133,8 @@ export default {
         (!this.extraDiscount.min_amount || price > this.extraDiscount.min_amount)
       ) {
         return getPriceWithDiscount(price, this.extraDiscount)
+      } else if (this.domainDiscount.value && this.product && this.product._id) {
+        return getPriceWithDiscount(price, this.domainDiscount)
       }
       return price
     },
@@ -97,6 +143,8 @@ export default {
       if (checkOnPromotion(this.product)) {
         return this.product.base_price
       } else if (this.extraDiscount.value) {
+        return getPrice(this.product)
+      } else if (this.domainDiscount.value && this.product && this.product._id) {
         return getPrice(this.product)
       }
     },
@@ -173,6 +221,11 @@ export default {
 
   created () {
     if (this.canShowPriceOptions) {
+      const discountRuleDomain = checkDiscountDomain(this.product || this.item)
+      if (discountRuleDomain) {
+        this.domainDiscount = discountRuleDomain
+      }
+
       if (this.discountOption) {
         this.updateDiscount(this.discountOption)
       } else {

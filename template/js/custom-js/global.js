@@ -29,3 +29,14 @@ EcomSearch.dslMiddlewares.push((dsl) => {
     }
   }
 })
+
+const getDiscountByDomain = async () => {
+  const domain = window._settings && window._settings.domain
+  const storeId = window._settings && window._settings.store_id
+  const urlAppDiscount = 'https://us-central1-ecom-discounts2.cloudfunctions.net/app'
+  const discountByDomain = await fetch(`${urlAppDiscount}/discount-rules?store_id=${storeId}&domain=${domain}`)
+
+  window.$discountsDomain = await discountByDomain.json()
+}
+
+getDiscountByDomain()
