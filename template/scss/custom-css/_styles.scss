@@ -44,10 +44,6 @@
   display: block;
 }
 
-.search__count {
-  display: none !important;
-}
-
 .header__submenu {
   grid-template-columns: repeat(auto-fit, minmax(20%, 1fr));
   gap: 0;
@@ -119,8 +115,21 @@
   }
   .prices {
     text-align: center;
+    &__compare {
+      font-size: 0.8rem;
+    }
     &__discount {
       font-size: 1.15rem;
+    }
+    &__installments {
+      font-weight: 600;
+      small {
+        display: none;
+        font-weight: 400;
+        @media (min-width: 800px) {
+          display: inline;
+        }
+      }
     }
   }
 }
