@@ -35,7 +35,7 @@ const checkDiscountDomain = (product) => {
     window.$discountsDomain.discount_rules
 
   if (discountRulesDomain && discountRulesDomain.length) {
-    const productId = product._id
+    const productId = product.product_id || product._id
     const categories = product && product.categories
     let discount
     discountRulesDomain.forEach(rule => {
@@ -105,6 +105,11 @@ export default {
         value: 0,
         min_amount: 0
       },
+      domainDiscount: {
+        type: null,
+        value: 0,
+        min_amount: 0
+      },
       discountLabel: this.discountText,
       pointsProgramName: null,
       pointsMinPrice: 0,
@@ -128,6 +133,8 @@ export default {
         (!this.extraDiscount.min_amount || price > this.extraDiscount.min_amount)
       ) {
         return getPriceWithDiscount(price, this.extraDiscount)
+      } else if (this.domainDiscount.value && this.product && this.product._id) {
+        return getPriceWithDiscount(price, this.domainDiscount)
       }
       return price
     },
@@ -136,6 +143,8 @@ export default {
       if (checkOnPromotion(this.product)) {
         return this.product.base_price
       } else if (this.extraDiscount.value) {
+        return getPrice(this.product)
+      } else if (this.domainDiscount.value && this.product && this.product._id) {
         return getPrice(this.product)
       }
     },
@@ -214,7 +223,7 @@ export default {
     if (this.canShowPriceOptions) {
       const discountRuleDomain = checkDiscountDomain(this.product || this.item)
       if (discountRuleDomain) {
-        this.extraDiscount = discountRuleDomain
+        this.domainDiscount = discountRuleDomain
       }
 
       if (this.discountOption) {
@@ -223,30 +232,7 @@ export default {
         waitStorefrontInfo('apply_discount')
           .then(discountCampaign => {
             if (discountCampaign.available_extra_discount) {
-              const extraDiscountByCampaign = discountCampaign.available_extra_discount
-              const isFixedDiscountByCampaign = extraDiscountByCampaign.type === 'fixed'
-              const minAmount = Math.max(extraDiscountByCampaign.min_amount || 1, this.extraDiscount.min_amount || 1)
-              if (this.extraDiscount && extraDiscountByCampaign.type !== this.extraDiscount.type) {
-                let newValue = isFixedDiscountByCampaign ? this.extraDiscount.value : extraDiscountByCampaign.value
-                newValue *= this.price / 100
-                newValue += (isFixedDiscountByCampaign ? extraDiscountByCampaign.value : this.extraDiscount.value)
-                const value = Math.max(newValue, this.price)
-                this.extraDiscount = {
-                  type: 'fixed',
-                  value,
-                  min_amount: minAmount
-                }
-              } else if (this.extraDiscount && extraDiscountByCampaign.type === this.extraDiscount.type) {
-                const newValue = this.extraDiscount.value + extraDiscountByCampaign.value
-                const value = isFixedDiscountByCampaign ? Math.max(newValue, this.price) : newValue
-                this.extraDiscount = {
-                  type: extraDiscountByCampaign.type,
-                  value,
-                  min_amount: minAmount
-                }
-              } else {
-                this.extraDiscount = extraDiscountByCampaign
-              }
+              this.extraDiscount = discountCampaign.available_extra_discount
             }
           })
       }
