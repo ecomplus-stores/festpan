@@ -115,6 +115,9 @@
   }
   .prices {
     text-align: center;
+    &__compare {
+      font-size: 0.8rem;
+    }
     &__discount {
       font-size: 1.15rem;
     }

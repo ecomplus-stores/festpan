@@ -285,6 +285,11 @@
               </p>
             </template>
 
+            <p v-if="body.quantity">
+              Estoque: <strong>{{ body.quantity }}</strong>
+              {{ body.quantity > 1 ? 'unidades' : 'unidade' }}
+            </p>
+
             <slot name="sale-timer">
               <div
                 v-if="isOnSale"
