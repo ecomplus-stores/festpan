@@ -121,6 +121,16 @@
     &__discount {
       font-size: 1.15rem;
     }
+    &__installments {
+      font-weight: 600;
+      small {
+        display: none;
+        font-weight: 400;
+        @media (min-width: 800px) {
+          display: inline;
+        }
+      }
+    }
   }
 }
 
