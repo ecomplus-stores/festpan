@@ -10,13 +10,15 @@
       "enabled": true
     },
     {
-      "type": "collection-shelf",
-      "shuffle": true,
-      "limit": 12,
+      "autoplay": 2000,
       "page": 1,
+      "title": "Mais Vendidos",
+      "shuffle": true,
+      "headless": false,
+      "type": "collection-shelf",
+      "limit": 12,
       "collection_id": null,
-      "sort": "sales",
-      "title": "Mais Vendidos"
+      "sort": "sales"
     },
     {
       "type": "collection-shelf",
