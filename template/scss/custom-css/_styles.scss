@@ -143,3 +143,27 @@
     display: none;
   }
 }
+
+.product .gallery__stage,
+.product__picture {
+  margin-left: auto;
+  margin-right: auto;
+  picture.picture {
+    &,
+    img {
+      padding-top: 0;
+      aspect-ratio: var(--aspect-ratio);
+      margin: 0 auto;
+      width: auto;
+      max-height: var(--max-height, 700px);
+      @media (max-width: 767px) {
+        max-height: min(350px, var(--max-height, 350px));
+      }
+    }
+  }
+}
+.gallery {
+  .gallery__big-image {
+    cursor: default;
+  }
+}

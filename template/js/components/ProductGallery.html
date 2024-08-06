@@ -51,7 +51,7 @@
             class="glide__slide"
             :key="'slide-' + i"
           >
-            <div @click="openZoom(i)">
+            <div>
               <slot v-if="i === 0 && !isSliderMoved">
                 <a-picture
                   v-if="!elFirstPicture"

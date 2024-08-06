@@ -44,27 +44,18 @@ if (stamps && Array.isArray(stamps.stamps_list) && stamps.stamps_list.length) {
                     </div>
                   <% } %>
                 </div>
-                <div
-                  class="product__picture"
-                  <% if (width) { %>
-                    style="max-width: <%= width %>px"
-                  <% } %>  
-                >
+                <div class="product__picture">
                   <picture
                     <% if (width && height) { %>
                       class="picture"
-                      style="--aspect-ratio-pc: <%= Math.round(height * 100 * 10000 / width) / 10000 %>%"
+                      style="<%= `--aspect-ratio-pc: ${Math.round(height * 100 * 10000 / width) / 10000};` +
+                        `--aspect-ratio: ${(width / height).toFixed(3)};` +
+                        `--max-height: ${height}px` %>"
                     <% } %>
                   >
                     <source
-                      srcset="<%= _.ecomUtils.img(_.state).url %>"
-                      type="image/webp"
-                      media="(max-width: 399.98px)"
-                    >
-                    <source
                       srcset="<%= imgObj.url %>"
                       type="image/webp"
-                      media="(min-width: 400px)"
                     >
                     <img
                       src="<%= imgObj.url.replace(/\.webp$/, '') %>"
