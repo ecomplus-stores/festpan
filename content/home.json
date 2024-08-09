@@ -4,61 +4,7 @@
       "type": "banner-slider",
       "autoplay": 9000,
       "full_width": false,
-      "slides": [
-        {
-          "start": "",
-          "end": "",
-          "img": "/img/uploads/bannercupomfretefinal.png"
-        },
-        {
-          "start": "",
-          "end": "",
-          "img": "/img/uploads/166020.jpg",
-          "link": "https://loja.festpan.com.br/pkf/chocolate-em-po--50---101kg-nestle"
-        },
-        {
-          "start": "",
-          "end": "",
-          "img": "/img/uploads/151478.jpg",
-          "link": "https://loja.festpan.com.br/pkf/recheio-cobertura-leitinho-205kg-lacrema--festpan"
-        },
-        {
-          "start": "",
-          "end": "",
-          "img": "/img/uploads/111492.jpg",
-          "link": "https://loja.festpan.com.br/pf/mistura-paes-macios-5kg-vapt---festpan"
-        },
-        {
-          "start": "",
-          "end": "",
-          "img": "/img/uploads/111317.jpg",
-          "link": "https://loja.festpan.com.br/pf/mistura-bomba-e-carolina-5kg-vapt---festpan"
-        },
-        {
-          "start": "",
-          "end": "",
-          "img": "/img/uploads/102178.jpg",
-          "link": "https://loja.festpan.com.br/pkf/barra-de-chocolate-ao-leite-diet-500gr-nestle"
-        },
-        {
-          "start": "",
-          "end": "",
-          "img": "/img/uploads/102174.jpg",
-          "link": "https://loja.festpan.com.br/pkf/barra-de-chocolate-meio-amargo-1kg-nestle"
-        },
-        {
-          "start": "",
-          "end": "",
-          "img": "/img/uploads/102173.jpg",
-          "link": "https://loja.festpan.com.br/pkf/barra-chocolate-ao-leite-1kg-nestle"
-        },
-        {
-          "start": "",
-          "end": "",
-          "img": "/img/uploads/102172.jpg",
-          "link": "https://loja.festpan.com.br/pkf/barra-de-chocolate-branco-marfim-1kg-nestle"
-        }
-      ]
+      "slides": []
     },
     {
       "type": "info-bar",
