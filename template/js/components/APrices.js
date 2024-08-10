@@ -172,6 +172,7 @@ export default {
   },
 
   created () {
+    window.$setProductDomainPrice(this.product)
     if (this.canShowPriceOptions) {
       if (this.discountOption) {
         this.updateDiscount(this.discountOption)

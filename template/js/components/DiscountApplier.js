@@ -15,7 +15,7 @@ import { i18n, formatMoney } from '@ecomplus/utils'
 import { store, modules } from '@ecomplus/client'
 import ecomCart from '@ecomplus/shopping-cart'
 import ecomPassport from '@ecomplus/passport-client'
-import AAlert from '../AAlert.vue'
+import AAlert from '@ecomplus/storefront-components/src/AAlert.vue'
 
 const addFreebieItems = (ecomCart, productIds) => {
   if (Array.isArray(productIds)) {
@@ -221,20 +221,22 @@ export default {
           data.customer.doc_number = customer.doc_number
         }
       }
+      const body = {
+        ...this.modulesPayload,
+        amount: {
+          subtotal: this.localAmountTotal,
+          ...this.amount,
+          total: this.localAmountTotal,
+          discount: 0
+        },
+        items: this.ecomCart.data.items,
+        ...data
+      }
+      delete body.domain
       modules({
         url: '/apply_discount.json',
         method: 'POST',
-        data: {
-          ...this.modulesPayload,
-          amount: {
-            subtotal: this.localAmountTotal,
-            ...this.amount,
-            total: this.localAmountTotal,
-            discount: 0
-          },
-          items: this.ecomCart.data.items,
-          ...data
-        }
+        data: body
       })
         .then(({ data }) => this.parseDiscountOptions(data.result))
         .catch(err => {

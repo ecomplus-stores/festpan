@@ -4,7 +4,6 @@ export default item => {
     // set final price from kit
     ? item.kit_product.price / item.kit_product.pack_quantity
     : item.price
-
   // fix item final price with customizations additions
   if (Array.isArray(item.customizations)) {
     item.customizations.forEach(customization => {
@@ -16,7 +15,11 @@ export default item => {
       }
     })
   }
-
-  // @TODO handle gift wrap
+  if (window.$setProductDomainPrice && !(item.__discounted_price === item.final_price)) {
+    const discount = window.$setProductDomainPrice(item)
+    if (discount) {
+      item.__discounted_price = item.final_price
+    }
+  }
   return item
 }
