@@ -61,7 +61,7 @@ let domainDiscounts
 if (_.axios.$ssrFetchAndCache && _.settings.domain) {
   const discountRulesUrl = 'https://us-central1-ecom-discounts2.cloudfunctions.net/app/discount-rules'
   try {
-    domainDiscounts = await _.axios.$ssrFetchAndCache(`${discountsAppUrl}?store_id=${_.storeId}&domain=${_.settings.domain}`)
+    domainDiscounts = await _.axios.$ssrFetchAndCache(`${discountRulesUrl}?store_id=${_.storeId}&domain=${_.settings.domain}`)
   } catch (err) {
     console.error(err)
   }
