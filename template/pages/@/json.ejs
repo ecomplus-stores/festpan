@@ -78,7 +78,7 @@ if (_.axios.$ssrFetchAndCache && _.settings.domain) {
 
 <% if (domainDiscounts) { %>
   <script>/*<!--*/<%-
-    `window.$domainDiscounts=${JSON.stringify(_.domainDiscounts)};`
+    `window.$domainDiscounts=${JSON.stringify(domainDiscounts)};`
   %>/*-->*/</script>
 <% } %>
 
