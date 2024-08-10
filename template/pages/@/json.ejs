@@ -58,10 +58,10 @@ if (Array.isArray(_.widgets)) {
 }
 
 let domainDiscounts
-if (global.$ssrFetchAndCache && _.settings.domain) {
+if (_.axios.$ssrFetchAndCache && _.settings.domain) {
   const discountRulesUrl = 'https://us-central1-ecom-discounts2.cloudfunctions.net/app/discount-rules'
   try {
-    domainDiscounts = await global.$ssrFetchAndCache(`${discountsAppUrl}?store_id=${_.storeId}&domain=${_.settings.domain}`)
+    domainDiscounts = await _.axios.$ssrFetchAndCache(`${discountsAppUrl}?store_id=${_.storeId}&domain=${_.settings.domain}`)
   } catch (err) {
     console.error(err)
   }

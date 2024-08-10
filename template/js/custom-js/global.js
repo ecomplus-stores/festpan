@@ -66,6 +66,7 @@ window.$domainDiscounts = {
 */
 
 window.$setProductDomainPrice = (product) => {
+  if (!window.$domainDiscounts) return null
   const { discount_rules: discountRules } = window.$domainDiscounts
   if (!discountRules || !discountRules.length) {
     return null

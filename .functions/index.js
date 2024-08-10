@@ -5,7 +5,7 @@ const { ssr } = require('@ecomplus/storefront-renderer/functions/')
 
 process.env.STOREFRONT_LONG_CACHE = 'false'
 
-global.$ssrFetchAndCache = async (
+axios.$ssrFetchAndCache = async (
   url,
   {
     maxAge = 300,
