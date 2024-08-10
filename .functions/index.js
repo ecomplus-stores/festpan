@@ -1,9 +1,12 @@
 const functions = require('firebase-functions')
+const { initializeApp } = require('firebase-admin/app')
 const { getFirestore } = require('firebase-admin/firestore')
 const axios = require('axios')
 const { ssr } = require('@ecomplus/storefront-renderer/functions/')
 
 process.env.STOREFRONT_LONG_CACHE = 'false'
+
+initializeApp()
 
 axios.$ssrFetchAndCache = async (
   url,
