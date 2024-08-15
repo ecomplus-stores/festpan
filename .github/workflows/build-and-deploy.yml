@@ -65,7 +65,7 @@ jobs:
         env:
           CHANGED_FILES: ${{ steps.changed_files.outputs.all }}
         run: |
-          npm run build -- --prerender=app/index,404,admin/index --prerender-limit=0;
+          npm run build -- --prerender=404,admin/index --prerender-limit=0;
           echo "::set-output name=isg::0";
         id: partial_build
 
