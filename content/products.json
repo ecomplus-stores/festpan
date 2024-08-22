@@ -5,6 +5,10 @@
       "enabled": true
     },
     {
+      "type": "buy-together",
+      "enabled": false
+    },
+    {
       "type": "product-block",
       "enabled": true,
       "size_guide": {
