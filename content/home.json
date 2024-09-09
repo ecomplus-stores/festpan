@@ -39,6 +39,13 @@
           "img": "/img/uploads/4semanadohotdog.jpg",
           "link": "https://loja.festpan.com.br/search?term=hot+dog",
           "alt": "100"
+        },
+        {
+          "start": "",
+          "end": "",
+          "img": "/img/uploads/1semanadosorvete.jpg",
+          "link": "https://loja.festpan.com.br/search?term=sorvete",
+          "alt": "97"
         }
       ]
     },
