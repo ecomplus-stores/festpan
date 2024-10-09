@@ -42,6 +42,34 @@ axios.$ssrFetchAndCache = async (
   return runFetch()
 }
 
+globalThis.ecomClientAxiosMidd = async (config) => {
+  if (config.method && config.method !== 'get') return null
+  if (config.headers?.['X-Access-Token']) return null
+  if (!config.baseURL?.includes('ecvol.com')) return null
+  let url = config.baseURL
+  if (url.endsWith('/')) {
+    if (config.url.startsWith('/')) {
+      url += config.url.substring(1)
+    } else {
+      url += config.url
+    }
+  } else {
+    if (config.url.startsWith('/')) {
+      url += config.url
+    } else {
+      url += `/${config.url}`
+    }
+  }
+  const data = await axios.$ssrFetchAndCache(url)
+  return {
+    data,
+    status: 200,
+    statusText: 'OK',
+    headers: {},
+    config,
+  }
+}
+
 exports.ssr = functions.https.onRequest((req, res) => {
   const chChar = 'p'
   if (
