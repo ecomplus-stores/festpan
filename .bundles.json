@@ -1,26 +1,29 @@
 {
   "assetsByChunkName": {
-    "vendors~app-account~app-confirmation~app-order": "chunk.9b0f36aaf21fc3fc38fb.js",
-    "vendors~app-account~app-checkout": "chunk.3087645128a8872d3c89.js",
-    "vendors~app-cart~app-checkout": "chunk.76626845287774946e7d.js",
+    "vendors~app-account~app-confirmation~app-order": "chunk.d4e1e1464aa9f22856d1.js",
+    "vendors~app-account~app-checkout": "chunk.cb9fe7378f38c1eaf4a8.js",
+    "vendors~app-cart~app-checkout": "chunk.6560baf8d7b71b56e16a.js",
     "admin": [
-      "admin.c201a3ebba7f5af0046b.js",
-      "admin.c201a3ebba7f5af0046b.js.map"
+      "admin.acc898778e644ad5d5e1.js",
+      "admin.acc898778e644ad5d5e1.js.map"
     ],
-    "app-account": "chunk.d76250024d597f8a8531.js",
-    "app-checkout": "chunk.2047900d96361aab5d5c.js",
-    "app-confirmation": "chunk.efee93a03c55f4d42596.js",
+    "app-account": "chunk.23ccc1359a91f7136b6b.js",
+    "app-cart": "chunk.a78487dce20658d7affa.js",
+    "app-checkout": "chunk.8f717f0e054ba02af794.js",
+    "app-confirmation": "chunk.682231ddbddf63ba6dba.js",
+    "app-order": "chunk.1eb1ebfb83afeea504d8.js",
     "checkout": [
-      "checkout.0262279d3d15619900fd.js",
-      "checkout.0262279d3d15619900fd.js.map"
+      "checkout.8e5547609bc999e5b786.js",
+      "checkout.8e5547609bc999e5b786.js.map"
     ],
     "storefront": [
-      "storefront.97b1126371aceb53a656.css",
-      "storefront.bb5c8c2a9d64f74f5d5a.js",
-      "storefront.97b1126371aceb53a656.css.map",
-      "storefront.bb5c8c2a9d64f74f5d5a.js.map"
+      "storefront.5ada4d772c9d618b1546.css",
+      "storefront.e103b757ce355aa7ffaf.js",
+      "storefront.5ada4d772c9d618b1546.css.map",
+      "storefront.e103b757ce355aa7ffaf.js.map"
     ],
-    "vendors~app-cart": "chunk.1db47d776ee4c105222b.js",
-    "vendors~app-order": "chunk.e38ea9fea3b0793dd0d0.js"
+    "vendors~app-account": "chunk.e55167bfc3a704afeaf2.js",
+    "vendors~app-cart": "chunk.aef7a44c7e9e3d6531fd.js",
+    "vendors~app-checkout": "chunk.c025c928adace2bee51e.js"
   }
 }
