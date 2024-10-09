@@ -43,7 +43,6 @@ axios.$ssrFetchAndCache = async (
 }
 
 globalThis.ecomClientAxiosMidd = async (config) => {
-  functions.logger.info(config.url, { config })
   if (config.method && config.method !== 'get') return null
   if (config.headers?.['X-Access-Token']) return null
   if (!config.baseURL?.includes('ecvol.com')) return null
@@ -61,7 +60,6 @@ globalThis.ecomClientAxiosMidd = async (config) => {
       url += `/${config.url}`
     }
   }
-  functions.logger.info({ url })
   const data = await axios.$ssrFetchAndCache(url)
   return {
     data,
