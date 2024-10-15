@@ -4,7 +4,7 @@ const { getFirestore } = require('firebase-admin/firestore')
 const axios = require('axios')
 const { ssr } = require('@ecomplus/storefront-renderer/functions/')
 
-process.env.STOREFRONT_LONG_CACHE = 'true'
+process.env.STOREFRONT_LONG_CACHE = 'false'
 
 initializeApp()
 
