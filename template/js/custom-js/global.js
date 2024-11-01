@@ -104,3 +104,33 @@ window.$setProductDomainPrice = (product) => {
   }
   return discount
 }
+
+const holidays = [
+  // https://brasilapi.com.br/api/feriados/v1/2024
+  '2024-11-02',
+  '2024-11-15',
+  '2024-11-20',
+  '2024-12-25',
+  '2024-12-31',
+  '2025-01-01'
+]
+const getDateStr = (d) => {
+  return `${d.getFullYear()}-` +
+    `${(d.getMonth() + 1).toString().padStart(2, '0')}-` +
+    `${d.getDate().toString().padStart(2, '0')}`
+}
+const checkHoliday = (d) => {
+  const weekDay = d.getDay()
+  if (weekDay === 0 || weekDay === 6) return true
+  const dateStr = getDateStr(d)
+  return holidays.some((_dateStr) => _dateStr === dateStr)
+}
+window.propsShippingLine = {
+  getDeadlineStr ({ days, isWorkingDays }) {
+    const date = new Date()
+    date.setDate(date.getDate() + 1)
+    if (days === 1 && isWorkingDays && checkHoliday(date)) {
+      return 'Em 1 dia útil'
+    }
+  }
+}
