@@ -8,6 +8,13 @@
         {
           "start": "",
           "end": "",
+          "img": "/img/uploads/finaldesemanaf.jpg",
+          "link": "https://loja.festpan.com.br/p/confeitaria?utm_source=site&utm_medium=banner&utm_campaign=frete-gratis",
+          "alt": "159"
+        },
+        {
+          "start": "",
+          "end": "",
           "img": "/img/uploads/cafecaboclooutubro.jpg",
           "link": "\r\nhttps://loja.festpan.com.br/pf/cafe-torrado-e-moido-tradicional-almofada-250g-caboclo",
           "alt": "138"
@@ -60,13 +67,6 @@
           "img": "/img/uploads/diapadaria.jpg",
           "link": "https://loja.festpan.com.br/search?term=padaria",
           "alt": "152"
-        },
-        {
-          "start": "",
-          "end": "",
-          "img": "/img/uploads/finaldesemanaf.jpg",
-          "link": "https://loja.festpan.com.br/p/confeitaria?utm_source=site&utm_medium=banner&utm_campaign=frete-gratis",
-          "alt": "159"
         }
       ]
     },
