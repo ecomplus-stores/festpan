@@ -4,15 +4,7 @@
       "type": "banner-slider",
       "autoplay": 9000,
       "full_width": false,
-      "slides": [
-        {
-          "start": "",
-          "end": "",
-          "img": "/img/uploads/diapadaria.jpg",
-          "link": "https://loja.festpan.com.br/search?term=padaria",
-          "alt": "152"
-        }
-      ]
+      "slides": []
     },
     {
       "type": "info-bar",
