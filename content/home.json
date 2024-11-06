@@ -4,7 +4,15 @@
       "type": "banner-slider",
       "autoplay": 9000,
       "full_width": false,
-      "slides": []
+      "slides": [
+        {
+          "start": "",
+          "end": "",
+          "img": "/img/uploads/cafenovembro.jpg",
+          "link": "https://loja.festpan.com.br/pf/cafe-torrado-e-moido-extra-forte-vacuo-500g-pele?utm_source=site&utm_medium=banner&utm_campaign=cafe",
+          "alt": "160"
+        }
+      ]
     },
     {
       "type": "info-bar",
