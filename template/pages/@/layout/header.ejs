@@ -15,14 +15,6 @@ const networks = [
   'tiktok'
 ]
 
-// marketing stripe custom styles
-let marketingStripeStyle = ''
-;['background', 'color'].forEach(prop => {
-  if (header.marketing_stripe[prop]) {
-    marketingStripeStyle += `${prop}:${header.marketing_stripe[prop]};`
-  }
-})
-
 // list featured categories
 let categories = []
 let isCategoriesNavFull
@@ -50,27 +42,50 @@ const isAlphabeticalOrderSubmenu = header.alphabetical_order_submenu
 const fullWidthSubmenu = header.full_width_submenu
 const isCentralizedLogo = header.centralized_logo
 const hasAllDepartments = header.menu_all_departments
+
+if (header.marketing_stripe && !Array.isArray(header.marketing_stripe)) {
+  header.marketing_stripe = [header.marketing_stripe]
+}
 %>
 
 <div id="overlay" class="fade"></div>
 
 <div class="top-bar">
-  <% if (header.marketing_stripe) { %>
-    <% if (header.marketing_stripe.text) { %>
-      <% if (header.marketing_stripe.link) { %>
-        <a
-          class="top-bar__countdown"
-          style="<%= marketingStripeStyle %>"
-          href="<%= header.marketing_stripe.link %>"
-        >
-        <%= header.marketing_stripe.text %>
-        </a>
-      <% } else { %>
-        <div class="top-bar__countdown" style="<%= marketingStripeStyle %>">
-          <%= header.marketing_stripe.text %>
-        </div>
-      <% } %>
-    <% } %>
+  <% if (header.marketing_stripe && header.marketing_stripe.length) { %>
+    <div class="glide" data-autoplay="6000">
+      <div class="glide__track" data-glide-el="track">
+        <ul class="glide__slides">
+          <% header.marketing_stripe.forEach((marketingStripe) => { %>
+            <% if (marketingStripe.text) { %>
+              <li class="glide__slide">
+                <%
+                // marketing stripe custom styles
+                let marketingStripeStyle = ''
+                ;['background', 'color'].forEach(prop => {
+                  if (marketingStripe[prop]) {
+                    marketingStripeStyle += `${prop}:${marketingStripe[prop]};`
+                  }
+                })
+                %>
+                <% if (marketingStripe.link) { %>
+                  <a
+                    class="top-bar__countdown"
+                    style="<%= marketingStripeStyle %>"
+                    href="<%= marketingStripe.link %>"
+                  >
+                  <%= marketingStripe.text %>
+                  </a>
+                <% } else { %>
+                  <div class="top-bar__countdown" style="<%= marketingStripeStyle %>">
+                    <%= marketingStripe.text %>
+                  </div>
+                <% } %>
+              </li>
+            <% } %>
+          <% }) %>
+        </ul>
+      </div>
+    </div>
   <% } %>
 
   <div class="top-bar__nav d-none d-md-block">
