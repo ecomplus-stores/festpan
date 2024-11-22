@@ -8,13 +8,6 @@
         {
           "start": "",
           "end": "",
-          "img": "/img/uploads/cafenovembro.jpg",
-          "link": "https://loja.festpan.com.br/pf/cafe-torrado-e-moido-extra-forte-vacuo-500g-pele?utm_source=site&utm_medium=banner&utm_campaign=cafe",
-          "alt": "167"
-        },
-        {
-          "start": "",
-          "end": "",
           "img": "/img/uploads/1(102510).jpg",
           "link": "https://loja.festpan.com.br/pkf/po-para-decoracao-glitz-neon-rosa-5g-fab",
           "alt": "168"
@@ -88,6 +81,13 @@
           "img": "/img/uploads/32(101402).jpg",
           "link": "https://loja.festpan.com.br/pkf/caixa-p6-brigadeiros-leve-frescor-13x10x45cm-com-10-uni-carber",
           "alt": "178"
+        },
+        {
+          "start": "",
+          "end": "",
+          "img": "/img/uploads/cafenovembro.jpg",
+          "link": "https://loja.festpan.com.br/pf/cafe-torrado-e-moido-extra-forte-vacuo-500g-pele?utm_source=site&utm_medium=banner&utm_campaign=cafe",
+          "alt": "167"
         }
       ]
     },
