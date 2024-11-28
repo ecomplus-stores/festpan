@@ -15,35 +15,35 @@
           "start": "",
           "end": "",
           "img": "/img/uploads/4(1).jpg",
-          "link": "https://loja.festpan.com.br/search?term=fab",
+          "link": "https://loja.festpan.com.br/search?term=fab&utm_source=banner&utm_medium=banner_02&utm_campaign=fab",
           "alt": "193"
         },
         {
           "start": "",
           "end": "",
           "img": "/img/uploads/8(1).jpg",
-          "link": "https://loja.festpan.com.br/search?term=blend",
+          "link": "https://loja.festpan.com.br/search?term=Pasta+Saborizante+Concentrada+Blend&utm_source=banner&utm_medium=banner_03&utm_campaign=blend",
           "alt": "194"
         },
         {
           "start": "",
           "end": "",
           "img": "/img/uploads/12(1).jpg",
-          "link": "https://loja.festpan.com.br/search?term=iceberg",
+          "link": "https://loja.festpan.com.br/search?term=Iceberg&utm_source=banner&utm_medium=banner_04&utm_campaign=iceberg",
           "alt": "195"
         },
         {
           "start": "",
           "end": "",
           "img": "/img/uploads/blacknestle.jpg",
-          "link": "https://loja.festpan.com.br/search?term=nestl%C3%A9",
+          "link": "https://loja.festpan.com.br/search?term=Nestl%C3%A9&utm_source=banner&utm_medium=banner_05&utm_campaign=nestle",
           "alt": "196"
         },
         {
           "start": "",
           "end": "",
           "img": "/img/uploads/cafenovembro.jpg",
-          "link": "https://loja.festpan.com.br/pf/cafe-torrado-e-moido-extra-forte-vacuo-500g-pele?utm_source=site&utm_medium=banner&utm_campaign=cafe",
+          "link": "https://loja.festpan.com.br/pf/cafe-torrado-e-moido-extra-forte-vacuo-500g-pele?utm_source=banner&utm_medium=banner_06&utm_campaign=cafe-pele",
           "alt": "167"
         }
       ]
@@ -88,5 +88,5 @@
       "title": "Destaques"
     }
   ],
-  "meta_title": "nestle professional"
+  "meta_title": ""
 }
