@@ -14,6 +14,18 @@
         {
           "start": "",
           "end": "",
+          "img": "/img/uploads/banner-jde-cafe-pilao-181410.jpg",
+          "link": "https://loja.festpan.com.br/pf/cafe-torrado-e-moido-tradicional-almofada-500g-pilyo?utm_source=banner&utm_medium=pilao&utm_campaign=pilao"
+        },
+        {
+          "start": "",
+          "end": "",
+          "img": "/img/uploads/4-1-.jpg",
+          "link": "https://loja.festpan.com.br/search?term=fab&utm_source=banner&utm_medium=fab&utm_campaign=fab"
+        },
+        {
+          "start": "",
+          "end": "",
           "img": "/img/uploads/12(1).jpg",
           "link": "https://loja.festpan.com.br/search?term=Iceberg&utm_source=banner&utm_medium=iceberg&utm_campaign=iceberg",
           "alt": "195"
@@ -37,18 +49,6 @@
           "img": "/img/uploads/8(1).jpg",
           "link": "https://loja.festpan.com.br/search?term=Pasta+Saborizante+Concentrada+Blend&utm_source=banner&utm_medium=blend&utm_campaign=blend",
           "alt": "194"
-        },
-        {
-          "start": "",
-          "end": "",
-          "img": "/img/uploads/4-1-.jpg",
-          "link": "https://loja.festpan.com.br/search?term=fab&utm_source=banner&utm_medium=fab&utm_campaign=fab"
-        },
-        {
-          "start": "",
-          "end": "",
-          "img": "/img/uploads/banner-jde-cafe-pilao-181410.jpg",
-          "link": "https://loja.festpan.com.br/pf/cafe-torrado-e-moido-tradicional-almofada-500g-pilyo?utm_source=banner&utm_medium=pilao&utm_campaign=pilao"
         }
       ]
     },
