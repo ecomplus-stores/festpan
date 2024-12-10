@@ -11,25 +11,45 @@ initializeApp()
 axios.$ssrFetchAndCache = async (
   url,
   {
+    config,
     maxAge = 300,
     canUseStale = true,
     cacheKey,
     timeout = 4000
   } = {}
 ) => {
-  const key = cacheKey || `${url}`.replace(/\//g, '$').substring(0, 1499)
+  let key = cacheKey
+  if (!key) {
+    if (config?.method === 'post') {
+      if (config.data) {
+        const body = typeof config.data === 'object'
+          ? JSON.stringify(config.data)
+          : config.data
+        if (typeof body === 'string' && body.length < 1399) {
+          key = body
+        }
+      }
+    } else {
+      key = `${url}`.replace(/\//g, '$').substring(0, 1399)
+    }
+  }
   const now = Date.now()
   const ttlMs = maxAge * 1000
-  const docRef = getFirestore().doc(`ssrFetchCache/${key}`)
-  const docSnap = await docRef.get()
+  const docRef = key && getFirestore().doc(`ssrFetchCache/${key}`)
+  const docSnap = docRef && await docRef.get()
   const runFetch = async () => {
-    const response = await axios.get(url, { timeout })
+    if (config?.method === 'post' && timeout <= 4000) {
+      timeout = 9000
+    }
+    const response = await axios.get(url, { ...config, timeout })
     const { data } = response
-    const cacheVal = { timestamp: now, data }
-    docRef.set(cacheVal)
+    if (docRef) {
+      const cacheVal = { timestamp: now, data }
+      docRef.set(cacheVal)
+    }
     return data
   }
-  if (docSnap.exists) {
+  if (docSnap?.exists) {
     const cacheVal = docSnap.data()
     if (cacheVal.timestamp + ttlMs >= now) {
       return cacheVal.data
@@ -43,7 +63,13 @@ axios.$ssrFetchAndCache = async (
 }
 
 globalThis.ecomClientAxiosMidd = async (config) => {
-  if (config.method && config.method !== 'get') return null
+  if (config.method === 'post') {
+    if (!config.url.endsWith('/items.json')) {
+      return null
+    }
+  } else if (config.method && config.method !== 'get') {
+    return null
+  }
   if (config.headers?.['X-Access-Token']) return null
   if (!config.baseURL?.includes('ecvol.com')) return null
   let url = config.baseURL
@@ -60,7 +86,7 @@ globalThis.ecomClientAxiosMidd = async (config) => {
       url += `/${config.url}`
     }
   }
-  const data = await axios.$ssrFetchAndCache(url)
+  const data = await axios.$ssrFetchAndCache(url, { config })
   return {
     data,
     status: 200,
