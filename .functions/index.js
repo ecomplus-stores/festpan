@@ -27,7 +27,6 @@ axios.$ssrFetchAndCache = async (
           : config.data
         if (typeof body === 'string' && body.length < 1399) {
           key = body
-          console.log({ key })
         }
       }
     } else {
@@ -76,7 +75,7 @@ globalThis.ecomClientAxiosMidd = async (config) => {
     !config.baseURL?.includes('ecvol.com') &&
     !config.url.endsWith('/items.json')
   ) {
-      return null
+    return null
   }
   let url = config.baseURL
   if (url.endsWith('/')) {
