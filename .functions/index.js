@@ -72,7 +72,12 @@ globalThis.ecomClientAxiosMidd = async (config) => {
     return null
   }
   if (config.headers?.['X-Access-Token']) return null
-  if (!config.baseURL?.includes('ecvol.com')) return null
+  if (
+    !config.baseURL?.includes('ecvol.com') &&
+    !config.url.endsWith('/items.json')
+  ) {
+      return null
+  }
   let url = config.baseURL
   if (url.endsWith('/')) {
     if (config.url.startsWith('/')) {
