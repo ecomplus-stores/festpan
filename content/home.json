@@ -10,6 +10,13 @@
           "end": "2024-12-14T02:59:00Z",
           "img": "/img/uploads/banner.jpg",
           "link": "https://loja.festpan.com.br/search?term=fini&utm_source=banner&utm_medium=fini&utm_campaign=fini"
+        },
+        {
+          "start": "",
+          "end": "",
+          "img": "/img/uploads/01-nestle.jpg",
+          "link": "https://loja.festpan.com.br/search?term=nestl%C3%A9&utm_source=banner&utm_medium=01-nestle&utm_campaign=nestle",
+          "alt": "260"
         }
       ]
     },
