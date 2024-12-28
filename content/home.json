@@ -8,6 +8,11 @@
         {
           "start": "",
           "end": "",
+          "img": "/img/uploads/banner-comunicado-recesso.jpg"
+        },
+        {
+          "start": "",
+          "end": "",
           "img": "/img/uploads/silver-plastic.jpg",
           "link": "https://loja.festpan.com.br/p/ano-novo-silver-plastic?utm_source=banner&utm_medium=silver-plastic&utm_campaign=silver-plastic",
           "alt": "267"
@@ -39,11 +44,6 @@
           "img": "/img/uploads/03-banner.jpg",
           "link": "https://loja.festpan.com.br/p/utensilios?utm_source=banner&utm_medium=03-utensilios&utm_campaign=utensilios",
           "alt": "281"
-        },
-        {
-          "start": "",
-          "end": "",
-          "img": "/img/uploads/banner-comunicado-recesso.jpg"
         }
       ]
     },
