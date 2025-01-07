@@ -15,6 +15,20 @@
         {
           "start": "",
           "end": "",
+          "img": "/img/uploads/validade-bella.jpg",
+          "link": "https://loja.festpan.com.br/search?term=Pasta+Saborizante+daBella&utm_source=site&utm_medium=banner&utm_campaign=validade-bella",
+          "alt": "295"
+        },
+        {
+          "start": "",
+          "end": "",
+          "img": "/img/uploads/validade-mago.jpg",
+          "link": "https://loja.festpan.com.br/search?term=Emuls%C3%A3o+Saborizante+Mago&utm_source=site&utm_medium=banner&utm_campaign=validade-mago",
+          "alt": "296"
+        },
+        {
+          "start": "",
+          "end": "",
           "img": "/img/uploads/01-nestle.jpg",
           "link": "https://loja.festpan.com.br/search?term=nestl%C3%A9&utm_source=banner&utm_medium=01-nestle&utm_campaign=nestle",
           "alt": "260"
@@ -39,20 +53,6 @@
           "img": "/img/uploads/03-banner.jpg",
           "link": "https://loja.festpan.com.br/p/utensilios?utm_source=banner&utm_medium=03-utensilios&utm_campaign=utensilios",
           "alt": "281"
-        },
-        {
-          "start": "",
-          "end": "",
-          "img": "/img/uploads/validade-bella.jpg",
-          "link": "https://loja.festpan.com.br/search?term=Pasta+Saborizante+daBella&utm_source=site&utm_medium=banner&utm_campaign=validade-bella",
-          "alt": "295"
-        },
-        {
-          "start": "",
-          "end": "",
-          "img": "/img/uploads/validade-mago.jpg",
-          "link": "https://loja.festpan.com.br/search?term=Emuls%C3%A3o+Saborizante+Mago&utm_source=site&utm_medium=banner&utm_campaign=validade-mago",
-          "alt": "296"
         }
       ]
     },
