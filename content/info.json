@@ -2,12 +2,14 @@
   "shipping": {
     "show": true,
     "title": "Entrega rápida",
-    "text": "para todo o Brasil"
+    "text": "para todo o Brasil",
+    "link": "https://loja.festpan.com.br/pages/entrega"
   },
   "installments": {
     "show": true,
     "title": "Parcele sem juros",
-    "text": "em até 6x s/ Juros"
+    "text": "em até 6x s/ Juros",
+    "link": "https://loja.festpan.com.br/pages/pagamentos"
   },
   "exchange": {
     "show": false,
@@ -17,6 +19,7 @@
   "promo": {
     "show": true,
     "title": "5% de desconto",
-    "text": "Em pagamentos à vista"
+    "text": "Em pagamentos à vista",
+    "link": "https://loja.festpan.com.br/pages/pagamentos"
   }
 }
