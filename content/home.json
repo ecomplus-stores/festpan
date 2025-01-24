@@ -22,8 +22,14 @@
         {
           "start": "",
           "end": "",
+          "img": "/img/uploads/2-pascoa.jpg",
+          "link": "https://loja.festpan.com.br/p/pascoa?utm_source=site&utm_medium=banner&utm_campaign=03-pascoa"
+        },
+        {
+          "start": "",
+          "end": "",
           "img": "/img/uploads/3-pascoa.jpg",
-          "link": "https://loja.festpan.com.br/search?term=P%C3%A1scoa&utm_source=site&utm_medium=banner&utm_campaign=03-pascoa",
+          "link": "https://loja.festpan.com.br/p/pascoa?utm_source=site&utm_medium=banner&utm_campaign=03-pascoa",
           "alt": "301"
         },
         {
@@ -32,12 +38,6 @@
           "img": "/img/uploads/4-pascoa.jpg",
           "link": "https://loja.festpan.com.br/search?term=Forma+de+acetato&utm_source=site&utm_medium=banner&utm_campaign=04-pascoa",
           "alt": "302"
-        },
-        {
-          "start": "",
-          "end": "",
-          "img": "/img/uploads/2-pascoa.jpg",
-          "link": "https://loja.festpan.com.br/p/pascoa?utm_source=site&utm_medium=banner&utm_campaign=03-pascoa"
         }
       ]
     },
