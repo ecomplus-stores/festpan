@@ -22,6 +22,13 @@
         {
           "start": "",
           "end": "",
+          "img": "/img/uploads/bolo-de-cenoura.jpg",
+          "link": "https://loja.festpan.com.br/p/bolo-de-cenoura?utm_source=site&utm_medium=banner&utm_campaign=bolo-de-cenoura",
+          "alt": "310"
+        },
+        {
+          "start": "",
+          "end": "",
           "img": "/img/uploads/2-pascoa.jpg",
           "link": "https://loja.festpan.com.br/p/pascoa?utm_source=site&utm_medium=banner&utm_campaign=03-pascoa"
         },
@@ -38,20 +45,6 @@
           "img": "/img/uploads/4-pascoa.jpg",
           "link": "https://loja.festpan.com.br/search?term=Forma+de+acetato&utm_source=site&utm_medium=banner&utm_campaign=04-pascoa",
           "alt": "302"
-        },
-        {
-          "start": "",
-          "end": "",
-          "img": "/img/uploads/bolo-de-cenoura.jpg",
-          "link": "https://loja.festpan.com.br/pkf/mistura-bolo-de-cenoura-5kg-vapt--festpan?utm_source=site&utm_medium=banner&utm_campaign=bolo-de-cenoura",
-          "alt": "310"
-        },
-        {
-          "start": "",
-          "end": "",
-          "img": "/img/uploads/bolo-de-cenoura.jpg",
-          "link": "https://loja.festpan.com.br/pkf/mistura-bolo-de-cenoura-5kg-vapt--festpan?utm_source=site&utm_medium=banner&utm_campaign=bolo-de-cenoura",
-          "alt": "310"
         }
       ]
     },
