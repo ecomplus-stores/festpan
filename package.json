@@ -5,10 +5,6 @@
     "not ie 11",
     "not ie_mob 11"
   ],
-  "engines": {
-    "node": "16.20.2",
-    "npm": "^8.19.4"
-  },
   "private": true,
   "name": "@ecomplus/storefront",
   "version": "2.0.0-starter",
