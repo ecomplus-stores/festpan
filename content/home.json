@@ -8,9 +8,30 @@
         {
           "start": "",
           "end": "",
+          "img": "/img/uploads/carnaval2.jpg",
+          "link": "https://loja.festpan.com.br/search?term=dabella&utm_source=site&utm_medium=banner&utm_campaign=dabella-50off",
+          "alt": "323"
+        },
+        {
+          "start": "",
+          "end": "",
           "img": "/img/uploads/nestle_fevereiro.jpg",
           "link": "https://loja.festpan.com.br/search?term=nestl%C3%A9&utm_source=site&utm_medium=banner&utm_campaign=parceria_nestle",
           "alt": "308"
+        },
+        {
+          "start": "",
+          "end": "",
+          "img": "/img/uploads/carnaval1.jpg",
+          "link": "https://loja.festpan.com.br/pkf/pasta-saborizante-maracuja-150gr-dabella?utm_source=site&utm_medium=banner&utm_campaign=ofertas",
+          "alt": "322"
+        },
+        {
+          "start": "",
+          "end": "",
+          "img": "/img/uploads/carnaval3.jpg",
+          "link": "https://loja.festpan.com.br/search?term=dabella&utm_source=site&utm_medium=banner&utm_campaign=oferta-preco",
+          "alt": "324"
         },
         {
           "start": "",
@@ -31,27 +52,6 @@
           "img": "/img/uploads/3-pascoa.jpg",
           "link": "https://loja.festpan.com.br/search?term=P%C3%A1scoa&utm_source=site&utm_medium=banner&utm_campaign=03-pascoa&utm_source=&utm_medium=&utm_campaign=",
           "alt": "320"
-        },
-        {
-          "start": "",
-          "end": "",
-          "img": "/img/uploads/carnaval1.jpg",
-          "link": "https://loja.festpan.com.br/pkf/pasta-saborizante-maracuja-150gr-dabella?utm_source=site&utm_medium=banner&utm_campaign=ofertas",
-          "alt": "322"
-        },
-        {
-          "start": "",
-          "end": "",
-          "img": "/img/uploads/carnaval2.jpg",
-          "link": "https://loja.festpan.com.br/search?term=dabella&utm_source=site&utm_medium=banner&utm_campaign=dabella-50off",
-          "alt": "323"
-        },
-        {
-          "start": "",
-          "end": "",
-          "img": "/img/uploads/carnaval3.jpg",
-          "link": "https://loja.festpan.com.br/search?term=dabella&utm_source=site&utm_medium=banner&utm_campaign=oferta-preco",
-          "alt": "324"
         }
       ]
     },
