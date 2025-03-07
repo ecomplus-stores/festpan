@@ -150,12 +150,13 @@ export default {
       const amount = this.amount || {
         subtotal: this.ecomCart.data.subtotal
       }
-      this.localAmountTotal = (amount.subtotal || 0) +
-        (amount.freight || 0) - this.paymentGatewayDiscount
+      this.localAmountTotal = Math.round(((amount.subtotal || 0) +
+        (amount.freight || 0) - this.paymentGatewayDiscount) * 100) / 100
     },
 
     parseDiscountOptions (listResult = []) {
       let extraDiscountValue = 0
+      let hasFreebies = false
       if (listResult.length) {
         let discountRule, invalidCouponMsg, invalidAlertVariant
         listResult.forEach(appResult => {
@@ -193,7 +194,14 @@ export default {
               invalidCouponMsg = response.invalid_coupon_message
             }
             if (this.canAddFreebieItems) {
-              addFreebieItems(this.ecomCart, response.freebie_product_ids)
+              const freebieProductIds = response.freebie_product_ids
+              if (Array.isArray(freebieProductIds) && freebieProductIds.length) {
+                hasFreebies = true
+                addFreebieItems(this.ecomCart, freebieProductIds)
+                if (this.localCouponCode) {
+                  this.$emit('update:coupon-code', this.localCouponCode)
+                }
+              }
             }
           }
         })
@@ -213,7 +221,7 @@ export default {
           }
           this.$emit('set-discount-rule', discountRule)
         } else {
-          if (this.localCouponCode) {
+          if (this.localCouponCode && !hasFreebies) {
             this.alertText = invalidCouponMsg || this.i19invalidCouponMsg
             this.alertVariant = invalidAlertVariant || 'warning'
           } else {
@@ -304,11 +312,17 @@ export default {
 
   watch: {
     couponCode (couponCode) {
-      if (couponCode !== this.couponCode) {
+      if (couponCode !== this.localCouponCode) {
         this.localCouponCode = couponCode
         if (couponCode && !this.isFormVisible) {
           this.isFormVisible = true
         }
+      }
+    },
+
+    localCouponCode () {
+      if (this.alertVariant === 'info') {
+        this.alertText = null
       }
     },
 
@@ -327,7 +341,7 @@ export default {
     },
 
     localAmountTotal (total, oldTotal) {
-      if (oldTotal !== null && Math.abs(total - oldTotal) > 0.01) {
+      if (oldTotal !== null && Math.abs(total - oldTotal) > 0.02) {
         this.scheduleUpdateDiscount()
       }
     },
