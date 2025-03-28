@@ -90,6 +90,16 @@
     color: var(--secondary);
     font-weight: 500;
   }
+  &__shelf-life {
+    font-size: 11px;
+    padding: 4px 6px;
+    text-decoration: none !important;
+    position: absolute;
+    top: 4px;
+    left: 6px;
+    display: inline-block;
+    z-index: 2;
+  }
 }
 .product-card:not(.product-card--small) {
   .product-card {

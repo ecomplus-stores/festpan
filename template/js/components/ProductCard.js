@@ -137,6 +137,35 @@ export default {
       return checkOnPromotion(body)
         ? Math.round(((body.base_price - getPrice(body)) * 100) / body.base_price)
         : 0
+    },
+
+    shortShelfLife () {
+      let date
+      if (this.body.specs) {
+        const spec = this.body.specs.find(({ grid }) => grid === 'validade')
+        if (spec && spec.text) {
+          date = new Date(spec.text)
+        }
+      }
+      if (!date) {
+        const { specifications } = this.body
+        const dateStr = specifications && specifications.validade &&
+          specifications.validade[0] && specifications.validade[0].text
+        if (dateStr) {
+          date = new Date(dateStr)
+        }
+      }
+      if (date) {
+        const now = Date.now()
+        const dateTimestamp = date.getTime()
+        if (
+          dateTimestamp > now - 1000 * 60 * 60 * 24 * 60 &&
+          dateTimestamp < now + 1000 * 60 * 60 * 24 * 180
+        ) {
+          return date.toLocaleDateString()
+        }
+      }
+      return null
     }
   },
 
@@ -188,7 +217,7 @@ export default {
             for (let i = 0; i < selectFields.length; i++) {
               const selectOptions = data[selectFields[i]]
               if (selectOptions && selectOptions.length) {
-                return import('../ProductQuickview.vue')
+                return import('@ecomplus/storefront-components/src/ProductQuickview.vue')
                   .then(quickview => {
                     new Vue({
                       render: h => h(quickview.default, {

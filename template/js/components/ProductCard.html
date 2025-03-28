@@ -31,6 +31,14 @@
         >
           <slot name="header"/>
 
+          <span
+            v-if="shortShelfLife"
+            class="product-card__shelf-life alert alert-warning"
+          >
+            Vencimendo em
+            <strong>{{ shortShelfLife }}</strong>
+          </span>
+
           <div class="product-card__pictures">
             <template v-if="body.pictures && body.pictures.length">
               <a-picture
