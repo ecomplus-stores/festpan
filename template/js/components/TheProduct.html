@@ -273,9 +273,15 @@
                   </span>
                 </component>
               </div>
-
             </template>
 
+            <p
+              v-if="shortShelfLife"
+              class="product__shelf-life alert alert-warning inline-block"
+            >
+              Vencimendo em
+              <strong>{{ shortShelfLife }}</strong>
+            </p>
             <p v-if="body.quantity">
               Estoque: <strong>{{ body.quantity }}</strong>
               {{ body.quantity > 1 ? 'unidades' : 'unidade' }}

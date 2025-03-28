@@ -99,6 +99,8 @@
     left: 6px;
     display: inline-block;
     z-index: 2;
+    text-wrap: balance;
+    opacity: 0.9;
   }
 }
 .product-card:not(.product-card--small) {
@@ -176,4 +178,10 @@
   .gallery__big-image {
     cursor: default;
   }
+}
+.product__shelf-life {
+  display: inline-block;
+  padding-top: var(--spacer-1);
+  padding-bottom: var(--spacer-1);
+  margin-bottom: var(--spacer-2);
 }

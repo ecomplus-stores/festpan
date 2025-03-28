@@ -289,6 +289,27 @@ export default {
 
     isKitWithVariations () {
       return this.kitItems.some(item => item.variations && item.variations.length)
+    },
+
+    shortShelfLife () {
+      let date
+      const { specifications } = this.body
+      const dateStr = specifications && specifications.validade &&
+        specifications.validade[0] && specifications.validade[0].text
+      if (dateStr) {
+        date = new Date(dateStr)
+      }
+      if (date) {
+        const now = Date.now()
+        const dateTimestamp = date.getTime()
+        if (
+          dateTimestamp > now - 1000 * 60 * 60 * 24 * 60 &&
+          dateTimestamp < now + 1000 * 60 * 60 * 24 * 180
+        ) {
+          return date.toLocaleDateString()
+        }
+      }
+      return null
     }
   },
 
