@@ -8,6 +8,12 @@
         {
           "start": "",
           "end": "",
+          "img": "/img/uploads/festpan_bnr_pascoa_sem1_03.jpg",
+          "link": "https://loja.festpan.com.br/p/cortadores-de-plastico"
+        },
+        {
+          "start": "",
+          "end": "",
           "img": "/img/uploads/festpan_bnr_aviso_pausapascoa.jpg"
         },
         {
@@ -21,12 +27,6 @@
           "start": "",
           "end": "",
           "img": "/img/uploads/festpan_bnr_pascoa_sem1_02.jpg",
-          "link": "https://loja.festpan.com.br/p/cortadores-de-plastico"
-        },
-        {
-          "start": "",
-          "end": "",
-          "img": "/img/uploads/festpan_bnr_pascoa_sem1_03.jpg",
           "link": "https://loja.festpan.com.br/p/cortadores-de-plastico"
         }
       ]
