@@ -8,6 +8,11 @@
         {
           "start": "",
           "end": "",
+          "img": "/img/uploads/festpan_bnr_aviso_pausapascoa.jpg"
+        },
+        {
+          "start": "",
+          "end": "",
           "img": "/img/uploads/FESTPAN_BNR_SEARA_SALADA_WEB.jpg",
           "link": "https://loja.festpan.com.br/p/salada?utm_source=site&utm_medium=banner&utm_campaign=salda",
           "alt": "364"
@@ -23,11 +28,6 @@
           "end": "",
           "img": "/img/uploads/festpan_bnr_pascoa_sem1_03.jpg",
           "link": "https://loja.festpan.com.br/p/cortadores-de-plastico"
-        },
-        {
-          "start": "",
-          "end": "",
-          "img": "/img/uploads/festpan_bnr_aviso_pausapascoa.jpg"
         }
       ]
     },
