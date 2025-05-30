@@ -8,10 +8,15 @@
   status = 200
 
 [[redirects]]
-  from = "/*"
+  from = "/"
   to = "https://loja.festpan.com.br/:splat"
   status = 301
   force = true
+
+[[redirects]]
+  from = "/*"
+  to = "https://loja.festpan.com.br/:splat"
+  status = 301
 
 [[headers]]
   for = "/storefront.*"
