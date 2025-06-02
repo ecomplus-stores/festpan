@@ -1,0 +1,37 @@
+{
+  "icons": [
+    {
+      "src": "/icon_512x512.769667cb4532c9a10b8706d027998d6d.png",
+      "sizes": "512x512",
+      "type": "image/png"
+    },
+    {
+      "src": "/icon_384x384.597b21cc692139e443c7867a648375e9.png",
+      "sizes": "384x384",
+      "type": "image/png"
+    },
+    {
+      "src": "/icon_192x192.b0c01fa0d2e5cd50dd2d5eb0c475dd5f.png",
+      "sizes": "192x192",
+      "type": "image/png"
+    },
+    {
+      "src": "/icon_128x128.92fd9753d15ef1c0960576eb865c93a5.png",
+      "sizes": "128x128",
+      "type": "image/png"
+    },
+    {
+      "src": "/icon_96x96.60470520a4114bf2349940ad9f08d4b8.png",
+      "sizes": "96x96",
+      "type": "image/png"
+    }
+  ],
+  "name": "Festpan Alimentos",
+  "short_name": "festpan",
+  "orientation": "portrait",
+  "display": "standalone",
+  "start_url": ".",
+  "description": "Festpan Alimentos Distribuidora está 45 anos transportando qualidade para restaurantes, padarias, mercados, hotéis desde a entrada até a sobremesa e agora para você.",
+  "background_color": "#ffffff",
+  "theme_color": "#cc0106"
+}
