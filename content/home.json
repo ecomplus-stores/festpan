@@ -6,34 +6,10 @@
       "full_width": false,
       "slides": [
         {
-          "start": "2025-05-09T18:19:44.124Z",
-          "end": "2025-05-17T03:00:00.000Z",
-          "img": "/img/uploads/neutro_bnr_sem2_venci_01.jpg",
-          "link": "https://loja.festpan.com.br/p/ofertas?utm_source=site&utm_medium=banner&utm_campaign=ofertas-venc"
-        },
-        {
           "start": "2025-05-09T18:19:55.212Z",
           "end": "2025-05-17T03:00:00.000Z",
           "img": "/img/uploads/neutro_bnr_sem2_venci_02.jpg",
           "link": "https://loja.festpan.com.br/p/ofertas?utm_source=site&utm_medium=banner&utm_campaign=ofertas-venc"
-        },
-        {
-          "start": "2025-05-13T18:10:46.205Z",
-          "end": "2025-05-17T02:59:10.493Z",
-          "img": "/img/uploads/festpan_bnr_sem2_01.jpg",
-          "link": "https://loja.festpan.com.br/search?term=recheios?utm_source=site&utm_medium=banner&utm_campaign=recheios-maio"
-        },
-        {
-          "start": "2025-05-13T18:15:49.635Z",
-          "end": "2025-05-17T02:59:50.244Z",
-          "img": "/img/uploads/festpan_bnr_sem2_02.jpg",
-          "link": "https://loja.festpan.com.br/search?term=recheios?utm_source=site&utm_medium=banner&utm_campaign=recheios-maio"
-        },
-        {
-          "start": "2025-05-14T15:14:58.591Z",
-          "end": "2025-05-22T02:59:00.000Z",
-          "img": "/img/uploads/festpan_bnr_seara_primor_web.jpg",
-          "link": "https://loja.festpan.com.br/pkf/gordura-vegetal-500g--primor?utm_source=site&utm_medium=banner&utm_campaign=primor"
         },
         {
           "start": "2025-05-17T03:00:00.000Z",
@@ -42,34 +18,10 @@
           "link": "https://loja.festpan.com.br/search?term=amor?utm_source=site&utm_medium=banner&utm_campaign=namorados"
         },
         {
-          "start": "2025-05-17T03:00:00.000Z",
-          "end": "2025-05-24T02:59:00.000Z",
-          "img": "/img/uploads/neutro_bnr_mai_sem3_02.jpg",
-          "link": "https://loja.festpan.com.br/p/namorados?utm_source=site&utm_medium=banner&utm_campaign=namorados"
-        },
-        {
-          "start": "2025-05-15T18:36:13.858Z",
-          "end": "2025-05-31T02:59:00.000Z",
-          "img": "/img/uploads/neutro_brn_mai_promo_nestle.jpg",
-          "link": "https://loja.festpan.com.br/p/nestle?utm_source=site&utm_medium=banner&utm_campaign=nestle"
-        },
-        {
-          "start": "2025-05-24T03:00:00.000Z",
-          "end": "2025-06-02T02:59:00.000Z",
-          "img": "/img/uploads/festpan_bnr_sem4_01.jpg",
-          "link": "https://loja.festpan.com.br/search?term=junina?utm_source=site&utm_medium=banner&utm_campaign=junina"
-        },
-        {
-          "start": "2025-05-24T03:00:00.000Z",
-          "end": "2025-06-02T02:59:00.000Z",
-          "img": "/img/uploads/festpan_bnr_sem4_02.jpg",
-          "link": "https://loja.festpan.com.br/search?term=junina?utm_source=site&utm_medium=banner&utm_campaign=junina"
-        },
-        {
-          "start": "2025-05-24T03:00:00.000Z",
-          "end": "2025-06-02T02:59:00.000Z",
-          "img": "/img/uploads/festpan_bnr_sem4_03.jpg",
-          "link": "https://loja.festpan.com.br/p/chicobento?utm_source=site&utm_medium=banner&utm_campaign=chicobento"
+          "start": "2025-06-02T11:12:35.313Z",
+          "end": "2025-06-11T02:59:00.000Z",
+          "img": "/img/uploads/neutro_bnr_jun_sem1_namorados_01.jpg",
+          "link": "https://loja.festpan.com.br/p/sb1-caixote?utm_source=site&utm_medium=banner&utm_campaign=Caixasdecoração"
         }
       ]
     },
