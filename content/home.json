@@ -6,22 +6,16 @@
       "full_width": false,
       "slides": [
         {
-          "start": "2025-05-09T18:19:55.212Z",
-          "end": "2025-05-17T03:00:00.000Z",
-          "img": "/img/uploads/neutro_bnr_sem2_venci_02.jpg",
-          "link": "https://loja.festpan.com.br/p/ofertas?utm_source=site&utm_medium=banner&utm_campaign=ofertas-venc"
-        },
-        {
-          "start": "2025-05-17T03:00:00.000Z",
-          "end": "2025-05-24T02:59:00.000Z",
-          "img": "/img/uploads/neutro_bnr_mai_sem3_01.jpg",
-          "link": "https://loja.festpan.com.br/search?term=amor?utm_source=site&utm_medium=banner&utm_campaign=namorados"
-        },
-        {
           "start": "2025-06-02T11:12:35.313Z",
           "end": "2025-06-11T02:59:00.000Z",
           "img": "/img/uploads/neutro_bnr_jun_sem1_namorados_01.jpg",
           "link": "https://loja.festpan.com.br/p/sb1-caixote?utm_source=site&utm_medium=banner&utm_campaign=Caixasdecoração"
+        },
+        {
+          "start": "2025-06-02T11:16:51.279Z",
+          "end": "2025-06-11T02:59:00.000Z",
+          "img": "/img/uploads/neutro_bnr_jun_sem1_namorados_02.jpg",
+          "link": "https://loja.festpan.com.br/search?term=p%C3%B3+decorativo?utm_source=site&utm_medium=banner&utm_campaign=Pósdecorativos"
         }
       ]
     },
