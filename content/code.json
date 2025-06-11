@@ -1,5 +1,5 @@
 {
   "css": "",
-  "html_head": "<meta name=\"google-site-verification\" content=\"3WPkJpuwlz3FHVfYHrE6KVDbAWiA1k7am2rL7o3zgVs\" />\n<script src=\"https://cdn.amplitude.com/libs/analytics-browser-2.11.1-min.js.gz\"></script><script src=\"https://cdn.amplitude.com/libs/plugin-session-replay-browser-1.8.0-min.js.gz\"></script><script>window.amplitude.add(window.sessionReplay.plugin({sampleRate: 1}));window.amplitude.init('7e07f5a0808495fd94d6c2fda0fac91', {\"autocapture\":{\"elementInteractions\":true}});</script>",
+  "html_head": "<meta name=\"google-site-verification\" content=\"3WPkJpuwlz3FHVfYHrE6KVDbAWiA1k7am2rL7o3zgVs\" />",
   "html_body": ""
 }
