@@ -6,31 +6,6 @@
       "full_width": true,
       "slides": [
         {
-          "start": "2025-06-02T17:28:00.000Z",
-          "end": "2025-06-11T02:59:00.000Z",
-          "img": "/img/uploads/neutro_bnr_jun_sem1_namorados_01.jpg",
-          "link": "https://loja.festpan.com.br/p/sb1-caixote?utm_source=site&utm_medium=banner&utm_campaign=Caixasdecoração",
-          "alt": "banner namorados"
-        },
-        {
-          "start": "2025-06-02T17:28:00.000Z",
-          "end": "2025-06-11T02:59:00.000Z",
-          "img": "/img/uploads/neutro_bnr_jun_sem1_namorados_02.jpg",
-          "link": "https://loja.festpan.com.br/search?term=p%C3%B3+decorativo?utm_source=site&utm_medium=banner&utm_campaign=Pósdecorativos"
-        },
-        {
-          "start": "2025-06-02T17:28:00.000Z",
-          "end": "2025-06-11T02:59:00.000Z",
-          "img": "/img/uploads/neutro_bnr_jun_sem1_namorados_03.jpg",
-          "link": "https://loja.festpan.com.br/p/pastadabella?utm_source=site&utm_medium=banner&utm_campaign=pastadabella"
-        },
-        {
-          "start": "2025-06-02T17:30:00.000Z",
-          "end": "2025-06-16T02:59:02.004Z",
-          "img": "/img/uploads/neutro_bnr_jun_sem1_namorados_04.jpg",
-          "link": "https://loja.festpan.com.br/search?term=namorados&utm_source=site&utm_medium=banner&utm_campaign=Namorados%3Futm_source%3Dsite&utm_medium=banner&utm_campaign=Namorados"
-        },
-        {
           "start": "2025-06-11T03:00:45.723Z",
           "end": "2025-06-16T02:59:00.000Z",
           "img": "/img/uploads/neutro_jun_bnr_sem2_namorados_01.jpg",
@@ -53,6 +28,12 @@
           "end": "2025-06-16T02:59:00.000Z",
           "img": "/img/uploads/neutro_jun_bnr_sem2_namorados_04.jpg",
           "link": "https://loja.festpan.com.br/search?term=love?utm_source=site&utm_medium=banner&utm_campaign=Love"
+        },
+        {
+          "start": "2025-06-02T17:30:00.000Z",
+          "end": "2025-06-16T02:59:02.004Z",
+          "img": "/img/uploads/neutro_bnr_jun_sem1_namorados_04.jpg",
+          "link": "https://loja.festpan.com.br/search?term=namorados&utm_source=site&utm_medium=banner&utm_campaign=Namorados%3Futm_source%3Dsite&utm_medium=banner&utm_campaign=Namorados"
         }
       ]
     },
