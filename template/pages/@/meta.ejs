@@ -25,6 +25,7 @@ if (resource || collection) {
   _.state = Object.assign({}, body || content, _.state)
 }
 _.categories = _.categories.filter(({ slug }) => /^\w*p\w*\//.test(slug))
+_.items = _.items.filter(({ slug }) => /^\w*p\w*\//.test(slug))
 
 // preset global list of active widgets
 _.widgets = []
