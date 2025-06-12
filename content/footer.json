@@ -25,7 +25,8 @@
       "src": "/img/uploads/google-safe-browsing.webp",
       "alt": "Google Safe Browsing",
       "width": 150,
-      "height": 62
+      "height": 62,
+      "link": "https://transparencyreport.google.com/safe-browsing/search?url=https:%2F%2Floja.festpan.com.br%2F&hl=pt_BR"
     }
   ],
   "payment_methods": {
