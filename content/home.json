@@ -6,12 +6,6 @@
       "full_width": true,
       "slides": [
         {
-          "start": "2025-06-11T20:30:51.212Z",
-          "end": "2025-07-01T02:59:00.000Z",
-          "img": "/img/uploads/br_pt_nptrade_bannerwinter1995x525px_m-1.jpg",
-          "link": "https://loja.festpan.com.br/search?term=nestl%C3%A9&utm_source=site&utm_medium=banner&utm_campaign=Nestlé"
-        },
-        {
           "start": "2025-06-16T11:10:59.575Z",
           "end": "2025-06-23T02:59:00.000Z",
           "img": "/img/uploads/festpan_jun_bnr_sem3_junino_01.jpg",
@@ -34,6 +28,12 @@
           "end": "2025-06-23T02:59:00.000Z",
           "img": "/img/uploads/festpan_jun_bnr_sem3_junino_04.jpg",
           "link": "https://loja.festpan.com.br/search?term=junina&utm_source=site&utm_medium=banner&utm_campaign=Junina"
+        },
+        {
+          "start": "2025-06-11T20:30:51.212Z",
+          "end": "2025-07-01T02:59:00.000Z",
+          "img": "/img/uploads/br_pt_nptrade_bannerwinter1995x525px_m-1.jpg",
+          "link": "https://loja.festpan.com.br/search?term=nestl%C3%A9&utm_source=site&utm_medium=banner&utm_campaign=Nestlé"
         }
       ]
     },
