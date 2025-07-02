@@ -1,17 +1,27 @@
 {
   "categories_list": {
-    "featured": [],
-    "random": 8,
+    "featured": [
+      "/p/mercearia?Mercearia",
+      "/p/embalagens-e-descartaveis?Embalagens e Descartáveis",
+      "/p/utensilios?Utensílios",
+      "/p/confeitaria?Confeitaria",
+      "/p/panificacao?Panificação",
+      "/f/chocolates?Chocolates",
+      "/pfkvw/pfkvw/pfkvw/pfkv/pfkv/pfkv/pfkv/pfkv/pfkv/pfkv/pfkv/pfkv/pfkv/pfkv/pfkv/pfkv/pfkv/pfkv/pfkv/pfkv/pfkv/pfkv/pfkv/pfkv/pfkv/pfkv/pfkv/pfkv/pfkv/pfkv/pfkv/pfkv/pfkv/pfkv/pfkv/pfkv/pfkv/pfkv/pfkv/pfkv/pfkv/pfkv/pfkv/pfkv/pfkv/pfkv/pfkv/pfkv/sazonal?Sazonal"
+    ],
+    "random": 7,
     "full_width": true
   },
   "menu_all_departments": false,
   "centralized_logo": false,
-  "marketing_stripe": [{
-    "text": "Pague com pix e ganhe 5% de desconto",
-    "link": "",
-    "background": "#090909",
-    "color": "#ffffff"
-  }],
+  "marketing_stripe": [
+    {
+      "text": "Pague com pix e ganhe 5% de desconto",
+      "link": "",
+      "background": "#090909",
+      "color": "#ffffff"
+    }
+  ],
   "alphabetical_order_submenu": true,
   "name_all_departments": "",
   "search_input": true,
