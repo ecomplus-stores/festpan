@@ -6,10 +6,9 @@
       "/p/utensilios?Utensílios",
       "/p/confeitaria?Confeitaria",
       "/p/panificacao?Panificação",
-      "/f/chocolates?Chocolates",
-      "/pfkvw/pfkvw/pfkvw/pfkv/pfkv/pfkv/pfkv/pfkv/pfkv/pfkv/pfkv/pfkv/pfkv/pfkv/pfkv/pfkv/pfkv/pfkv/pfkv/pfkv/pfkv/pfkv/pfkv/pfkv/pfkv/pfkv/pfkv/pfkv/pfkv/pfkv/pfkv/pfkv/pfkv/pfkv/pfkv/pfkv/pfkv/pfkv/pfkv/pfkv/pfkv/pfkv/pfkv/pfkv/pfkv/pfkv/pfkv/pfkv/sazonal?Sazonal"
+      "/f/chocolates?Chocolates"
     ],
-    "random": 7,
+    "random": 6,
     "full_width": true
   },
   "menu_all_departments": false,
