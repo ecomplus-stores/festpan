@@ -44,7 +44,7 @@
       "title": "Aqui tem promoção todo dia"
     },
     {
-      "autoplay": 2000,
+      "autoplay": 0,
       "page": 1,
       "title": "Mais Vendidos",
       "shuffle": true,
