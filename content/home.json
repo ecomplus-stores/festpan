@@ -6,15 +6,21 @@
       "full_width": true,
       "slides": [
         {
+          "start": "2025-08-04T12:59:33.091Z",
+          "end": "",
+          "img": "/img/uploads/fes-102_2025_ago_bnr_sem2_02.jpg"
+        },
+        {
           "start": "2025-08-01T17:30:20.015Z",
           "end": "2025-08-17T02:59:44.807Z",
           "img": "/img/uploads/br_pt_npecomm_diadospaisbannersclientesbidfood1995x525px_m-1.jpg",
           "link": "https://loja.festpan.com.br/search?term=nestl%C3%A9&utm_source=site&utm_medium=banner&utm_campaign=c-sem4-banner-1-dia_dos_pais"
         },
         {
-          "start": "2025-08-04T12:59:33.091Z",
+          "start": "2025-08-04T13:02:34.061Z",
           "end": "",
-          "img": "/img/uploads/fes-102_2025_ago_bnr_sem2_02.jpg"
+          "img": "/img/uploads/fes-102_2025_ago_bnr_sem2_01.jpg",
+          "link": "https://loja.festpan.com.br/pk/velas-diamante&utm_source=site&utm_medium=banner&utm_campaign=c-sem4-banner-1-dia_dos_pais"
         }
       ]
     },
