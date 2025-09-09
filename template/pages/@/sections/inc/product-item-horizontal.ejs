@@ -1,0 +1,148 @@
+<%
+const stamps = _.cms('stamps') || {}
+const itemData = {}
+let itemDataFields = ['_id', 'sku', 'slug', 'quantity']
+if (Array.isArray(_.itemDataFields)) {
+  itemDataFields = itemDataFields.concat(_.itemDataFields)
+}
+itemDataFields.forEach(field => itemData[field] = opt.item[field])
+itemData.name = _.ecomUtils.name(opt.item)
+itemData.price = _.ecomUtils.price(opt.item)
+itemData.old_price = _.ecomUtils.oldPrice ? _.ecomUtils.oldPrice(opt.item) : null
+
+const imgObj = _.ecomUtils.img(opt.item)
+const imgHoverObj = _.ecomUtils.img(opt.item, 1)
+if (imgObj) {
+  itemData.pictures = [{
+    _id: _.ecomUtils.randomObjectId(),
+    normal: imgObj
+  }]
+}
+let stampsList
+if (stamps && Array.isArray(stamps.stamps_list) && stamps.stamps_list.length) {
+  stampsList = stamps.stamps_list
+}
+%>
+
+<article class="product-item wow fadeInLeft animated" data-wow-delay="0s">
+  <div
+    class="product-card card-product style-3 style-row type-row-3 h-100 flex-sm-row"
+    data-product-id="<%= itemData._id %>"
+    data-sku="<%= itemData.sku %>"
+    <% if (!opt.static) { %>
+      data-to-render="true"
+    <% } %>
+  >
+    <div data-slot="stamps">
+      <% if (Array.isArray(stampsList) && stampsList.length) { %>
+        <div class="product-card__stamps">
+          <% for (stamp of stampsList) {
+            if (stamp.img && (!stamp.skus || !stamp.skus.length || stamp.skus.includes(itemData.sku))) {
+          %>
+            <span class="product-card__stamps-<%= stamp.id && stamp.id.toLowerCase().replace(/\s/g, '-') %>">
+              <img src="<%= stamp.img %>" alt="<%= stamp.id %>">
+            </span>
+          <% } %>
+          <% } %>
+        </div>
+      <% } %>
+    </div>
+
+    <div class="card-product-wrapper product-card__pictures">
+      <a
+        href="/<%= itemData.slug %>"
+        class="product-img product-card__link"
+        title="<%= itemData.name %>"
+      >
+        <% if (imgObj) { %>
+          <img
+            class="img-product lazyload"
+            src="<%= imgObj.url %>"
+            data-src="<%= imgObj.url %>"
+            alt="<%= imgObj.alt %>"
+            <% if (imgObj.url.startsWith('https://ecoms1.com/')) { %>
+              crossorigin="anonymous"
+            <% } %>
+          >
+        <% } %>
+        <% if (imgHoverObj) { %>
+          <img
+            class="img-hover lazyload"
+            src="<%= imgHoverObj.url %>"
+            data-src="<%= imgHoverObj.url %>"
+            alt="<%= imgHoverObj.alt %>"
+          >
+        <% } %>
+      </a>
+    </div>
+
+    <div class="card-product-info">
+      <div class="box-title">
+        <div class="bg-white relative z-5">
+          <% if (itemData.category) { %>
+            <p class="caption text-main-2 font-2">
+              <%= itemData.category %>
+            </p>
+          <% } %>
+          <a href="/<%= itemData.slug %>" class="name-product body-md-2 fw-semibold text-secondary link line-clamp-xl-3 product-card__name">
+            <%= itemData.name %>
+          </a>
+        </div>
+        <div class="group-btn">
+          <p class="price-wrap fw-medium product-card__prices prices">
+            <span class="new-price price-text fw-medium prices__value">
+              <% if (opt.item.available && opt.item.visible && _.ecomUtils.inStock(opt.item)) { %>
+                <%= _.ecomUtils.formatMoney(itemData.price) %>
+              <% } else { %>
+                --
+              <% } %>
+            </span>
+            <% if (itemData.old_price && itemData.old_price > itemData.price) { %>
+              <span class="old-price body-md-2 text-main-2">
+                <%= _.ecomUtils.formatMoney(itemData.old_price) %>
+              </span>
+            <% } %>
+          </p>
+          <ul class="list-product-btn flex-row">
+            <li>
+              <a href="#shoppingCart" data-bs-toggle="offcanvas" class="box-icon add-to-cart btn-icon-action hover-tooltip">
+                <span class="icon icon-cart2"></span>
+                <span class="tooltip"><%= _.dictionary('addToCart') %></span>
+              </a>
+            </li>
+            <li class="wishlist">
+              <a href="javascript:void(0);" class="box-icon btn-icon-action hover-tooltip">
+                <span class="icon icon-heart2"></span>
+                <span class="tooltip"><%= _.dictionary('addToWishlist') %></span>
+              </a>
+            </li>
+            <li>
+              <a href="#quickView" data-bs-toggle="modal" class="box-icon quickview btn-icon-action hover-tooltip">
+                <span class="icon icon-view"></span>
+                <span class="tooltip"><%= _.dictionary('quickView') %></span>
+              </a>
+            </li>
+            <li>
+              <a href="#compare" data-bs-toggle="offcanvas" class="box-icon btn-icon-action hover-tooltip">
+                <span class="icon icon-compare1"></span>
+                <span class="tooltip"><%= _.dictionary('compare') %></span>
+              </a>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <div class="spinner-border spinner-border-sm fade" role="status">
+      <span class="sr-only">Loading...</span>
+    </div>
+
+    <%- await include('@/helpers/widgets-append', {
+      _, opt, field: 'productCardSlots'
+    }) %>
+  </div>
+
+  <%- await include('@/helpers/widgets-append', {
+    _, opt, field: 'productItemAppend'
+  }) %>
+</article>

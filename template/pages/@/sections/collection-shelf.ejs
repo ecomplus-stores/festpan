@@ -66,8 +66,23 @@ if (opt.sort || opt.collection_id) {
 }
 %>
 
-<div class="collection-shelf my-lg-5">
-  <%- await include('@/sections/inc/products-carousel', {
-    _, opt: { items, collection, title, link, shuffle, headless, autoplay }
-  }) %>
-</div>
+<% if (opt.grid_type == "Mosaico") { %>
+  <div class="collection-shelf mosaic mb-lg-5" style="--bg_color: <%= opt.bg_color || '#fff' %>; --title_color: <%= opt.title_color || '#000' %>;">
+    <%- await include('@/sections/inc/products-mosaic', {
+      _, opt: { items: items.slice(0,7), collection, title, link, shuffle, headless, autoplay }
+    }) %>
+  </div>
+
+<% } else if(opt.grid_type == "Horizontal"){ %>
+  <div class="collection-shelf my-lg-5">
+    <%- await include('@/sections/inc/products-horizontal', {
+      _, opt: { items, collection, title, link, shuffle, headless, autoplay }
+    }) %>
+  </div>
+<% } else { %>
+  <div class="collection-shelf my-lg-5">
+    <%- await include('@/sections/inc/products-carousel', {
+      _, opt: { items, collection, title, link, shuffle, headless, autoplay }
+    }) %>
+  </div>
+<% } %>

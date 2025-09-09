@@ -1,0 +1,191 @@
+// Add your custom CSS here.
+.rounded-icon {
+  border: 1px solid #ff0000;
+}
+
+.info-bar {
+  background: #ffffff;
+  color: #3b3a3a;
+}
+
+.i-shipping-fast, .i-credit-card, .i-exchange, .i-percent {
+  color: #ff0000;
+}
+
+.icone-place {
+  display: flex;
+  height: inherit;
+  fill: inherit;
+}
+
+.header__nav a {
+  color: #222;
+}
+
+.info-bar__item {
+  text-transform: none;
+  font-weight: 400;
+}
+
+.info-bar__item:after {
+  background: #e9e9e9;
+}
+
+.header__logo {
+  max-height: 80px;
+}
+
+.top-bar__countdown {
+  font-size: var(--font-size-sm);
+  font-weight: bold
+}
+
+.product__info {
+  display: block;
+}
+
+.header__submenu {
+  grid-template-columns: repeat(auto-fit, minmax(20%, 1fr));
+  gap: 0;
+  > div {
+    &:not(:last-child) {
+      padding-right: var(--spacer-2);
+    }
+    &:not(:first-child) {
+      padding-left: var(--spacer-2);
+    }
+    > a {
+      font-weight: 600;
+    }
+    > div:not(:last-child) {
+      margin-bottom: var(--spacer-4);
+    }
+  }
+}
+
+.banner-slider {
+  &--full-width {
+    max-height: calc(1440px * var(--banner-aspect-ratio));
+    max-width: 1440px;
+  }
+}
+
+.prices {
+  &__value,
+  &__discount {
+    color: var(--primary);
+  }
+  &--big {
+    .prices {
+      &__discount {
+        margin-top: var(--spacer-1);
+        font-size: 1.5rem;
+      }
+    }
+  }
+}
+
+.product-card {
+  &__name {
+    color: var(--secondary);
+    font-weight: 500;
+  }
+  &__shelf-life {
+    font-size: 11px;
+    padding: 4px 6px;
+    text-decoration: none !important;
+    position: absolute;
+    top: 4px;
+    left: 6px;
+    display: inline-block;
+    z-index: 2;
+    text-wrap: balance;
+    opacity: 0.9;
+  }
+}
+.product-card:not(.product-card--small) {
+  .product-card {
+    &__name {
+      text-align: center;
+      padding-top: var(--spacer-3);
+      @media (min-width: 992px) {
+        min-height: 50px;
+      }
+    }
+    &__buy {
+      opacity: .75;
+    }
+  }
+  &:hover {
+    .fade {
+      opacity: 1;
+    }
+  }
+  span:has([data-trustvox-product-code]) {
+    min-height: 26px;
+    text-align: center;
+  }
+  .prices {
+    text-align: center;
+    &__compare {
+      font-size: 0.8rem;
+    }
+    &__discount {
+      font-size: 1.15rem;
+    }
+    &__installments {
+      font-weight: 600;
+      small {
+        display: none;
+        font-weight: 400;
+        @media (min-width: 800px) {
+          display: inline;
+        }
+      }
+    }
+  }
+}
+
+.search-engine {
+  &__retail > .row {
+    row-gap: var(--spacer-4);
+  }
+  &__filter--Categories,
+  &__filter--store {
+    display: none;
+  }
+}
+
+.product .gallery__stage,
+.product__picture {
+  margin-left: auto;
+  margin-right: auto;
+  picture.picture {
+    &,
+    img {
+      padding-top: 0;
+      aspect-ratio: var(--aspect-ratio);
+      margin: 0 auto;
+      width: auto;
+      max-height: var(--max-height, 700px);
+      @media (max-width: 767px) {
+        max-height: min(350px, var(--max-height, 350px));
+      }
+    }
+  }
+}
+.gallery {
+  .gallery__big-image {
+    cursor: default;
+  }
+}
+.product__shelf-life {
+  display: inline-block;
+  padding-top: var(--spacer-1);
+  padding-bottom: var(--spacer-1);
+  margin-bottom: var(--spacer-2);
+}
+
+.payment__intermediator {
+  display: none;
+}

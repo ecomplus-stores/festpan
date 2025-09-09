@@ -2,9 +2,15 @@
   class="prices"
   :class="{ 'prices--literal': isLiteral, 'prices--big': isBig }"
 >
+  <strong class="prices__value new-price price-text fw-medium mb-0">
+    <small v-if="hasVariedPrices">
+      {{ i19asOf }}
+    </small>
+    {{ formatMoney(price) }}
+  </strong>
   <span
     v-if="comparePrice"
-    class="prices__compare"
+    class="prices__compare old-price body-md-2 text-main-2 fw-normal"
   >
     <template v-if="isLiteral">
       <small>
@@ -18,12 +24,7 @@
     <s v-else>{{ formatMoney(comparePrice) }}</s>
   </span>
 
-  <strong class="prices__value">
-    <small v-if="hasVariedPrices">
-      {{ i19asOf }}
-    </small>
-    {{ formatMoney(price) }}
-  </strong>
+  
 
   <transition-group enter-active-class="animated slideInDown">
     <div
@@ -60,7 +61,7 @@
     <div
       key="discount"
       v-if="typeof priceWithDiscount === 'number' && priceWithDiscount < price"
-      class="prices__discount"
+      class="prices__discount mt-1"
     >
       <template v-if="typeof discountLabel === 'string' && discountLabel">
         <span>

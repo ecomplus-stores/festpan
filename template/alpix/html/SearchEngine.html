@@ -1,0 +1,334 @@
+<section class="search-engine">
+  <a-backdrop v-if="1 != 1" :is-visible.sync="isAsideVisible"/>
+
+  <transition
+    enter-active-class="animated slideInRight"
+    leave-active-class="animated slideOutRight"
+  >
+    <!-- Moderno: Offcanvas de filtros integrado ao Vue -->
+<div
+  class="offcanvas offcanvas-start canvas-sidebar canvas-filter-product"
+  id="filterShop2"
+  tabindex="-1"
+  aria-modal="true"
+  role="dialog"
+  :class="{ show: isAsideVisible }"
+  style="visibility: visible;"
+>
+  <div class="canvas-wrapper">
+    <div class="canvas-header">
+      <h5 class="title">{{ i19refineSearch }}</h5>
+      <span
+        class="icon-close link icon-close-popup close-filter"
+        data-bs-dismiss="offcanvas"
+        @click="toggleFilters(false)"
+        aria-label="Fechar"
+      ></span>
+    </div>
+    <div class="canvas-body">
+    
+      
+  <!-- Filtros dinâmicos -->
+
+  <div
+    v-for="({ filter, options, isSpec }, i) in filters.filter(el => el.filter != 'store')"
+    v-if="options.length"
+    :key="`filters-${filter}`"
+    class="widget-facet facet-fieldset search-engine__filter"
+    :class="`search-engine__filter--${filter}`"
+  >
+    <p class="facet-title title-sidebar fw-semibold">{{ getFilterLabel(filter) }}</p>
+    <div class="box-fieldset-item">
+      <fieldset class="fieldset-item"
+        v-for="(opt, index) in options"
+        :key="`${filter}-${index}`"
+        :data-opt="opt.key"
+      >
+        <input
+          type="radio"
+          class="tf-check"
+          name="price"
+          :id="`${filter}-${index}`"
+            @change="ev => setFilterOption(filter, opt.key, ev.target.checked)"
+            :checked="selectedOptions[filter] && selectedOptions[filter].indexOf(opt.key) > -1"
+        >
+        <label :for="`${filter}-${index}`" class="m-0">{{ opt.key }}</label>
+      </fieldset>
+    </div>
+  </div>
+  
+      
+      <!-- Exemplo de filtro de preço -->
+      <div class="widget-facet facet-price">
+        <p class="facet-title title-sidebar fw-semibold">{{ i19price }}</p>
+        <a
+              v-if="hasSetPriceRange"
+              href="#"
+              class="btn btn-link btn-sm mb-2"
+              @click.prevent="setPriceRange()"
+            >
+              <i class="i-arrow-left mr-1"></i>
+              {{ i19all }}
+            </a>
+        <div class="box-fieldset-item">
+          <fieldset class="fieldset-item" v-for="({ label, min, max }, index) in priceOptions" :key="`Price-${index}`">
+            <input
+              type="radio"
+              class="tf-check"
+              name="price"
+              :id="`price-${index}`"
+              @change="setPriceRange(min, max)"
+              :checked="priceRange.min === min && priceRange.max === max"
+            >
+            <label :for="`price-${index}`" class="m-0">{{ label }}</label>
+          </fieldset>
+        </div>
+        <div class="box-price-product">
+          <form class="w-100 form-filter-price" @submit.prevent="handlePriceInputs">
+            <div class="cols w-100">
+              <fieldset class="box-price-item">
+                <input type="number" class="min-price price-input" ref="inputMinPrice" aria-describedby="search-engine-price-range" :placeholder="`R$ Mínimo`">
+              </fieldset>
+              <span class="br-line"></span>
+              <fieldset class="box-price-item">
+                <input type="number" class="max-price price-input" ref="inputMaxPrice" aria-describedby="search-engine-price-range" :placeholder="`R$ Máximo`">
+              </fieldset>
+            </div>
+            <div class="btn-filter-price cs-pointer link" @click="handlePriceInputs()">
+              <span class="title-sidebar fw-bold">Ok</span>
+            </div>
+          </form>
+        </div>
+      </div>
+
+      
+
+    </div>
+    <div class="canvas-bottom">
+      <button class="tf-btn btn-reset w-100" @click="clearFilters">
+        <span class="caption text-white">{{ i19clearFilters }}</span>
+      </button>
+    </div>
+  </div>
+</div>
+  </transition>
+
+  <transition
+    enter-active-class="animated fadeInRight slower"
+    leave-active-class="animated fadeOutRight"
+  >
+    
+  </transition>
+
+  <transition
+    enter-active-class="animated fadeInDown"
+    leave-active-class="animated fadeOutUp fast position-absolute"
+  >
+    <!-- Adaptado para search-engine__nav em Vue -->
+<div class="tf-shop-control flex-wrap gap-10"  v-if="isNavVisible">
+  <div class="d-flex align-items-center gap-10">
+    <a
+      href="#filterShop2"
+      class="tf-btn-filter"
+      data-bs-toggle="offcanvas"
+      aria-controls="mobileMenu"
+      @click.prevent="toggleFilters(true)"
+    >
+      <span class="icon icon-filter">
+        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="#121212" viewBox="0 0 256 256">
+          <path d="M176,80a8,8,0,0,1,8-8h32a8,8,0,0,1,0,16H184A8,8,0,0,1,176,80ZM40,88H144v16a8,8,0,0,0,16,0V56a8,8,0,0,0-16,0V72H40a8,8,0,0,0,0,16Zm176,80H120a8,8,0,0,0,0,16h96a8,8,0,0,0,0-16ZM88,144a8,8,0,0,0-8,8v16H40a8,8,0,0,0,0,16H80v16a8,8,0,0,0,16,0V152A8,8,0,0,0,88,144Z"></path>
+        </svg>
+      </span>
+      <span class="body-md-2 fw-medium">Filtros</span>
+    </a>
+    <p class="body-text-3 m-0 d-none d-lg-block">
+      {{ totalSearchResults }} produtos encontrados
+      <span v-if="term" class="title-sidebar fw-bold">para "{{ term }}"</span>
+    </p>
+  </div>
+  <div class="tf-control-view flat-title-tab-product flex-wrap">
+    <ul class="tf-control-layout menu-tab-line m-0" role="tablist">
+      <li class="tf-view-layout-switch" data-tab="tabgrid-1">
+        <a href="#" class="tab-link main-title link fw-semibold d-flex" :class="{active: layoutGrid === 'col-md-3'}" @click.prevent="layoutGrid = 'col-md-3'">
+          <i class="icon-menu-dots"></i>
+        </a>
+      </li>
+      <li class="tf-view-layout-switch" data-tab="tabgrid-2">
+        <a href="#" class="tab-link main-title link d-flex fw-semibold" :class="{active: layoutGrid === 'col-md-2'}" @click.prevent="layoutGrid = 'col-md-2'">
+          <i class="icon-dot-line"></i>
+        </a>
+      </li>
+      
+    </ul>
+    
+    <div class="tf-dropdown-sort tf-sort type-sort-by" data-bs-toggle="dropdown">
+      <div class="btn-select w-100">
+        <i class="icon-sort"></i>
+        <p class="body-text-3 w-100 m-0">
+          Ordenar por: <span class="text-sort-value">{{ sortOptions.find(el => el.value == this.selectedSortOption).label }}</span>
+        </p>
+        <i class="icon-arrow-down fs-10"></i>
+      </div>
+      <div class="dropdown-menu">
+        <div
+          v-for="({ value, label }, index) in sortOptions"
+          :key="`sort-${index}`"
+          class="select-item"
+          :data-sort-value="value"
+          @click="setSortOrder(value)"
+        >
+          <span class="text-value-item">{{ label }}</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+  </transition>
+
+  <transition enter-active-class="animated fadeIn slower">
+    <div
+      class="search-engine__results fade"
+      :style="{ opacity: isSearching && !isLoadingMore ? 0.4 : 1 }"
+      v-if="isResultsVisible"
+    >
+      <div class="container px-0">
+        <div class="search-engine__info">
+          <template v-if="term">
+            <div
+              v-if="hasEmptyResult"
+              class="search-engine__no-results"
+            >
+              <div class="lead mb-2">
+                <span v-if="suggestedTerm">
+                  {{ i19didYouMean }}
+                  <a
+                    href="#"
+                    @click.prevent="$emit('update:term', suggestedTerm)"
+                    v-text="suggestedTerm"
+                  ></a>
+                  ?
+                </span>
+                {{ i19noResultsFor }}
+                <em>{{ term }}</em>
+              </div>
+              <h4 v-if="popularItems.length">
+                {{ i19popularProducts }}
+              </h4>
+            </div>
+
+            <div
+              v-else
+              class="search-engine__terms"
+            >
+              <span
+                v-if="noResultsTerm"
+                class="d-none d-lg-inline"
+              >
+                {{ i19noResultsFor }}
+                <s>{{ noResultsTerm }}</s>.
+              </span>
+              <span class="d-none d-md-inline">
+                {{ i19searchingFor }}:
+              </span>
+              <h1>{{ term }}</h1>
+            </div>
+          </template>
+
+          <h3 v-else-if="hasEmptyResult && popularItems.length"> 
+            {{ i19popularProducts }}
+          </h3>
+
+          <transition
+            enter-active-class="animated fadeInDown"
+            leave-active-class="animated fadeOutUp"
+          >
+            <div v-if="hasSelectedOptions && isFilterable">
+              <button
+                class="btn btn-sm btn-outline-secondary"
+                type="button"
+                @click="clearFilters"
+              >
+                <i class="i-trash mr-1"></i>
+                {{ i19clearFilters }}
+              </button>
+
+              <template v-for="(options, filter) in selectedOptions">
+                <button
+                  class="search-engine__selected btn btn-sm btn-light"
+                  type="button"
+                  v-for="option in options"
+                  @click="setFilterOption(filter, option, false)"
+                >
+                  <i class="i-times mr-1"></i>
+                  {{ option }}
+                  <small>{{ getFilterLabel(filter) }}</small>
+                </button>
+              </template>
+            </div>
+          </transition>
+        </div>
+
+        <article
+          v-if="canShowItems"
+          class="search-engine__retail"
+        >
+          <div class="row">
+            <div
+              
+              :class="'col-6 ' + (layoutGrid || 'col-md-3')"
+              v-for="(product, i) in suggestedItems"
+              :key="product._id"
+              :ref="i === pageAnchorIndex ? 'pageAnchor' : null"
+            >
+              <slot
+                name="product-card"
+                v-bind="{ product }"
+              >
+                <product-card
+                  class="search-engine__item"
+                  v-bind="productCardProps"
+                  :product="product"
+                  
+                />
+              </slot>
+            </div>
+          </div>
+        </article>
+
+        <transition enter-active-class="animated fadeInDown">
+          <div
+            class="alert alert-warning"
+            role="alert"
+            v-if="hasNetworkError"
+          >
+            <i class="i-wifi mr-2"></i>
+            {{ i19searchOfflineErrorMsg }}
+            <a
+              href="#"
+              class="alert-link"
+              @click.prevent="fetchItems"
+            >
+              {{ i19searchAgain }}
+            </a>
+          </div>
+        </transition>
+      </div>
+    </div>
+  </transition>
+
+  <transition leave-active-class="animated fadeOut">
+    <slot v-if="!hasSearched || isLoadingMore"/>
+  </transition>
+
+  <component
+    :is="loadMoreSelector ? 'portal' : 'div'"
+    :selector="loadMoreSelector"
+  >
+    <div
+      v-if="resultItems.length < totalSearchResults"
+      :key="lastRequestId"
+      id="search-engine-load-more"
+      style="width: 100%; margin-top: 20px; height: 5px"
+    ></div>
+  </component>
+</section>

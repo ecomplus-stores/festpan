@@ -1,0 +1,27 @@
+<% if (_.state.body_html) { %>
+  <section id="product-description" class="product-description my-4 my-lg-5">
+    <div class="container">
+      <!-- <p class="lead">
+        <a href="#description" name="description">#</a>
+        <%= _.dictionary('productDescription') %>
+      </p> -->
+      <div class="html-clearfix">
+        <%- _.state.body_html
+  // Troca estrutura de card antiga para a nova estrutura visual
+  .replace(/<div class="card mb-3">/g, '<div class="tf-sp-4 flat-product-des-list style-2 bg-white">')
+  .replace(/<a([^>]+)class="card-header"/g, '<div$1class="flat-title-tab-product-des"')
+  .replace(/<\/a>/g, '</div>')
+  .replace(/<div([^>]+)class="collapse show"/g, '<div$1class="fw-product-accordion__collapse show"')
+  .replace(/<div([^>]+)class="card-body pb-0"/g, '<div$1class="tab-main tab-des"')
+  // Mantém o replace das imagens para lozad
+  .replace(/<img ([^/>]+)?src=['"]([^'"]+)['"]([^/>]+)?\/?>/g, '<img class="lozad" data-src="$2" $1 $3>')
+  .replace(/<img class="lozad" data-src="([^'"]+)"([^>]+)class=['"]([^'"]+)['"]([^/>]+)?>/g, '<img class="lozad $3" data-src="$1" $2 $4>')
+%>
+      </div>
+    </div>
+  </section>
+<% } %>
+
+<%- await include('@/helpers/widgets-append', {
+  _, opt: {}, field: 'productDescriptionAppend'
+}) %>

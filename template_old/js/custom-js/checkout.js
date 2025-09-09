@@ -1,0 +1,3 @@
+window.propsShippingCalculator = {
+  canAutoSelectService: false
+}

@@ -33,50 +33,78 @@ if (slides && slides.length) {
       }
     }
   }
-  %>
-
-  <div class="<%- className %>" style="<%- style %>">
-    <div class="glide" data-autoplay="<%= opt.autoplay %>">
-      <div class="glide__track" data-glide-el="track">
-        <ul class="glide__slides banner-slider__slides">
-          <% for (let i = 0; i < slides.length; i++) { %>
-            <li class="glide__slide">
-              <%- await include('@/sections/inc/banner', {
-                _, opt: { ...slides[i], height_auto: true, sync_load: i === 0 }
-              }) %>
-            </li>
-          <% } %>
-        </ul>
-
-        <% if (slides.length > 1) { %>
-          <div class="glide__arrows d-none d-md-block" data-glide-el="controls">
-            <button
-              class="btn glide__arrow glide__arrow--left"
-              data-glide-dir="<"
-              aria-label="<%= _.dictionary('previous') %>"
-            >
-              <i class="i-chevron-left"></i>
-            </button>
-            <button
-              class="btn glide__arrow glide__arrow--right"
-              data-glide-dir=">"
-              aria-label="<%= _.dictionary('next') %>"
-            >
-              <i class="i-chevron-right"></i>
-            </button>
-          </div>
-
-          <div class="glide__bullets" data-glide-el="controls[nav]">
-            <% slides.forEach((_, index) => { %>
-              <button
-                class="glide__bullet"
-                data-glide-dir="=<%= index %>"
-                aria-label="<%= `${(index + 1)}° banner` %>"
-              ></button>
-            <% }) %>
+%>
+<div class="container">
+  <div class="banner-image-product slider style-abs type-abs-2 p-0 hover-img h-100 mb-14 mt-4
+" style="<%- style %>">
+    <!-- Swiper container instead of Glide -->
+    <div class="swiper-container banner-slider-swiper" 
+         data-autoplay="<%= opt.autoplay %>">
+      <!-- Swiper wrapper -->
+      <div class="swiper-wrapper">
+        <% for (let i = 0; i < slides.length; i++) { %>
+          <div class="swiper-slide">
+            <%- await include('@/sections/inc/banner', {
+              _, opt: { ...slides[i], height_auto: true, sync_load: i === 0 }
+            }) %>
           </div>
         <% } %>
       </div>
+
+      <% if (slides.length > 1) { %>
+        <!-- Swiper navigation -->
+        <div class="swiper-button-prev d-none d-md-flex" aria-label="<%= _.dictionary('previous') %>">
+          
+        </div>
+        <div class="swiper-button-next d-none d-md-flex" aria-label="<%= _.dictionary('next') %>">
+          
+        </div>
+
+        <!-- Swiper pagination -->
+        <div class="swiper-pagination"></div>
+      <% } %>
     </div>
   </div>
+</div>
+
+<!-- Initialize Swiper -->
+<script>
+  document.addEventListener('DOMContentLoaded', function() {
+    // Initialize each banner slider on the page
+    const bannerSliders = document.querySelectorAll('.banner-slider-swiper');
+    
+    bannerSliders.forEach(function(sliderElement) {
+      const autoplayValue = sliderElement.dataset.autoplay;
+      
+      const swiperOptions = {
+        // Enable navigation arrows
+        navigation: {
+          nextEl: sliderElement.querySelector('.swiper-button-next'),
+          prevEl: sliderElement.querySelector('.swiper-button-prev'),
+        },
+        // Enable pagination
+        pagination: {
+          el: sliderElement.querySelector('.swiper-pagination'),
+          clickable: true,
+        },
+        // Add other options as needed
+        loop: true,
+        effect: 'fade',
+        fadeEffect: {
+          crossFade: true
+        },
+        // Only enable autoplay if it's set
+        ...autoplayValue ? {
+          autoplay: {
+            delay: parseInt(autoplayValue) || 5000,
+            disableOnInteraction: false,
+          }
+        } : {}
+      };
+      
+      // Initialize Swiper
+      new Swiper(sliderElement, swiperOptions);
+    });
+  });
+</script>
 <% } %>

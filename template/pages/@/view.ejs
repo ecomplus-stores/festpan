@@ -17,9 +17,14 @@
 >
   <%- await include('@/layout/menu') %>
 
+  
+
   <main role="main" id="main">
     <%- await include('@/layout/header') %>
+    
+    <div id="wrapper" class="<%= _.pageName == 'products'  ? 'bg-3_old' : '' %>">
     <%- await include('@/layout/sections') %>
+    </div>
     <%- await include('@/layout/footer') %>
   </main>
 

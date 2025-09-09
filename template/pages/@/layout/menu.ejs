@@ -36,146 +36,302 @@ if (mainCategories) {
   }
 }
 %>
+<!-- Mobile Menu -->
+<div class="offcanvas offcanvas-start canvas-mb" id="mobileMenu">
+    <span class="icon-close btn-close-mb link" data-bs-dismiss="offcanvas"></span>
+    <div class="logo-site">
+        <a href="/">
+            <%- await include('@/layout/inc/logo', { _ }) %>
+        </a>
+    </div>
+    <div class="mb-canvas-content">
+        <div class="mb-body">
+            <div class="flat-animate-tab">
+                <div class="flat-title-tab-nav-mobile">
+                    <ul class="menu-tab-line" role="tablist">
+                        <li class="nav-tab-item" role="presentation">
+                            <a href="#category" class="tab-link link fw-semibold active"
+                                data-bs-toggle="tab"><%= _.dictionary('categories') || 'Categories' %></a>
+                        </li>
+                        <li class="br-line type-vertical bg-line h23"></li>
+                        <li class="nav-tab-item" role="presentation">
+                            <a href="#main-menu" class="tab-link link fw-semibold "
+                                data-bs-toggle="tab"><%= _.dictionary('menu') || 'Menu' %></a>
+                        </li>
+                        
+                        
+                    </ul>
+                </div>
+                <div class="tab-content">
+                    <!-- Main Menu Tab -->
+                    <div class="tab-pane" id="main-menu" role="tabpanel">
+                        <div class="mb-content-top">
+                            
 
-<aside id="menu" class="menu shadow">
-  <nav class="accordion" id="accordion-menu">
-    <button
-      class="menu__btn menu__btn--close btn"
-      type="button"
-      onclick="toggleSidenav()"
-      aria-label="Toggle Side Navigation"
-    >
-      <i class="i-times"></i>
-    </button>
+                            <!-- Main Navigation -->
+                            <ul class="nav-ul-mb" id="wrapper-menu-navigation">
+                                <% if (Array.isArray(_.cms('pages').home)) { %>
+                                <li class="nav-mb-item <%= _.route.path === '/' ? 'active' : '' %>">
+                                    <a href="/" class="mb-menu-link">
+                                        <span><%= _.dictionary('home') || 'Home' %></span>
+                                    </a>
+                                </li>
+                                <% } %>
+                                <%
+                                const footer = _.cms('footer') || {};
+                                if (
+                                    footer.links_1 &&
+                                    (footer.links_1.list_pages ||
+                                        (footer.links_1.list && footer.links_1.list.find(({ url }) => url)))
+                                ) {
+                                %>
+                                <li class="nav-mb-item">
+                                    <a href="#dropdown-menu-pages" class="collapsed mb-menu-link"
+                                         data-bs-toggle="collapse" aria-expanded="false"
+                                         aria-controls="dropdown-menu-pages">
+                                        <span><%= footer.links_1.title || _.dictionary('pages') %></span>
+                                        <span class="btn-open-sub"></span>
+                                    </a>
+                                    <div id="dropdown-menu-pages" class="collapse">
+                                        <ul class="sub-nav-menu">
+                                            <% if (footer.links_1.list_pages) { %>
+                                                <% (_.cms('pages') || []).forEach(slug => { %>
+                                                    <% const { title } = _.cms(`pages/${slug}`) %>
+                                                    <li>
+                                                        <a href="/pages/<%= slug %>" class="sub-nav-link">
+                                                            <%= title %>
+                                                        </a>
+                                                    </li>
+                                                <% }) %>
+                                            <% } else { %>
+                                                <% footer.links_1.list.forEach(({ url, text }) => { %>
+                                                    <li>
+                                                        <a href="<%= url %>" class="sub-nav-link">
+                                                            <%= text %>
+                                                        </a>
+                                                    </li>
+                                                <% }) %>
+                                            <% } %>
+                                        </ul>
+                                    </div>
+                                </li>
+                                <% } if (
+                                    footer.links_2 &&
+                                    (footer.links_2.list_pages ||
+                                        (footer.links_2.list && footer.links_2.list.find(({ url }) => url)))
+                                ) {
+                                %>
+                                <li class="nav-mb-item">
+                                    <a href="#dropdown-menu-pages" class="collapsed mb-menu-link"
+                                         data-bs-toggle="collapse" aria-expanded="false"
+                                         aria-controls="dropdown-menu-pages">
+                                        <span><%= footer.links_1.title || _.dictionary('pages') %></span>
+                                        <span class="btn-open-sub"></span>
+                                    </a>
+                                    <div id="dropdown-menu-pages" class="collapse">
+                                        <ul class="sub-nav-menu">
+                                            <% if (footer.links_1.list_pages) { %>
+                                                <% (_.cms('pages') || []).forEach(slug => { %>
+                                                    <% const { title } = _.cms(`pages/${slug}`) %>
+                                                    <li>
+                                                        <a href="/pages/<%= slug %>" class="sub-nav-link">
+                                                            <%= title %>
+                                                        </a>
+                                                    </li>
+                                                <% }) %>
+                                            <% } else { %>
+                                                <% footer.links_1.list.forEach(({ url, text }) => { %>
+                                                    <li>
+                                                        <a href="<%= url %>" class="sub-nav-link">
+                                                            <%= text %>
+                                                        </a>
+                                                    </li>
+                                                <% }) %>
+                                            <% } %>
+                                        </ul>
+                                    </div>
+                                </li>
+                                <% } %>
 
-    <% for (const slug in categoryParents) { %>
-      <% if (categoryParents.hasOwnProperty(slug)) { %>
-        <% let category, parent %>
-        <div
-          <% if (slug === '_') { %>
-            id="categories-nav"
-            class="collapse show"
-            aria-expanded="true"
-          <% } else { %>
-            id="<%= getSubmenuId(slug) %>"
-            class="collapse"
-            aria-expanded="false"
-          <% } %>
-          data-parent="#accordion-menu"
-        >
+                                <!-- Categories Menu Item -->
+                                <li class="nav-mb-item">
+                                    <a href="#dropdown-menu-categories" class="collapsed mb-menu-link"
+                                        data-bs-toggle="collapse" aria-expanded="false"
+                                        aria-controls="dropdown-menu-categories">
+                                        <span><%= _.dictionary('categories') || 'Categories' %></span>
+                                        <span class="btn-open-sub"></span>
+                                    </a>
+                                    <div id="dropdown-menu-categories" class="collapse">
+                                        <ul class="sub-nav-menu">
+                                            <% if (mainCategories && mainCategories.length) { %>
+                                                <% for (let i = 0; i < Math.min(10, mainCategories.length); i++) { %>
+                                                    <% const category = mainCategories[i] %>
+                                                    <li>
+                                                        <a href="/<%= category.slug %>" class="sub-nav-link">
+                                                            <%= category.name %>
+                                                        </a>
+                                                    </li>
+                                                <% } %>
+                                                <% if (mainCategories.length > 10) { %>
+                                                    <li>
+                                                        <a href="/search" class="sub-nav-link">
+                                                            <%= _.dictionary('seeAll') || 'See all categories' %>
+                                                        </a>
+                                                    </li>
+                                                <% } %>
+                                            <% } %>
+                                        </ul>
+                                    </div>
+                                </li>
 
-          <% if (slug !== '_') { %>
-            <% category = _.categories.find(category => category.slug === slug) %>
-            <% parent = category && category.parent %>
-            <button
-              class="menu__btn btn"
-              type="button"
-              data-toggle="collapse"
-              <% if (!parent || !parent.slug) { %>
-                aria-expanded="true"
-                data-target="#categories-nav"
-                aria-controls="categories-nav"
-              <% } else {
-                const submenuId = getSubmenuId(parent.slug)
-                %>
-                aria-expanded="false"
-                data-target="#<%= submenuId %>"
-                aria-controls="<%= submenuId %>"
-              <% } %>
-            >
-              <i class="i-arrow-left"></i>
-            </button>
-          <% } %>
+                              
 
-          <div class="menu__list">
-            <% categoryParents[slug].forEach((subcategory, index) => { %>
-              <% const hasSubmenu = Array.isArray(categoryParents[subcategory.slug]) %>
-              <a
-                <% if (hasSubmenu) {
-                  const submenuId = getSubmenuId(subcategory.slug)
-                  %>
-                  href="#<%= submenuId %>"
-                  data-toggle="collapse"
-                  role="button"
-                  aria-expanded="false"
-                  aria-controls="<%= submenuId %>"
-                <% } else { %>
-                  href="/<%= subcategory.slug %>"
-                <% } %>
-                id="c-<%= subcategory._id %>"
-                class="menu__item"
-              >
-                <% if (subcategory.icon) { %>
-                  <span class="menu__item-icon">
-                    <img
-                      data-src="<%= subcategory.icon.url %>"
-                      alt="<%= subcategory.icon.alt || subcategory.name %>"
-                      class="lozad"
-                      data-preload="<%= (index * 200) %>"
-                    >
-                  </span>
-                <% } %>
-                <span>
-                  <%= subcategory.name %>
-                </span>
-              </a>
-            <% }) %>
-          </div>
+                                <!-- User Account -->
+                                <li class="nav-mb-item">
+                                    <a href="/app/#/account/" class="mb-menu-link">
+                                        <span><%= _.dictionary('myAccount') || 'My Account' %></span>
+                                    </a>
+                                </li>
 
-          <% if (category && category.slug) { %>
-            <a href="/<%= category.slug %>" class="menu__link">
-              <%= _.dictionary('seeAll$1Category').replace('$1', category.name) %>
-            </a>
-          <% } %>
+                                <!-- Cart -->
+                                <li class="nav-mb-item">
+                                    <a href="/app/#/cart" class="mb-menu-link">
+                                        <span>Meu carrinho</span>
+                                    </a>
+                                </li>
+                            </ul>
+                        </div>
+
+                        <!-- Contact Information -->
+                        <div class="mb-other-content">
+                            <ul class="mb-info">
+                                <% if (contacts.address) { %>
+                                <li>
+                                    <p>
+                                        <%= _.dictionary('address') || 'Address' %>:
+                                        <a target="_blank" href="https://www.google.com/maps/search/<%= encodeURIComponent(contacts.address) %>">
+                                            <span class="fw-medium">
+                                                <%= contacts.address %>
+                                            </span>
+                                        </a>
+                                    </p>
+                                </li>
+                                <% } %>
+
+                                <% if (contacts.phone) { %>
+                                <li>
+                                    <p>
+                                        <%= _.dictionary('phone') || 'Phone' %>:
+                                        <a href="tel:+<%= contacts.phone.replace(/\D/g, '') %>">
+                                            <span class="fw-medium"><%= contacts.phone %></span>
+                                        </a>
+                                    </p>
+                                </li>
+                                <% } %>
+
+                                <% if (contacts.email) { %>
+                                <li>
+                                    <p>
+                                        <%= _.dictionary('email') || 'Email' %>:
+                                        <a href="mailto:<%= contacts.email %>">
+                                            <span class="fw-medium"><%= contacts.email %></span>
+                                        </a>
+                                    </p>
+                                </li>
+                                <% } %>
+                            </ul>
+
+                           
+                        </div>
+                    </div>
+
+                    <!-- Categories Tab -->
+                    <div class="tab-pane  active show" id="category" role="tabpanel">
+                        
+                        <div class="mb-content-top">
+                            <!-- Search Form -->
+                            <form 
+                              action="/search" 
+                              method="get"
+                              class="form-search  mb-3"
+                            >
+                                <fieldset>
+                                    <input 
+                                      type="search" 
+                                      name="term" 
+                                      placeholder="<%= _.dictionary('searchProducts') || 'Search for products...' %>" 
+                                      tabindex="2" 
+                                      aria-required="true" 
+                                      required
+                                    >
+                                </fieldset>
+                                <button type="submit" class="button-submit">
+                                    <i class="icon-search"></i>
+                                </button>
+                            </form>
+                            <ul class="nav-ul-mb">
+                                <% if (mainCategories) { %>
+                                    <% mainCategories.forEach(mainCategory => { %>
+                                        <li class="nav-mb-item">
+                                            <% if (Array.isArray(categoryParents[mainCategory.slug])) { %>
+                                                <a href="#drd-categories-<%= mainCategory.slug.replace(/\//g, '-') %>" 
+                                                   class="collapsed mb-menu-link"
+                                                   data-bs-toggle="collapse" 
+                                                   aria-expanded="false"
+                                                   aria-controls="drd-categories-<%= mainCategory.slug.replace(/\//g, '-') %>">
+                                                    <span><%= mainCategory.name %></span>
+                                                    <span class="btn-open-sub"></span>
+                                                </a>
+                                                <div id="drd-categories-<%= mainCategory.slug.replace(/\//g, '-') %>" class="collapse">
+                                                    <ul class="sub-nav-menu">
+                                                        <% categoryParents[mainCategory.slug].forEach(subcategory => { %>
+                                                            <li>
+                                                                <a href="/<%= subcategory.slug %>" class="sub-nav-link">
+                                                                    <%= subcategory.name %>
+                                                                </a>
+                                                            </li>
+                                                        <% }) %>
+                                                        <li>
+                                                            <a href="/<%= mainCategory.slug %>" class="sub-nav-link fw-bold">
+                                                                <%= _.dictionary('seeAll$1Category').replace('$1', mainCategory.name) %>
+                                                            </a>
+                                                        </li>
+                                                    </ul>
+                                                </div>
+                                            <% } else { %>
+                                                <a href="/<%= mainCategory.slug %>" class="mb-menu-link">
+                                                    <span><%= mainCategory.name %></span>
+                                                </a>
+                                            <% } %>
+                                        </li>
+                                    <% }) %>
+                                <% } %>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
-      <% } %>
-    <% } %>
-  </nav>
 
-  <footer class="menu__footer">
-    <% if (menu.phone_wpp) { %>
-      <div class="menu__phone">
-        <% if (contacts.whatsapp) { %>
-          <a
-            href="javascript:;"
-            target="_blank"
-            rel="noopener"
-            class="whatsapp-link"
-            data-tel="<%= contacts.whatsapp.replace(/\D/g, '') %>"
-          >
-            <i class="i-whatsapp mr-1"></i>
-            <%= contacts.whatsapp %>
-          </a>
-        <% } else if (contacts.phone) { %>
-          <a
-            href="tel:+<%= contacts.phone.replace(/\D/g, '') %>"
-            target="_blank"
-            rel="noopener"
-          >
-            <i class="i-phone mr-1"></i>
-            <%= contacts.phone %>
-          </a>
-        <% } %>
-      </div>
-    <% } %>
-
-    <% if (menu.socials) { %>
-      <div class="menu__social">
-        <% networksWithColors.forEach(([network, color]) => { %>
-          <% if (contacts[network]) { %>
-            <a
-              href="<%= contacts[network] %>"
-              target="_blank"
-              rel="noopener"
-              aria-label="<%= network %>"
-              style="color: <%= color %>"
-            >
-              <i class="i-<%= network %>"></i>
-            </a>
-          <% } %>
-        <% }) %>
-      </div>
-    <% } %>
-  </footer>
-</aside>
-  
+        <!-- Bottom Bar with Currency/Language -->
+        <div class="mb-bottom">
+            <% if (_.settings.theme.custom && _.settings.theme.custom.currency_options) { %>
+                <div class="bottom-bar-language bar-lang">
+                    <div class="tf-curs">
+                        <select id="currency-selector" class="image-select center style-default type-cur">
+                            <option value="BRL" data-thumbnail="<%= _.assetsPrefix %>/img/flags/br.png" selected>BRL</option>
+                            <% if (_.settings.theme.custom.currency_options && Array.isArray(_.settings.theme.custom.currency_options)) { %>
+                                <% _.settings.theme.custom.currency_options.forEach(currency => { %>
+                                    <option value="<%= currency.code %>" data-thumbnail="<%= currency.icon || `${_.assetsPrefix}/img/flags/us.png` %>">
+                                        <%= currency.code %>
+                                    </option>
+                                <% }) %>
+                            <% } %>
+                        </select>
+                    </div>
+                </div>
+            <% } %>
+        </div>
+    </div>
+</div>
+<!-- /Mobile Menu -->

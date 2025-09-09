@@ -3,63 +3,96 @@ const posts = _.cms('posts')
 const themeCustom = _.settings.theme.custom || ''
 if (Array.isArray(posts) && posts.length) {
   %>
-    <div class="blog my-4 my-lg-5">
+    
+    <section class="tf-sp-2 pt-0">
       <div class="container">
-        <div class="row">
-          <%
-          const postsList = []
-          posts.forEach(slug => { 
-            const post = (_.cms(`posts/${slug}`))
-            post.slug = slug
-            postsList.push(post)
-          })
-          postsList.sort((a, b) => {
-            return b.date > a.date ? 1 : -1
-          })
-          postsList.forEach(post => { 
-            const { title, slug, thumbnail, description, date } = post 
-            %>
-            <div class="col col-md-6 col-lg-4">
-              <div class="card">
-                <% if (thumbnail) { %>
-                  <a href="/posts/<%= slug %>">
-                    <img
-                      src="<%= _.assetsPrefix || '' %><%= thumbnail %>"
-                      class="card-img-top"
-                      alt="<%= title %>"
-                    >
-                  </a>
-                <% } %>
-                <div class="card-body">
-                  <span class="blog-post-date <%= themeCustom === 'ecom-beauty' ? '' : ' d-none' %>">
-                    <% const postDate = _.ecomUtils.formatDate(date) %>
-                    <%= postDate %>
-                  </span>
-                  <h5 class="card-title">
-                    <a href="/posts/<%= slug %>">
-                      <%= title %>
-                    </a>
-                  </h5>
-                  <% if(themeCustom === 'ecom-beauty') { %>
-                    <a
-                      href="/posts/<%= slug %>"
-                      class="blog-post-link"
-                    >
-                      <%- _.dictionary('seeMore') %>
-                      <i class="i-chevron-right"></i>
+        <div class="flat-title wow fadeInUp" data-wow-delay="0s">
+          <h5 class="fw-semibold">
+            <%= _.dictionary('blog') || 'News' %>
+          </h5>
+          <div class="box-btn-slide relative">
+            <div class="swiper-button-prev nav-swiper nav-prev-products">
+              <i class="icon-arrow-left-lg"></i>
+            </div>
+            <div class="swiper-button-next nav-swiper nav-next-products">
+              <i class="icon-arrow-right-lg"></i>
+            </div>
+          </div>
+        </div>
+        <div class="swiper tf-sw-products" data-preview="4" data-tablet="3" data-mobile-sm="2" data-mobile="1"
+             data-space-lg="30" data-space-md="20" data-space="15" data-pagination="1" data-pagination-sm="2"
+             data-pagination-md="3" data-pagination-lg="4">
+          <div class="swiper-wrapper">
+            <%
+            const postsList = []
+            posts.forEach(slug => { 
+              
+              const post = (_.cms(`posts/${slug}`))
+              post.slug = slug
+              postsList.push(post)
+            })
+            postsList.sort((a, b) => {
+              return b.date > a.date ? 1 : -1
+            })
+            postsList.forEach((post, index) => { 
+              
+              const { title, slug, thumbnail, description, date, category } = post
+              const postDate = _.ecomUtils.formatDate(date)
+              const delay = index * 0.1
+              %>
+              <div class="swiper-slide">
+                <div class="news-item hover-img wow fadeInUp" data-wow-delay="<%= delay %>s">
+                  <% if (thumbnail) { %>
+                    <a href="/posts/<%= slug %>" class="entry_image img-style">
+                      <img src="<%= _.assetsPrefix || '' %><%= thumbnail %>" 
+                           data-src="<%= _.assetsPrefix || '' %><%= thumbnail %>" 
+                           alt="<%= title %>"
+                           class="lazyload">
                     </a>
                   <% } else { %>
-                    <p class="card-text">
-                      <%= description %>
-                    </p>
+                    <a href="/posts/<%= slug %>" class="entry_image img-style">
+                      <div class="placeholder-image d-flex align-items-center justify-content-center bg-light" style="height: 200px;">
+                        <i class="icon-image fs-3 text-muted"></i>
+                      </div>
+                    </a>
                   <% } %>
+                  <div class="content">
+                    <div class="entry_meta">
+                      <% if (category) { %>
+                        <div class="tags">
+                          <p class="caption fw-medium text-secondary">
+                            <%= category %>
+                          </p>
+                        </div>
+                      <% } %>
+                      <div class="date">
+                        <p class="caption">
+                          <%= postDate %>
+                        </p>
+                      </div>
+                    </div>
+                    <div class="entry_infor_news">
+                      <h6>
+                        <a href="/posts/<%= slug %>" class="link fw-semibold">
+                          <%= title %>
+                        </a>
+                      </h6>
+                      <% if (description) { %>
+                        <p class="subs body-text-3">
+                          <%= description.length > 100 ? description.substring(0, 100) + '...' : description %>
+                        </p>
+                      <% } %>
+                    </div>
+                  </div>
                 </div>
               </div>
-            </div>
-          <% }) %>
+            <% }) %>
+          </div>
+          <div class="d-flex d-xl-none sw-dot-default sw-pagination-blog justify-content-center"></div>
         </div>
       </div>
-    </div>
+    </section>
+    
   <%
 }
 %>

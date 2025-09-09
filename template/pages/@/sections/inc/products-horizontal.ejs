@@ -1,0 +1,91 @@
+<% if (Array.isArray(opt.items) && opt.items.length) {
+  const title = opt.title ||
+    (opt.collection && opt.collection.name) ||
+    _.dictionary('popularProducts')
+  const link = opt.link || (opt.collection && `/${opt.collection.slug}`)
+
+  if (opt.shuffle) {
+    let m = opt.items.filter(item => {
+      return item.available && _.ecomUtils.inStock(item)
+    }).length
+    let t, i
+    while (m) {
+      i = Math.floor(Math.random() * m--)
+      t = opt.items[m]
+      opt.items[m] = opt.items[i]
+      opt.items[i] = t
+    }
+  }
+  %>
+
+  <section
+    class="products-carousel <%= _.pageName == 'products'  ? 'containe' : 'container' %>"
+    data-size="<%= opt.items.length %>"
+    <% if (opt.collection) { %>
+      data-collection-id="<%= opt.collection._id %>"
+    <% } %>
+    data-title="<%= title %>"
+  >
+    <% if (!opt.headless) { %>
+      <div class="flat-title pb-8 wow fadeInUp" data-wow-delay="0s">
+        <%
+          const hasPromoKeyword = title.toLowerCase().includes('oferta') || 
+                                title.toLowerCase().includes('promoção') ||
+                                title.toLowerCase().includes('promoções');
+        %>
+        <h5 class="fw-semibold  <%= hasPromoKeyword ? ' text-primary flat-title-has-icon' : '' %>">
+            <% if (hasPromoKeyword) { %>
+                <span class="icon"><i class="icon-fire tf-ani-tada"></i></span>
+            <% } %>
+            <% if (opt.title || opt.collection) { %>
+              <% if (link) { %>
+                <a href="<%= link %>">
+                  <%= title %>
+                </a>
+              <% } else { %>
+                <span><%= title %></span>
+              <% } %>
+            <% } else { %>
+              <a href="/search">
+                <%= title %>
+              </a>
+            <% } %>
+        </h5>
+        <div class="box-btn-slide relative">
+            <div class="swiper-button-prev nav-swiper nav-prev-products">
+                <i class="icon-arrow-left-lg"></i>
+            </div>
+            <div class="swiper-button-next nav-swiper nav-next-products">
+                <i class="icon-arrow-right-lg"></i>
+            </div>
+        </div>
+    </div>
+    <% } %>
+
+ 
+        <div class="swiper tf-sw-products" data-preview="4" data-tablet="4" data-mobile-sm="3" data-mobile="2"
+          data-space-lg="30" data-space-md="20" data-space="15" data-pagination="2" data-pagination-sm="3"
+          data-pagination-md="4" data-pagination-lg="4">
+          <div class="swiper-wrapper">           
+              
+          <% for (let i = 0; i < opt.items.length; i += 2) { %>
+            <div class="swiper-slide product-item-horizontal">
+              <% for (let j = 0; j < 2; j++) { 
+                const idx = i + j
+                if (!opt.items[idx]) continue
+                if (!opt.items[idx].slug || !/^\w*p\w*\//.test(opt.items[idx].slug)) continue
+              %>
+                <div class="product-item-horizontal-inner">
+                  <%- await include('@/sections/inc/product-item', {
+                    _, opt: { item: opt.items[idx], type:'horizontal' }
+                  }) %>
+                </div>
+              <% } %>
+            </div>
+          <% } %>
+        </div>
+      </div>
+
+    </div>
+  </section>
+<% } %>

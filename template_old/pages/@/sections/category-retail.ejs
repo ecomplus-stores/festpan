@@ -1,0 +1,46 @@
+<%
+const search = new _.EcomSearch()
+search
+  .setCategoryIds([_.state._id])
+  .setSortOrder(opt.sort)
+let items
+try {
+  await search.fetch()
+  items = search.getItems()
+} catch (err) {
+  if (err.response && err.response.status === 404) {
+    console.error(err)
+  } else {
+    throw err
+  }
+}
+const categoryIds = [_.state._id]
+
+if (items && !items.length) {
+  const childCategories = _.categories.filter(({ parent }) => {
+    if (!parent) return false
+    return parent._id === _.state._id || parent.slug === _.state.slug
+  })
+  if (childCategories.length) {
+    childCategories.forEach(({ _id }) => {
+      categoryIds.push(_id)
+    })
+    search
+      .setCategoryIds(categoryIds)
+      .setSortOrder(opt.sort)
+    await search.fetch()
+    items = await search.getItems()
+  }
+}
+%>
+
+<div class="category-retail">
+  <%- await include('@/sections/inc/retail-grid', {
+    _, opt: {
+      items,
+      search,
+      category_names: categoryIds,
+      sort: opt.sort
+    }
+  }) %>
+</div>

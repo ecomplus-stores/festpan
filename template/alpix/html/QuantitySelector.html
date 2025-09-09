@@ -1,0 +1,92 @@
+<!-- filepath: c:\DevBox\festwines\template\alpix\html\QuantitySelector.html -->
+<div class="tf-product-info-choose-option flex-xl-nowrap">
+  <div 
+    class="product-quantity"
+    v-for="item in items"
+  >
+    <p class="title body-text-3 d-none d-md-block">
+      <slot v-bind="{ item }">
+        <a-link
+          v-if="item.slug"
+          target="_blank"
+          :href="`/${item.slug}`"
+          :title="item.name"
+        >
+          {{ item.name }}
+        </a-link>
+        <template class='' v-else>
+          Quantidade
+        </template>
+      </slot>
+    </p>
+    
+    <div class="wg-quantity">
+      <button
+        class="btn-quantity btn-decrease"
+        type="button"
+        @click="changeQnt(item, -1)"
+        :disabled="item.min_quantity >= selectedQnts[item._id]"
+      >
+        <i class="icon-minus"></i>
+      </button>
+      
+      <input
+        type="text"
+        class="quantity-product"
+        name="number"
+        @change="ev => changeQnt(item, null, ev)"
+        @keyup.up="changeQnt(item, 1)"
+        @keyup.down="changeQnt(item, -1)"
+        :value="selectedQnts[item._id]"
+        :disabled="!checkInStock(item)"
+        :readonly="item.min_quantity && item.min_quantity === item.max_quantity"
+      >
+      
+      <button
+        class="btn-quantity btn-increase"
+        type="button"
+        @click="changeQnt(item, 1)"
+        :disabled="item.max_quantity <= selectedQnts[item._id]"
+      >
+        <i class="icon-plus"></i>
+      </button>
+    </div>
+    
+    <!-- Alerts can be shown below each quantity selector -->
+    <div class="quantity-alerts mt-2">
+      <a-alert :can-show="hasMinAlert" class="small mb-1">
+        {{ i19minQuantity }}: <strong>{{ min }}</strong>
+      </a-alert>
+
+      <a-alert
+        :can-show="hasMaxAlert"
+        :variant="alertVariant"
+        class="small"
+      >
+        {{ i19maxQuantity }}: <strong>{{ max }}</strong>
+      </a-alert>
+    </div>
+  </div>
+
+  <div
+    v-if="hasBuyButton"
+    class="product-box-btn"
+  >
+    <slot
+      name="buy"
+      v-bind="{ selectedQnts, buy }"
+    >
+      <span @click="buy">
+        <button
+          type="button"
+          class="tf-btn text-white"
+        >
+          <slot name="buy-button-content">
+            {{ strBuy }}
+            <i class="icon-cart-2"></i>
+          </slot>
+        </button>
+      </span>
+    </slot>
+  </div>
+</div>

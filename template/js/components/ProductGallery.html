@@ -1,110 +1,106 @@
-<section class="gallery">
-  <div class="gallery__thumbs">
-    <div
-      v-if="videoSrc"
-      class="gallery__item gallery__item--video"
-      :class="{ 'gallery__item--selected': localPictures.length === activeIndex }"
-      @click="activeIndex = localPictures.length"
-    >
-      <i class="i-play"></i>
-      <span>{{ i19video }}</span>
-    </div>
 
+<section>
+<div class="tf-product-media-wrap thumbs-default sticky-top mb-4">
+  <div class="thumbs-slider">
+    <!-- Thumbs Swiper -->
     <div
-      v-for="(picture, i) in localPictures"
-      :key="'img-' + i"
-      class="gallery__item"
-      :class="{ 'gallery__item--selected': i === activeIndex }"
-      @click="activeIndex = i"
+      class="swiper tf-product-media-thumbs other-image-zoom"
+      data-direction="horizontal"
+      ref="thumbsSwiper"
     >
-      <a-picture
-        v-if="i < 4"
-        class="gallery__thumb"
-        :src="getImg(picture, null, 'small')"
-      />
-    </div>
-
-    <button
-      v-if="localPictures.length > 4"
-      type="button"
-      class="gallery__open btn btn-dark"
-      :style="zoomLinkStyle"
-      :title="i19openGallery"
-      @click.prevent="openZoom(4)"
-    >
-      +{{ localPictures.length - 4 }}
-    </button>
-  </div>
-
-  <div class="gallery__stage">
-    <div
-      class="glide"
-      ref="glide"
-    >
-      <div
-        class="glide__track"
-        data-glide-el="track"
-      >
-        <ul class="glide__slides">
-          <li
-            v-for="(picture, i) in localPictures"
-            class="glide__slide"
-            :key="'slide-' + i"
+    
+      <div class="swiper-wrapper stagger-wrap">
+        <div
+          v-for="(picture, i) in localPictures"
+          :key="'thumb-' + i"
+          class="swiper-slide stagger-item"
+          :data-color="picture.color || 'default'"
+        >
+          <div
+            class="item"
+            :class="{ 'is-active': i === activeIndex }"
+            @click="activeIndex = i"
           >
-            <div>
-              <slot v-if="i === 0 && !isSliderMoved">
-                <a-picture
-                  v-if="!elFirstPicture"
-                  class="gallery__big-image"
-                  :style="zoomLinkStyle"
-                  :src="getImg(picture, null, 'big')"
-                />
-                <div
-                  v-else
-                  ref="firstPicture"
-                  class="gallery__big-image"
-                  :style="zoomLinkStyle"
-                ></div>
-              </slot>
-
-              <a-picture
-                v-else
-                class="gallery__big-image"
-                :src="getImg(picture, null, 'big')"
-              />
-            </div>
-          </li>
-
-          <li
-            v-if="videoSrc"
-            class="glide__slide"
-            :key="'slide-' + localPictures.length"
+            <img
+              
+              :data-src="getImg(picture, null, 'small').url"
+              :src="getImg(picture, null, 'small').url"
+              :alt="picture.alt || ''"
+            >
+          </div>
+        </div>
+        <!-- Video thumb (if any) -->
+        <div
+          v-if="videoSrc"
+          class="swiper-slide stagger-item"
+          :data-color="'video'"
+        >
+          <div
+            class="item gallery__item--video"
+            :class="{ 'is-active': localPictures.length === activeIndex }"
+            @click="activeIndex = localPictures.length"
           >
+            <i class="i-play"></i>
+            <span>{{ i19video }}</span>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- Main Swiper -->
+    
+    <div class="swiper tf-product-media-main" id="gallery-swiper-started" ref="mainSwiper">
+      <div class="swiper-wrapper">
+        <div
+          
+          v-for="(picture, i) in localPictures"
+          :key="'main-' + i"
+          class="swiper-slide"
+          :data-color="picture.color || 'default'"
+        >
+          <div
+            @click="openZoom(i)"
+            :href="getImg(picture, null, 'big').url"
+            target="_blank"
+            class="item"
+            :data-pswp-width="picture['zoom'].size.split('x')[0] || 600"
+            :data-pswp-height="picture['zoom'].size.split('x')[1] || 800"
+          >
+            <img
+              class="tf-image-zoom "
+              :src="getImg(picture, null, 'big').url"
+              :data-zoom="getImg(picture, null, 'zoom').url"
+              :data-src="getImg(picture, null, 'big').url"
+              :alt="picture.alt || ''"
+            >
+          </div>
+        </div>
+        <!-- Video slide (if any) -->
+        <div
+          v-if="videoSrc"
+          class="swiper-slide"
+          :data-color="'video'"
+        >
+          <div class="embed-responsive" :class="`embed-responsive-${videoAspectRatio}`">
             <div
-              class="embed-responsive"
-              :class="`embed-responsive-${videoAspectRatio}`"
-            > 
-              <div
-                v-if="activeIndex === localPictures.length"
-                class="spinner-border text-primary" 
-                role="status"
-              >
-                <span class="sr-only">Loading...</span>
-              </div>
-              <iframe
-                class="embed-responsive-item"
-                v-if="activeIndex === localPictures.length"
-                :src="videoSrc"
-                allowfullscreen
-              ></iframe>
+              v-if="activeIndex === localPictures.length"
+              class="spinner-border text-primary"
+              role="status"
+            >
+              <span class="sr-only">Loading...</span>
             </div>
-          </li>
-        </ul>
+            <iframe
+              class="embed-responsive-item"
+              v-if="activeIndex === localPictures.length"
+              :src="videoSrc"
+              allowfullscreen
+            ></iframe>
+          </div>
+        </div>
       </div>
     </div>
   </div>
-
-  <div
+</div>
+<div
     v-once
     ref="pswp"
     class="pswp"

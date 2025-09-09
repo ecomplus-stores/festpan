@@ -1,0 +1,30 @@
+{
+  "border_menu_color": "#cccccc",
+  "bg_color": "#f2f2f2",
+  "text_color": "#131313",
+  "menu_color": "#131313",
+  "categories": [
+    {
+      "title": "Mercearia"
+    },
+    {
+      "title": "Embalagens e Descartáveis"
+    },
+    {
+      "title": "Utensílios"
+    },
+    {
+      "title": "Confeitaria"
+    },
+    {
+      "title": "Panificação"
+    },
+    {
+      "title": "Chocolates"
+    },
+    {
+      "title": "Sazoinal"
+    }
+    
+  ]
+}

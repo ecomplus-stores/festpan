@@ -1,4 +1,4 @@
-<div class="recommended-products">
+<div class="recommended-products <%= _.pageName == 'products'  ? 'bg-white flat-container mb-5' : '' %>">
   <%- await include('@/sections/inc/recommendations-shelf', {
     _, opt: { ...opt, showcaseType: 'related' }
   }) %>

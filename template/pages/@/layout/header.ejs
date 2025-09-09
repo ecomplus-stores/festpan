@@ -1,8 +1,13 @@
 <%
-// load header options and contacts from content
 const header = _.cms('header') || {}
+const apx_header_color = _.cms('apx_header_colors') || {}
 const contacts = _.cms('contacts') || {}
 const themeCustom = _.settings.theme.custom || ''
+
+// Extract colors with fallbacks
+const bgColor = apx_header_color.bg_color || '#f8f9fa'
+const textColor = apx_header_color.text_color || '#333333'
+const menuColor = apx_header_color.menu_color || '#ffffff'
 
 // social networks handled by contacts
 const networks = [
@@ -48,349 +53,428 @@ if (header.marketing_stripe && !Array.isArray(header.marketing_stripe)) {
 }
 %>
 
+<!-- Custom Header Colors -->
+<style>
+  :root {
+    --header-bg-color: <%= bgColor %>;
+    --header-border-color: <%= apx_header_color.border_menu_color %>;
+    --header-text-color: <%= textColor %>;
+    --header-menu-color: <%= menuColor %>;
+  }
+  .header-bottom{
+    border-top: 1px solid var(--header-border-color) !important;
+  }
+  .header-top{
+    border-bottom: 1px solid var(--header-border-color) !important;
+  }
+
+  .header-right *,
+  .header-right *:hover{text-decoration: none;}
+  .tf-header,
+  .tf-header .header-bt-left,
+  .header-top {
+    background-color: var(--header-bg-color) !important;
+  }
+  
+  .tf-header .header-top {
+    background-color: var(--header-bg-color);
+  }
+  
+  .tf-header .inner-header {
+    background-color: var(--header-bg-color);
+  }
+  .nav-category-wrap.style-2::after{right:-9px}
+  .tf-header .header-bottom {
+    background-color: var(--header-bg-color) !important;
+  }
+  
+  /* Text colors */
+  .tf-header .body-small,
+  .tf-header .text-main-2,
+  .tf-header .link,
+  .tf-header .nav-icon-item span,
+  .tf-header .nav-icon-item p,
+  .tf-header .nav-icon-item .body-text-3,
+  .tf-header .nav-icon-item .number-item,
+  .header-top .body-small,
+  .header-top .body-text-3 {
+    color: var(--header-text-color) !important;
+  }
+  
+  .tf-header .text-white,
+  .tf-header .nav-icon-item.text-white,
+  .tf-header .nav-icon-item.text-white span,
+  .tf-header .nav-icon-item.text-white p {
+    color: var(--header-text-color) !important;
+  }
+  
+  /* Menu colors */
+  .tf-header .nav-category-wrap,
+  .tf-header .main-nav-menu,
+    .tf-header .nav-item .item-link,
+  .tf-header .category-menu .menu-item a,
+  .main-nav-menu.style-white-2 .item-link .icon {
+    color: var(--header-menu-color);
+  }
+  
+  .tf-header .nav-title
+ {
+    color: var(--header-text-color) !important;
+  }
+  
+  /* Icons */
+  .tf-header .icon-headphone,
+  .tf-header .icon-whatsapp,
+  .tf-header .icon-user-2,
+  
+  .tf-header .icon-hearth,
+  .tf-header .icon-cart,
+  .tf-header .icon-search,
+  .header-top .icon-user-2 {
+    color: var(--header-text-color) !important;
+  }
+  
+  /* SVG icons */
+  .tf-header svg path {
+    fill: var(--header-text-color) !important;
+    stroke: var(--header-text-color) !important;
+  }
+  .tf-header .nav-cart svg path {
+    fill: var(--header-text-color) !important;
+    stroke: unset !important;
+  }
+  
+  /* Count boxes */
+  .tf-header .count-box {
+    background-color: var(--header-text-color);
+    color: var(--header-bg-color);
+  }
+.tf-header .icon-search,
+  .tf-header .nav-icon.style-3 .nav-icon-item .count-box{color: var(--white)!important;}
+  
+  /* Links hover */
+  .tf-header .link:hover,
+  .tf-header .nav-icon-item:hover,
+  .tf-header .item-link:hover {
+    opacity: 0.8;
+  }
+  
+  /* Search form */
+  .tf-header .form-search-product {
+    border-color: var(--header-text-color);
+  }
+  
+  /* Mobile button */
+  .tf-header .mobile-button span,
+  .tf-header .mobile-button span:before,
+  .tf-header .mobile-button span:after,
+  .tf-header .mobile-button:before,
+  .tf-header .mobile-button:after {
+    background-color: var(--header-text-color) !important;
+  }
+
+  .header-bottom{
+    --gray:var(--primary);
+  }
+  .nav-category-wrap .nav-title.active .title,
+  .nav-category-wrap .nav-title.active i,
+  .nav-category-wrap.style-2 .nav-title:hover i,
+  .nav-category-wrap.style-2 .nav-title:hover .title{
+    color: var(--white)!important;
+    opacity: .8;
+  }
+</style>
+
 <div id="overlay" class="fade"></div>
 
-<div class="top-bar">
-  <% if (header.marketing_stripe && header.marketing_stripe.length) { %>
-    <div class="glide" data-autoplay="6000">
-      <div class="glide__track" data-glide-el="track">
-        <ul class="glide__slides">
-          <% header.marketing_stripe.forEach((marketingStripe) => { %>
-            <% if (marketingStripe.text) { %>
-              <li class="glide__slide">
-                <%
-                // marketing stripe custom styles
-                let marketingStripeStyle = ''
-                ;['background', 'color'].forEach(prop => {
-                  if (marketingStripe[prop]) {
-                    marketingStripeStyle += `${prop}:${marketingStripe[prop]};`
-                  }
-                })
-                %>
-                <% if (marketingStripe.link) { %>
-                  <a
-                    class="top-bar__countdown"
-                    style="<%= marketingStripeStyle %>"
-                    href="<%= marketingStripe.link %>"
-                  >
-                  <%= marketingStripe.text %>
+<!-- Header -->
+ <% if (header.contacts_stripe && (header.contacts_stripe.pages || header.contacts_stripe.phone_wpp || header.contacts_stripe.socials)) { %>
+    <div class="header-top py-2  d-none d-md-block">
+      <div class="container">
+        <div class="row">
+          <div class="col-xl-6 col-12">
+            <div class="topbar-left justify-content-xl-start">
+              <% if (header.contacts_stripe.phone_wpp && contacts.phone) { %>
+                <p class="body-small text-main-2  m-0">
+                  <i class="icon-headphone"></i>
+                  Atendimento:
+                  <a href="tel:+<%= contacts.phone.replace(/\D/g, '') %>" class="text-primary link-secondary fw-semibold">
+                    <%= contacts.phone %>
                   </a>
-                <% } else { %>
-                  <div class="top-bar__countdown" style="<%= marketingStripeStyle %>">
-                    <%= marketingStripe.text %>
-                  </div>
-                <% } %>
-              </li>
-            <% } %>
-          <% }) %>
-        </ul>
+                </p>
+              <% } %>
+              <% if (header.contacts_stripe.phone_wpp && contacts.whatsapp) { %>
+                <p class="body-small text-main-2  m-0">
+                  <i class="icon-whatsapp"></i>
+                  WhatsApp:
+                  <a href="javascript:;" class="whatsapp-link text-primary link-secondary fw-semibold"
+                     data-tel="<%= contacts.whatsapp.replace(/\D/g, '') %>">
+                    <%= contacts.whatsapp %>
+                  </a>
+                </p>
+              <% } %>
+              <% if (header.contacts_stripe.pages) { %>
+                <% header.contacts_stripe.pages.forEach(({ link, title }) => { %>
+                  <p class="body-small text-main-2">
+                    <a href="<%= link %>" class="text-decoration-none">
+                      <%= title %>
+                    </a>
+                  </p>
+                <% }) %>
+              <% } %>
+            </div>
+          </div>
+          <div class="col-xl-6 d-none d-xl-block">
+            <div class="tf-cur justify-content-end bar-lang">
+             
+              <a href="/app/#/account/" class="link tf-cur-item text-white" id="user-button-top">
+                <i class="icon-user-2 text-main-2"></i>
+                <span class="body-small" data-client_name>Minha conta</span>
+              </a>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
   <% } %>
-
-  <div class="top-bar__nav d-none d-md-block">
-    <div class="container-fluid">
-      <div class="row">
-        <div class="col d-flex">
-          <nav class="top-bar__page-links">
-            <% if (header.contacts_stripe.pages) { %>
-              <div class="<%= (themeCustom === 'ecom-beauty' && isCategoriesNavFull) ? 'd-lg-none' : '' %>">
-                <% header.contacts_stripe.pages.forEach(({ link, title }) => { %>
-                  <a href="<%= link %>"><%= title %></a>
-                <% }) %>
-              </div>
-            <% } %>
-          </nav>
-          <% if (header.contacts_stripe.phone_wpp) { %>
-            <div class="top-bar__contacts-container">
-              <% if (contacts.whatsapp) { %>
-                <a href="javascript:;" target="_blank" rel="noopener" class="whatsapp-link"
-                  data-tel="<%= contacts.whatsapp.replace(/\D/g, '') %>">
-                  <i class="i-whatsapp"></i>
-                  <%= contacts.whatsapp %>
-                </a>
-                <% } %>
-              <% if (contacts.phone) { %>
-                <a href="tel:+<%= contacts.phone.replace(/\D/g, '') %>" target="_blank" rel="noopener">
-                  <i class="i-phone"></i>
-                  <%= contacts.phone %>
-                </a>
-              <% } %>
-            </div>
-            
-          <% } %>
+<header class="tf-header style-3" id="header">
+  <!-- Top bar -->
+  
+  
+  <div class="inner-header py-md-4 mb-md-2">
+    <div class="container">
+      <div class="row align-items-center">
+        <div class="col-md-auto col-7 d-flex align-items-center">
+          <div class="logo-site">
+            <a href="/">
+              <%- await include('@/layout/inc/logo', { _ }) %>
+            </a>
+          </div>
         </div>
-        <% if (header.contacts_stripe.socials) { %>
-          <div class="col-auto">
-            <% networks.forEach(network => { %>
-              <% if (contacts[network]) { %>
-                <a href="<%= contacts[network] %>" target="_blank" rel="noopener">
-                  <i class="i-<%= network %>"></i>
-                </a>
-              <% } %>
-            <% }) %>
+        
+        <% if (header.search_input) { %>
+          <div class="col-md d-none d-md-block">
+            <div class="header-center justify-content-end">
+              <form class="form-search-product style-3 bg-white" id="search-form" action="/search" method="get">
+              
+                <fieldset>
+                  <input 
+                    type="search" 
+                    name="term"
+                    placeholder="<%= _.dictionary('searchProducts') %>"
+                    aria-label="<%= _.dictionary('searchProducts') %>"
+                    id="search-input"
+                  >
+                </fieldset>
+                <button type="submit" class="btn-submit-form" aria-label="<%= _.dictionary('searchProducts') %>">
+                  <i class="icon-search"></i>
+                </button>
+                <div id="instant-search">
+                  <!--
+                    `InstantSearch` should be open on input focus:
+                    https://developers.e-com.plus/storefront/@ecomplus/storefront-components/docs/InstantSearch.html
+                  -->
+                </div>
+              </form>
+              
+            </div>
           </div>
         <% } %>
+        
+        <div class="col-md-auto col-5 d-flex align-items-center justify-content-end">
+          <div class="header-right">
+            <ul class="nav-icon style-3 m-0">
+              <li class="d-none d-xl-block">
+                <a href="/app/#/account/" class="nav-icon-item">
+                  <span class="icon position-relative">
+                    <i class="icon-hearth text-white link"></i>
+                    <span class="count-box" data-favorite_count>0</span>
+                  </span>
+                  <div class="infor text-start">
+                    <span class="body-text-3 text-main-2">Favoritos:</span>
+                    <h6 class="number-item fw-semibold text-main-2"><span data-favorite_count>0</span> item(s)</h6>
+                  </div>
+                </a>
+              </li>
+              <li class="d-none d-xl-block">
+                <a href="/app/#/cart" class="nav-icon-item" id="cart-button">
+                  <span class="icon position-relative">
+                    <i class="icon-cart text-white link"></i>
+                    <span class="count-box" id="cart-count">0</span>
+                  </span>
+                  <div class="infor text-start">
+                    <span class="body-text-3 text-main-2">Carrinho</span>
+                    <h6 class="number-item text-primary fw-semibold text-main-2 nowrap" cart-value>R$ 0,00</h6>
+                  </div>
+                </a>
+              </li>
+            </ul>
+            <ul class="nav-icon m-0 justify-content-xl-center d-xl-none">
+              <li class="nav-account">
+                <a href="/app/#/account/" class="link nav-icon-item text-white" id="user-button">
+                  <span>
+                    <svg width="22" height="23" viewBox="0 0 22 23" fill="none" xmlns="http://www.w3.org/2000/svg">
+                      <path d="M10.9998 11.5283C5.20222 11.5283 0.485352 16.2452 0.485352 22.0428C0.485352 22.2952 0.69017 22.5 0.942518 22.5C1.19487 22.5 1.39968 22.2952 1.39968 22.0428C1.39968 16.749 5.70606 12.4426 10.9999 12.4426C16.2937 12.4426 20.6001 16.749 20.6001 22.0428C20.6001 22.2952 20.8049 22.5 21.0572 22.5C21.3096 22.5 21.5144 22.2952 21.5144 22.0428C21.5144 16.2443 16.7975 11.5283 10.9998 11.5283Z" fill="#ffffff" stroke="#ffffff" stroke-width="0.3"></path>
+                      <path d="M10.9999 0.5C8.22767 0.5 5.97119 2.75557 5.97119 5.52866C5.97119 8.30174 8.22771 10.5573 10.9999 10.5573C13.772 10.5573 16.0285 8.30174 16.0285 5.52866C16.0285 2.75557 13.772 0.5 10.9999 0.5ZM10.9999 9.64303C8.73146 9.64303 6.88548 7.79705 6.88548 5.52866C6.88548 3.26027 8.73146 1.41429 10.9999 1.41429C13.2682 1.41429 15.1142 3.26027 15.1142 5.52866C15.1142 7.79705 13.2682 9.64303 10.9999 9.64303Z" fill="#ffffff" stroke="#ffffff" stroke-width="0.3"></path>
+                    </svg>
+                  </span>
+                  <p class="body-small m-0">
+                    <%= _.dictionary('signIn') || 'Sign in' %>
+                  </p>
+                </a>
+              </li>
+              <li class="nav-cart">
+                <a href="/app/#/cart" class="link nav-icon-item text-white">
+                  <span>
+                    <svg width="26" height="26" viewBox="0 0 26 26" fill="none" xmlns="http://www.w3.org/2000/svg">
+                      <path d="M8.55865 19.1096C6.8483 19.1096 5.46191 20.496 5.46191 22.2064C5.46191 23.9165 6.8483 25.3029 8.55865 25.3029C10.2688 25.3029 11.6552 23.9165 11.6552 22.2064C11.6534 20.4969 10.2681 19.1114 8.55865 19.1096ZM8.55865 24.1644C7.47712 24.1644 6.60037 23.2877 6.60037 22.2064C6.60037 21.1248 7.47712 20.2481 8.55865 20.2481C9.63996 20.2481 10.5167 21.1248 10.5167 22.2064C10.5167 23.2877 9.63996 24.1644 8.55865 24.1644Z" fill="#ffffff"></path>
+                      <path d="M25.436 6.1144H5.33643L4.92663 3.82036C4.67403 2.40819 3.56715 1.30353 2.15453 1.05382L0.668757 0.792113C0.359017 0.736969 0.0635073 0.943536 0.00836329 1.25305C-0.0465584 1.56279 0.159787 1.8583 0.469527 1.91345L1.96086 2.17516C2.90187 2.34193 3.63853 3.07859 3.80529 4.01959L5.82027 15.387C6.05819 16.7472 7.24001 17.7393 8.62083 17.738H20.5746C21.8305 17.7418 22.9396 16.9197 23.3014 15.7172L25.9767 6.84861C26.0263 6.67562 25.995 6.48929 25.8913 6.34209C25.7831 6.19956 25.6147 6.11551 25.436 6.1144ZM22.214 15.3813C21.9992 16.1035 21.3337 16.5975 20.5804 16.5938H8.62661C7.79745 16.596 7.08769 15.9994 6.94739 15.182L5.54144 7.24707H24.6731L22.214 15.3813Z" fill="#ffffff"></path>
+                      <path d="M20.512 19.1096C18.8017 19.1096 17.4153 20.496 17.4153 22.2064C17.4153 23.9165 18.8017 25.3029 20.512 25.3029C22.2221 25.3029 23.6085 23.9165 23.6085 22.2064C23.6068 20.4969 22.2215 19.1114 20.512 19.1096ZM20.512 24.1644C19.4305 24.1644 18.5537 23.2877 18.5537 22.2064C18.5537 21.1248 19.4305 20.2481 20.512 20.2481C21.5933 20.2481 22.4701 21.1248 22.4701 22.2064C22.4701 23.2877 21.5933 24.1644 20.512 24.1644Z" fill="#ffffff"></path>
+                    </svg>
+                  </span>
+                  <p class="body-small">
+                    <%= _.dictionary('yourCart') || 'Your cart:' %>
+                  </p>
+                </a>
+              </li>
+              <li class="d-flex d-xl-none align-items-center">
+                <a href="#mobileMenu" class="mobile-button" data-bs-toggle="offcanvas" aria-controls="mobileMenu" onclick="toggleSidenav()">
+                  <span></span>
+                </a>
+              </li>
+            </ul>
+            
+           
+          </div>
+        </div>
       </div>
     </div>
   </div>
-</div>
-
-<header class="header" id="header">
-  <div class="header__container container-fluid">
-    <div class="header__row row<%= isCentralizedLogo ? ' header__row--centralized-logo' : '' %><%= isCentralizedLogo && isCategoriesNavFull ? ' header__row--full-width' : '' %>">
-      <div class="col-auto p-0 header__toggler-block">
-        <button
-          class="btn header__toggler<%= hasMegamenu ? ' d-lg-none' : '' %>"
-          type="button"
-          onclick="toggleSidenav()"
-          aria-label="Toggle side navigation"
-        >
-          <i class="header__toggler-icon i-bars"></i>
-          <% if (!categories.length) { %>
-            <span class="d-none d-lg-inline">
-              Menu
-            </span>
-          <% } %>
-        </button>
-      </div>
-
-      <div class="col col-lg-auto pl-1 pl-md-2 pl-lg-3 header__logo-block">
-        <a href="/">
-          <%- await include('@/layout/inc/logo', { _ }) %>
-        </a>
-      </div>
-
-      <div class="order-lg-last col-auto p-0 header__buttons-block">
-        <div
-          class="header__buttons"
-          role="group"
-          aria-label="<%= _.dictionary('myAccount') %>"
-        >
-          <button
-            class="d-lg-none btn btn-lg"
-            id="mobile-search-btn"
-            type="button"
-            data-toggle="collapse"
-            data-target="#search-bar"
-            aria-expanded="true"
-            aria-controls="search-bar"
-            aria-controls="search-bar"
-            title="<%= _.dictionary('searchProducts') %>"
-          >
-            <i class="i-search"></i>
-          </button>
-
-          <a
-            id="user-button"
-            class="btn btn-lg"
-            role="button"
-            href="/app/#/account/"
-            title="<%= _.dictionary('myAccount') %>"
-          >
-            <i class="i-user"></i>
-          </a>
-          <a
-            id="cart-button"
-            class="btn btn-lg"
-            role="button"
-            href="/app/#/cart"
-            title="<%= _.dictionary('openCart') %>"
-          >
-            <i class="i-shopping-bag"></i>
-            <span id="cart-count" class="badge badge-primary"></span>
-          </a>
-        </div>
-
-        <div id="login-modal">
-          <!--
-            `LoginModal` should be rendered here:
-            https://developers.e-com.plus/storefront/@ecomplus/storefront-components/docs/LoginModal.html
-          -->
-        </div>
-        <div id="cart-quickview">
-          <!--
-            `CartQuickview` should be rendered here:
-            https://developers.e-com.plus/storefront/@ecomplus/storefront-components/docs/CartQuickview.html
-          -->
-        </div>
-      </div>
-
-      <% if (header.search_input) {
-        const searchColSize = !isCategoriesNavFull && categories.length ? '-3' : ''
-        %>
-        <div
-          class="d-none d-lg-block col-12 col-lg<%= searchColSize %> collapse show"
-          id="search-bar"
-        >
-          <form
-            class="header__search mt-2 mt-md-3 mt-lg-0"
-            id="search-form"
-            action="/search"
-            method="get"
-          >
-            <input
-              type="search"
-              name="term"
-              placeholder="<%= _.dictionary('searchProducts') %>"
-              aria-label="<%= _.dictionary('searchProducts') %>"
-              class="header__search-input form-control"
-              id="search-input"
-            >
-            <button
-              type="submit"
-              class="header__search-btn"
-              aria-label="<%= _.dictionary('searchProducts') %>"
-            >
-              <i class="i-search"></i>
-            </button>
-            <div id="instant-search">
-              <!--
-                `InstantSearch` should be open on input focus:
-                https://developers.e-com.plus/storefront/@ecomplus/storefront-components/docs/InstantSearch.html
-              -->
-            </div>
-          </form>
-
-          <% if (_.settings.domain) { %>
-            <script type="application/ld+json"><%-
-              JSON.stringify({
-                '@context': 'http://schema.org',
-                '@type': 'WebSite',
-                url: `https://${_.settings.domain}/`,
-                potentialAction: {
-                  '@type': 'SearchAction',
-                  target: `https://${_.settings.domain}/search?term={search_term_string}`,
-                  'query-input': 'required name=search_term_string'
-                }
-              })
-            %></script>
-          <% } %>
-        </div>
-      <% } %>
-
-      <% if (themeCustom === 'ecom-beauty' && isCategoriesNavFull) { %>
-        <% if (header.contacts_stripe.pages) { %>
-          <div class="header__page-links d-none d-lg-inline-block">
-            <% header.contacts_stripe.pages.forEach(({ link, title })=> { %>
-              <a href="<%= link %>">
-                <%= title %>
-              </a>
-            <% }) %>
+  
+ <% if (categories && categories.length) { %>
+  <div class="header-bottom d-none d-xl-block">
+    <div class="container">
+      <div class="header-bt-left active-container relative">
+        <div class="nav-category-wrap style-2 style-white">
+          <div class="nav-title btn-active" onclick="toggleCategoryMenu()">
+            <i class="icon-menu-dots fs-20"></i>
+            <h6 class="title fw-semibold m-0">
+              <%= _.dictionary('allCategories') || 'Todas as Categorias' %>
+            </h6>
           </div>
-        <% } %>
-      <% } %>
-
-      <% if (categories && categories.length) { %>
-        <div class="d-none d-lg-block <%= isCategoriesNavFull ? 'col-12 order-lg-last' : 'col' %> header__nav-block">
-          <nav class="header__nav<%= isCategoriesNavFull ? ' header__nav--full' : '' %>">
-            <% if (hasAllDepartments) { %>
-              <div class="d-inline-block">
-                <a 
-                  href="javascript:;"
-                  class="header__category"
-                  id="cd-all"
-                  onmouseover="toggleSubmenu('all', this)"
-                  onclick="toggleSubmenu('all', this)"
-                >
-                  <%= header.name_all_departments || _.dictionary('all') %>
-                </a>
-                <nav class="header__submenu header__submenu--full" id="s-all">
-                  <div class="row">
-                    <% _.categories.forEach(({ name, slug, parent, _id }) => { %>
-                      <% if (!parent) { 
-                        %>
-                        <div class="col-12 col-lg-<%- isCategoriesNavFull ? '2' : '4' %>">
-                          <a 
-                            id="sd-all-<%= _id %>" 
-                            href="/<%= slug %>"
-                          >
-                            <%= name %>
-                          </a>
-                        <% const subcategories = _.categories.filter(({ parent }) => parent && parent.slug === slug) %>
-                        <% if (subcategories.length) { %>
-                          <div id="header__submenu-<%= slug %>">
-                            <ul class="header__links">
+          <nav class="category-menu active-item" id="all-categories-menu">
+            <div class="menu-category-menu-container">
+              <ul id="primary-menu" class="megamenu">
+                <% categories.forEach(({ name, slug, _id }) => { %>
+                  <li class="menu-item">
+                    <a href="/<%= slug %>" id="cd-all-<%= _id %>">
+                      <span><%= name %></span>
+                    </a>
+                  </li>
+                <% }) %>
+              </ul>
+            </div>
+          </nav>
+        </div>
+        
+        <nav class="main-nav-menu style-white-2">
+          <ul class="nav-list m-0">
+            
+            <% categories.forEach(({ slug, name, _id }) => { 
+              if(apx_header_color.categories.find(el => el.title.toLowerCase().trim() == name.toLowerCase().trim())) {
+                
+              
+              %>
+              
+                <% const subcategories = _.categories.filter(({ parent }) => parent && parent.slug === slug) %>
+                <li class="nav-item ">
+                  <a href="/<%= slug %>" class="item-link body-md-2 fw-semibold" id="cd-<%= _id %>">
+                    <span><%= name %></span>
+                    <% if (subcategories.length) { %>
+                      <i class="icon icon-arrow-down"></i>
+                    <% } %>
+                  </a>
+                  <% if (subcategories.length && hasMegamenu) { %>
+                    <div class="sub-menu-container<%= fullWidthSubmenu ? ' mega-menu' : '' %>" id="<%= `s-${slug.replace(/\//g, '_')}` %>">
+                      <% if (fullWidthSubmenu) { %>
+                        <div class="wrapper-sub-menu">
+                          <div class="mega-menu-item">
+                            <p class="menu-heading body-small"><%= name.toUpperCase() %></p>
+                            <ul class="menu-list">
                               <% subcategories.forEach(subcategory => { %>
                                 <li>
-                                  <a id="td-all-<%= subcategory._id %>" class="header__submenu-subcategory" href="/<%= subcategory.slug %>">
-                                    <%= subcategory.name %>
+                                  <a href="/<%= subcategory.slug %>" class="body-md-2 link" id="sd-<%= subcategory._id %>">
+                                    <span><%= subcategory.name %></span>
                                   </a>
                                 </li>
-                                <% }) %>
-                              </ul>
-                            </div>
-                          <% } %>
-                          </div>
-                        <% } %>
-                      <% }) %>
-                    </div>
-                  </nav>
-              </div>
-            <% } %>
-            <% categories.forEach(({ slug, name, _id}) => { %>
-              <% let $categoryLink %>
-              <div class="d-inline-block">
-                <a
-                  href="javascript:;"
-                  class="header__category"
-                  id="cd-<%= _id %>"
-                  <%- hasMegamenu
-                    ? `onmouseover="toggleSubmenu('${slug}', this)" onclick="toggleSubmenu('${slug}', this, true)"`
-                    : `onclick="toggleSidenav('${slug}')"` %>
-                >
-                  <%= name %>
-                </a>
-                <%- $categoryLink %>
-                <%  if (slug && hasMegamenu) { %>
-                  <% const subcategories = _.categories.filter(({ parent }) => parent && parent.slug === slug) %>
-                  <% if (subcategories.length) { %>
-                    <%
-                      if (isAlphabeticalOrderSubmenu) {
-                        subcategories.sort((a, b)=> {
-                          return b.name > a.name ? -1 : 1
-                        })
-                      }
-                      const submenuCols = [[], [], [], [], []]
-                      for (let i = 0; i < subcategories.length; i++) {
-                        submenuCols[i % 5].push(subcategories[i])
-                      }
-                    %>
-                    <nav class="header__submenu<%= fullWidthSubmenu ? ' header__submenu--full' : '' %>" id="<%= `s-${slug.replace(/\//g, '_')}` %>">
-                      <% submenuCols.forEach(colSubcategories => { %>
-                        <% if (!colSubcategories.length) return %>
-                        <div>
-                          <% colSubcategories.forEach(subcategory => { %>
-                            <a id="sd-<%= subcategory._id %>" href="/<%= subcategory.slug %>"><%= subcategory.name %></a>
-                            <div>
-                              <% const thirdCategories = _.categories.filter(({ parent }) => parent && parent.slug === subcategory.slug) %>
-                              <%
-                                if (isAlphabeticalOrderSubmenu) {
-                                  thirdCategories.sort((a, b)=> {
-                                    return b.name > a.name ? -1 : 1
-                                  })
-                                }
-                              %>
-                              <% thirdCategories.forEach(thirdCategory => { %>
-                                <a id="td-<%= thirdCategory._id %>" class="header__submenu-subcategory" href="/<%= thirdCategory.slug %>">
-                                  <%= thirdCategory.name %>
-                                </a>
                               <% }) %>
-                            </div>
-                          <% }) %>
+                            </ul>
+                          </div>
                         </div>
-                      <% }) %>
-                    </nav>
+                      <% } else { %>
+                        <ul class="sub-menu-list">
+                          <% subcategories.forEach(subcategory => { %>
+                            <li>
+                              <a href="/<%= subcategory.slug %>" class="body-md-2 link" id="sd-<%= subcategory._id %>">
+                                <span><%= subcategory.name %></span>
+                              </a>
+                            </li>
+                          <% }) %>
+                        </ul>
+                      <% } %>
+                    </div>
                   <% } %>
-                <% } %>
-              </div>
-            <% }) %>
-          </nav>
-        </div>
-      <% } %>
+                </li>
+              <% 
+              }
+            }) %>
+            
+            <% if (header.contacts_stripe && header.contacts_stripe.pages) { %>
+              <% header.contacts_stripe.pages.forEach(({ link, title }) => { %>
+                <li class="nav-item">
+                  <a href="<%= link %>" class="item-link body-md-2 fw-semibold">
+                    <span><%= title %></span>
+                  </a>
+                </li>
+              <% }) %>
+            <% } %>
+          </ul>
+        </nav>
+      </div>
     </div>
   </div>
+<% } %>
+  
+  <div id="login-modal">
+    <!--
+      `LoginModal` should be rendered here:
+      https://developers.e-com.plus/storefront/@ecomplus/storefront-components/docs/LoginModal.html
+    -->
+  </div>
+  <div id="cart-quickview">
+    <!--
+      `CartQuickview` should be rendered here:
+      https://developers.e-com.plus/storefront/@ecomplus/storefront-components/docs/CartQuickview.html
+    -->
+  </div>
+  
+  <% if (_.settings.domain && header.search_input) { %>
+    <script type="application/ld+json"><%-
+      JSON.stringify({
+        '@context': 'http://schema.org',
+        '@type': 'WebSite',
+        url: `https://${_.settings.domain}/`,
+        potentialAction: {
+          '@type': 'SearchAction',
+          target: `https://${_.settings.domain}/search?term={search_term_string}`,
+          'query-input': 'required name=search_term_string'
+        }
+      })
+    %></script>
+  <% } %>
+  
 </header>
+<!-- /Header -->
 <% if (header.popup) { %>
   <div class="modal fade" id="popup-modal" tabindex="-1" role="dialog" aria-labelledby="modal-popup" aria-hidden="true">
     <div class="modal-dialog" role="document">

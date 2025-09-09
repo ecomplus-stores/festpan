@@ -56,7 +56,7 @@ if (!opt.items) {
           <article class="search-engine__retail">
             <div class="row">
               <% for (let i = 0; i < items.length; i++) { %>
-                <% if (!items[i].slug || !/^\w*p\w*\//.test(items[i].slug)) continue %>
+                <% if (!items[i].slug || !/^\w*\p*\//.test(items[i].slug)) continue %>
                 <div class="col-6 col-md-4 col-lg-3">
                   <%- await include('@/sections/inc/product-item', {
                     _, opt: { item: items[i] }

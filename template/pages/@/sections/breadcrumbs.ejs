@@ -8,37 +8,48 @@ const breadcrumbs = opt.breadcrumbs && opt.breadcrumbs.length
 
 if (Array.isArray(breadcrumbs) && breadcrumbs.length) {
   %>
-  <div class="container">
-    <nav aria-label="breadcrumb">
-      <ol class="breadcrumb my-2 my-sm-3<%= breadcrumbs.length < 2 ? ' d-none d-md-flex' : '' %>">
-        <li class="breadcrumb-item d-none d-md-block">
-          <a href="/">
-            <i class="i-home"></i>
+  <!-- Breakcrumbs -->
+  <div class="tf-sp-1 pb-0">
+    <div class="container">
+      <ul class="breakcrumbs">
+        <!-- Home link -->
+        <li>
+          <a href="/" class="body-small link">
+            <%= _.dictionary('home') || 'Home' %>
           </a>
         </li>
+        <li class="d-flex align-items-center">
+          <i class="icon icon-arrow-right"></i>
+        </li>
+        
         <% breadcrumbs.forEach(({ name, link }, index) => { %>
           <% if (index < breadcrumbs.length - 1) { %>
+            <!-- Inner breadcrumb items -->
             <li
-              <% if (index === breadcrumbs.length - 2) { %>
-                class="breadcrumb-item"
-              <% } else { %>
-                class="breadcrumb-item d-none d-md-block"
+              <% if (index > 0 && index < breadcrumbs.length - 2) { %>
+                class="d-none d-md-block"
               <% } %>
             >
-              <a href="<%= link %>">
+              <a href="<%= link %>" class="body-small link">
                 <%= name %>
               </a>
             </li>
+            <li class="d-flex align-items-center<%= index > 0 && index < breadcrumbs.length - 2 ? ' d-none d-md-flex' : '' %>">
+              <i class="icon icon-arrow-right"></i>
+            </li>
           <% } else { %>
-            <li class="breadcrumb-item d-none d-md-block active" aria-current="page">
-              <%= name %>
+            <!-- Active (current) breadcrumb item -->
+            <li>
+              <span class="body-small"><%= name %></span>
             </li>
           <% } %>
         <% }) %>
-      </ol>
-    </nav>
+      </ul>
+    </div>
   </div>
+  <!-- /Breakcrumbs -->
 
+  <!-- SEO Structured Data -->
   <script type="application/ld+json"><%-
     JSON.stringify({
       '@context': 'https://schema.org',

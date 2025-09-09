@@ -19,7 +19,7 @@
   %>
 
   <section
-    class="products-carousel"
+    class="products-carousel <%= _.pageName == 'products'  ? 'containe' : 'container' %>"
     data-size="<%= opt.items.length %>"
     <% if (opt.collection) { %>
       data-collection-id="<%= opt.collection._id %>"
@@ -27,63 +27,59 @@
     data-title="<%= title %>"
   >
     <% if (!opt.headless) { %>
-      <h4 class="products-carousel__title">
-        <% if (opt.title || opt.collection) { %>
-          <% if (link) { %>
-            <a href="<%= link %>">
-              <%= title %>
-            </a>
-          <% } else { %>
-            <span><%= title %></span>
-          <% } %>
-        <% } else { %>
-          <a href="/search">
-            <%= title %>
-          </a>
-        <% } %>
-      </h4>
+      <div class="flat-title pb-8 wow fadeInUp" data-wow-delay="0s">
+        <%
+          const hasPromoKeyword = title.toLowerCase().includes('oferta') || 
+                                title.toLowerCase().includes('promoção') ||
+                                title.toLowerCase().includes('promoções');
+        %>
+        <h5 class="fw-semibold  <%= hasPromoKeyword ? ' text-primary flat-title-has-icon' : '' %>">
+            <% if (hasPromoKeyword) { %>
+                <span class="icon"><i class="icon-fire tf-ani-tada"></i></span>
+            <% } %>
+            <% if (opt.title || opt.collection) { %>
+              <% if (link) { %>
+                <a href="<%= link %>">
+                  <%= title %>
+                </a>
+              <% } else { %>
+                <span><%= title %></span>
+              <% } %>
+            <% } else { %>
+              <a href="/search">
+                <%= title %>
+              </a>
+            <% } %>
+        </h5>
+        <div class="box-btn-slide relative">
+            <div class="swiper-button-prev nav-swiper nav-prev-products">
+                <i class="icon-arrow-left-lg"></i>
+            </div>
+            <div class="swiper-button-next nav-swiper nav-next-products">
+                <i class="icon-arrow-right-lg"></i>
+            </div>
+        </div>
+    </div>
     <% } %>
 
-    <div
-      class="glide"
-      data-wait-mutation="true"
-      data-autoplay="<%= opt.autoplay %>"
-      data-per-view="4"
-      data-per-view-md="3"
-      data-per-view-sm="2"
-    >
-      <div class="glide__track" data-glide-el="track">
-        <ul class="glide__slides products-carousel__list">
+ 
+        <div class="swiper tf-sw-products" data-preview="5" data-tablet="4" data-mobile-sm="3" data-mobile="2"
+          data-space-lg="30" data-space-md="20" data-space="15" data-pagination="2" data-pagination-sm="3"
+          data-pagination-md="4" data-pagination-lg="5">
+          <div class="swiper-wrapper">
+              <!-- item 1 -->
+              
           <% for (let i = 0; i < opt.items.length; i++) { %>
             <% if (!opt.items[i].slug || !/^\w*p\w*\//.test(opt.items[i].slug)) continue %>
-            <li class="glide__slide products-carousel__item">
+            <div class="swiper-slide">
               <%- await include('@/sections/inc/product-item', {
-                _, opt: { item: opt.items[i] }
+                _, opt: { item: opt.items[i], type:'horizontal' }
               }) %>
-            </li>
+            </div>
           <% } %>
-        </ul>
-
-        <div
-          class="glide__arrows glide__arrows--outer"
-          data-glide-el="controls"
-        >
-          <button
-            class="btn glide__arrow glide__arrow--left"
-            data-glide-dir="<"
-            aria-label="<%= _.dictionary('previous') %>"
-          >
-            <i class="i-chevron-left"></i>
-          </button>
-          <button
-            class="btn glide__arrow glide__arrow--right"
-            data-glide-dir=">"
-            aria-label="<%= _.dictionary('next') %>"
-          >
-            <i class="i-chevron-right"></i>
-          </button>
         </div>
       </div>
+
     </div>
   </section>
 <% } %>

@@ -15,29 +15,39 @@ const barCols = []
 %>
 
 <% if (barCols.length) { %>
-  <section class="info-bar">
+  <!-- Iconbox -->
+  <div class="tf-sp-2 pt-0">
     <div class="container">
-      <div class="info-bar__nav row">
-        <% barCols.forEach(({ link, icon, title, text }) => { %>
-          <div class="col-auto col-sm-6 col-lg">
-            <a class="info-bar__item" href="<%= link || 'javascript:;' %>">
-              <span class="rounded-icon">
-                <i class="i-<%= icon %>"></i>
-              </span>
-              <div class="ml-2 ml-md-3">
-                <% if(title) { %>
-                  <div class="info-bar__title">
-                    <strong><%= title %></strong>
-                  </div>
+      <div class="swiper tf-sw-iconbox" data-preview="5" data-tablet="3" data-mobile-sm="2" data-mobile="1"
+           data-space-lg="20" data-space-md="20" data-space="15">
+        <div class="swiper-wrapper">
+          <% barCols.forEach(({ link, icon, title, text }, index) => { %>
+            <div class="swiper-slide">
+              <% if (link && link !== 'javascript:;') { %>
+                  <a href="<%= link %>" class="d-block">
                 <% } %>
-                <div class="info-bar__text">
-                  <%= text %>
+              <div class="tf-icon-box wow fadeInLeft" data-wow-delay="<%= index * 0.1 %>s">
+                
+                <div class="icon-box">
+                  <i class="icon i-<%= icon %>"></i>
                 </div>
+                <div class="content">
+                  <% if(title) { %>
+                    <p class="m-0 body-text fw-semibold"><%= title %></p>
+                  <% } %>
+                  <p class="m-0 body-text-3"><%= text %></p>
+                </div>
+                
               </div>
-            </a>
-          </div>
-        <% }) %>
+              <% if (link && link !== 'javascript:;') { %>
+                  </a>
+                <% } %>
+            </div>
+          <% }) %>
+        </div>
+        <div class="sw-pagination-iconbox sw-dot-default justify-content-center"></div>
       </div>
     </div>
-  </section>
+  </div>
+  <!-- /Iconbox -->
 <% } %>

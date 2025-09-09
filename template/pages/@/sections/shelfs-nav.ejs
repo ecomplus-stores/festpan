@@ -56,36 +56,59 @@ if (opt.collection_ids) {
     .filter((result) => Boolean(result && result.items.length))
 }
 %>
-
 <% if (shelfTabs && shelfTabs.length) { %>
-  <div class="shelfs-nav my-lg-5">
-    <% if (opt.shelfs_title) { %>
-      <h3 class="shelfs-nav__title">
-        <%= opt.shelfs_title  %>
-      </h3>
-    <% } %>
-    <ul class="shelfs-nav__tabs">
-      <% for (let i = 0; i < shelfTabs.length; i++) { %>
-        <li class="shelfs-nav__tab<%= i === 0 ? ' active' : '' %>" data-tab="<%= i %>">
-          <h4><%= shelfTabs[i].title %></h4>
-        </li>
+  <div class="container">
+    <div class="tf-grid-product">
+      <% for (let i = 0; i < shelfTabs.length; i++) { 
+        const shelf = shelfTabs[i];
+        const swiperId = `swiper-wrapper-${i}`;
+      %>
+        <div class="tf-grid-product-item box-btn-slide-item collection-shelf" data-shelf="<%= i %>">
+          <div class="flat-title wow fadeInUp animated" data-wow-delay="0s" style="visibility: visible; animation-delay: 0s; animation-name: fadeInUp;">
+            <h5 class="fw-semibold"><%= shelf.title %></h5>
+            <div class="box-btn-slide relative">
+              <div class="swiper-button-prev nav-swiper nav-prev-products swiper-button-disabled" tabindex="-1" role="button" aria-label="Previous slide" aria-controls="<%= swiperId %>" aria-disabled="true">
+                <i class="icon-arrow-left-lg"></i>
+              </div>
+              <div class="swiper-button-next nav-swiper nav-next-products" tabindex="0" role="button" aria-label="Next slide" aria-controls="<%= swiperId %>" aria-disabled="false">
+                <i class="icon-arrow-right-lg"></i>
+              </div>
+            </div>
+          </div>
+          <div class="swiper tf-sw-products swiper-initialized swiper-horizontal swiper-backface-hidden"
+            data-preview="1" data-tablet="1" data-mobile-sm="1" data-mobile="1"
+            data-space-lg="20" data-space-md="20" data-space="20"
+            data-pagination="1" data-pagination-sm="1" data-pagination-md="1" data-pagination-lg="1">
+            <div class="swiper-wrapper" id="<%= swiperId %>" aria-live="polite">
+              <% 
+                const items = shelf.items;
+                for (let j = 0; j < items.length; j += 3) { 
+              %>
+                <div class="swiper-slide product-item-horizontal <%= j === 0 ? ' swiper-slide-active' : ' swiper-slide-next' %>" role="group" aria-label="<%= (j/3)+1 %> / <%= Math.ceil(items.length/3) %>" style="width: 350px; margin-right: 20px;">
+                  <ul class="product-list-wrap wow fadeInUp animated" data-wow-delay="0s" style="visibility: visible; animation-delay: 0s; animation-name: fadeInUp;">
+                    <% for (let k = 0; k < 3; k++) { 
+                      const idx = j + k;
+                      if (!items[idx]) continue;
+                    %>
+                      <li class="product-item-horizontal-inner">
+                        <%- await include('@/sections/inc/product-item', {
+                          _, opt: { item: items[idx] }
+                        }) %>
+                      </li>
+                    <% } %>
+                  </ul>
+                </div>
+              <% } %>
+            </div>
+            <div class="d-flex d-lg-none sw-dot-default sw-pagination-products justify-content-center swiper-pagination-clickable swiper-pagination-bullets swiper-pagination-horizontal">
+              <% for (let s = 0; s < Math.ceil(items.length/3); s++) { %>
+                <span class="swiper-pagination-bullet<%= s === 0 ? ' swiper-pagination-bullet-active' : '' %>" tabindex="0" role="button" aria-label="Go to slide <%= s+1 %>" <%= s === 0 ? 'aria-current="true"' : '' %>></span>
+              <% } %>
+            </div>
+            <span class="swiper-notification" aria-live="assertive" aria-atomic="true"></span>
+          </div>
+        </div>
       <% } %>
-    </ul>
-    <% for (let i = 0; i < shelfTabs.length; i++) { %>
-      <div class="collection-shelf" data-shelf="<%= i %>"
-        style="display: <%= i === 0 ? 'block' : 'none' %>">
-        <%- await include('@/sections/inc/products-carousel', {
-          _, opt: {
-            items: shelfTabs[i].items,
-            collection: null,
-            title: '',
-            link: '',
-            shuffle,
-            headless: true,
-            autoplay
-          }
-        }) %>
-      </div>
-    <% } %>
+    </div>
   </div>
 <% } %>

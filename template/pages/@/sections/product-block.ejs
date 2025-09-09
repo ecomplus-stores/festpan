@@ -6,189 +6,119 @@ if (stamps && Array.isArray(stamps.stamps_list) && stamps.stamps_list.length) {
 }
 %>
 
-<div id="product-block" class="product-block my-4 mb-lg-5">
-  <div class="container">
-    <section
-      id="product"
-      class="product"
-      data-to-render="true"
-      data-product-id="<%= _.state._id %>"
-      data-sku="<%= _.state.sku %>"
-    >
-      <div id="product-dock">
-        <!--
-          `TheProduct` should be rendered (hydrated) here:
-          https://developers.e-com.plus/storefront/@ecomplus/storefront-components/docs/TheProduct.html
-        -->
-      </div>
-
-      <div class="row">
-        <div class="col-12 col-md-6 mb-4">
-          <!-- Picture(s) gallery will be inserted dynamically within `TheProduct` -->
-          <% if (_.state.pictures) { %>
-            <% const imgObj = _.ecomUtils.img(_.state, null, 'big') %>
-            <% if (imgObj) { %>
-              <% const [width, height] = (imgObj.size || '').split('x').map(px => parseInt(px, 10)) %>
-              <div id="product-gallery">
-                <div data-slot="stamps">
-                  <% if (Array.isArray(stampsList) && stampsList.length) { %>
-                    <div class="product__stamps">
-                      <% for (stamp of stampsList) { 
-                        if (stamp.img && (!stamp.skus || !stamp.skus.length || stamp.skus.includes(_.state.sku))) {
-                          %>
-                          <span class="product__stamps-<%= stamp.id && stamp.id.toLowerCase().replace(/\s/g, '-') %>">
-                            <img src="<%= stamp.img %>" alt="<%= stamp.id %>">
-                          </span>
-                        <% } %>
-                      <% } %>
-                    </div>
-                  <% } %>
-                </div>
-                <div class="product__picture">
-                  <picture
-                    <% if (width && height) { %>
-                      class="picture"
-                      style="<%= `--aspect-ratio-pc: ${Math.round(height * 100 * 10000 / width) / 10000};` +
-                        `--aspect-ratio: ${(width / height).toFixed(3)};` +
-                        `--max-height: ${height}px` %>"
-                    <% } %>
-                  >
-                    <source
-                      srcset="<%= imgObj.url %>"
-                      type="image/webp"
-                    >
-                    <img
-                      src="<%= imgObj.url.replace(/\.webp$/, '') %>"
-                      alt="<%= imgObj.alt || _.state.name %>"
-                      <% if (imgObj.url.startsWith('https://ecoms1.com/')) { %>
-                        crossorigin="anonymous"
-                      <% } %>
-                      <% if (height) { %>
-                        width="<%= width %>"
-                        height="<%= height %>"
-                      <% } %>
-                    >
-                  </picture>
-                </div>
-              </div>
-            <% } %>
-          <% } %>
-          <!-- Custom additional code on bottom of images gallery -->
+<section>
+  <div id="product-block" class="tf-main-product section-image-zoom">
+    <div class="container">
+      <section
+        id="product"
+        class="product bg-white"
+        data-to-render="true"
+        data-product-id="<%= _.state._id %>"
+        data-sku="<%= _.state.sku %>"
+      >
+        <div id="product-dock">
+          <!--
+            `TheProduct` should be rendered (hydrated) here:
+            https://developers.e-com.plus/storefront/@ecomplus/storefront-components/docs/TheProduct.html
+          -->
         </div>
 
-        <div class="col">
-          <h1 class="product__name">
-            <%= _.ecomUtils.name(_.state) %>
-          </h1>
-          <p class="product__sku">
-            COD: <%= _.state.sku %>
-          </p>
-
-          <div id="product-actions">
-            <div id="product-loading">
-              <% if (_.state.available && _.state.visible && _.ecomUtils.inStock(_.state)) { %>
-                <div class="product__price prices prices--big">
-                  <strong class="prices__value">
-                    <%= _.ecomUtils.formatMoney(_.ecomUtils.price(_.state)) %>
-                  </strong>
-                </div>
-              <% } %>
-
-              <% if (_.state.variations && _.state.variations.length) { %>
-                <div data-slot="variations-info">
-                  <!-- Custom info for products with variations, such as sizes table link -->
-                  <% if (opt.size_guide && opt.size_guide.image) { %>
-                    <% const sizeGuideTitle = opt.size_guide.title || _.dictionary('sizeGuide') %>
-                    <div class="mb-3">
-                      <a 
-                        href="javascript:;"
-                        data-toggle="modal"
-                        data-target="#modal-size-guide"
-                      >
-                        <i class="i-ruler mr-1"></i> <%= sizeGuideTitle %>
-                      </a>
-                    </div>
-                    <div 
-                      class="modal modal-center fade" 
-                      id="modal-size-guide" 
-                      tabindex="-1" 
-                      style="display: none;" 
-                      aria-hidden="true"
-                    >
-                      <div class="modal-dialog">
-                        <div class="modal-content">
-                          <div class="modal-header d-flex align-items-center justify-content-between">
-                            <h5 class="modal-title">
-                              <%= sizeGuideTitle %>
-                            </h5>
-                            <button type="button" class="close" data-dismiss="modal">
-                              <span aria-hidden="true">&times;</span>
-                            </button>
-                          </div>
-                          <div class="modal-body">
-                            <img 
-                              class="img-fluid" 
-                              src="<%= opt.size_guide.image %>" 
-                              alt="<%= sizeGuideTitle %>"
-                            >
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                  <% } %>
-                </div>
-              <% } %>
-
-              <div class="spinner-border m-4" role="status">
-                <span class="sr-only">Loading...</span>
-              </div>
-
-              <div class="product__buy">
-                <button
-                  type="button"
-                  class="btn btn-lg btn-primary"
-                  onclick="ecomCart.addProduct(storefront.context.body)"
-                  <% if (_.state.variations && _.state.variations.length) { %>
-                    disabled
-                  <% } %>
-                >
-                  <div data-slot="buy-button-content">
-                    <i class="i-shopping-bag mr-1"></i>
-                    <% if (_.state.kit_composition && _.state.kit_composition.length) { %>
-                      <%= _.dictionary('buyKit') %>
-                    <% } else { %> 
-                      <% let buyText %>
-                      <% if (Array.isArray(_.widgets)) { %>
-                        <% const productWidget = _.widgets.find(item => item.pkg === '@ecomplus/widget-product') %>
-                        <% buyText = productWidget && productWidget.options.buyText %>
-                      <% } %>
-                      <%= buyText || _.dictionary('buy') %>
-                    <% } %>
-                  </div>
-                </button>
-              </div>
+        <div class="row">
+          <!-- Left Column - Product Images -->
+          <div class="col-md-6">
+            <div class="tf-product-media-wrap bg-white thumbs-default" id="product-gallery">
+              
             </div>
           </div>
 
-          <% if (_.state.short_description) { %>
-            <p class="product__info mt-3 lead">
-              <%= _.state.short_description %>
-            </p>
-          <% } %>
+          <!-- Right Column - Product Info -->
+          <div class="col-md-6">
+            <div class="tf-product-info-wrap bg-white position-relative">
+              <div class="tf-zoom-main"></div>
+              <div class="tf-product-info-list style-2 justify-content-xl-end">
+                <div class="tf-product-info-content">
+                  <!-- Product Header -->
+                  <div class="infor-heading">
+                    <% if (_.state.categories && _.state.categories.length) { %>
+                      <p class="caption">
+                        <%= _.dictionary('categories') || 'Categories' %>:
+                        <a href="/<%= _.state.categories[0].slug %>" class="link text-secondary">
+                          <%= _.state.categories[0].name %>
+                        </a>
+                      </p>
+                    <% } %> 
+
+                    <h5 class="product-info-name fw-semibold">
+                      <%= _.ecomUtils.name(_.state) %>
+                    </h5>
+                    
+                    <ul class="product-info-rate-wrap m-0">
+                      
+                      
+                      <!-- Sales count -->
+                      <% if (_.state.sales) { %>
+                        <li>
+                          <p class="caption text-main-2 m-0"><%= _.dictionary('sold') || 'Vendidos' %>: <%= _.state.sales %></p>
+                        </li>
+                      <% } %>
+                      
+                      <!-- SKU -->
+                      <li>
+                        <p class="caption text-main-2 m-0">
+                          <%= _.dictionary('sku') || 'SKU' %>: <%= _.state.sku %>
+                        </p>
+                      </li>
+                      <li>
+                        <p class="caption text-main-2 m-0">
+                          Estoque: <%= _.state.quantity > 0 ? _.state.quantity + ' unidades' : 'Indisponível' %> 
+                        </p>
+                      </li>
+                    </ul>
+                  </div>
+
+                  <!-- Pricing Info -->
+                  <div class="infor-center" id="product-actions">
+                                      
+                  </div>
+
+                  
+                
+
+                  <!-- Product Description -->
+                  <% if (_.state.short_description) { %>
+                    <div class="infor-bottom">
+                      <h6 class="fw-semibold">Sobre o produto</h6>
+                      <ul class="product-about-list m-0">
+                        <li>
+                          <p class="body-text-3 m-0">
+                            <%= _.state.short_description %>
+                          </p>
+                        </li>
+                      </ul>
+                    </div>
+                  <% } %>
+                  
+                  <div class="shipping"></div>
+                  
+                </div>
+              </div>
+            </div>
+          </div>
         </div>
-      </div>
+
+        <%- await include('@/helpers/widgets-append', {
+          _, opt: {}, field: 'productSlots'
+        }) %>
+      </section>
 
       <%- await include('@/helpers/widgets-append', {
-        _, opt: {}, field: 'productSlots'
+        _, opt: {}, field: 'productBlockAppend'
       }) %>
-    </section>
-
-    <%- await include('@/helpers/widgets-append', {
-      _, opt: {}, field: 'productBlockAppend'
-    }) %>
+    </div>
   </div>
-</div>
+</section>
 
+<!-- Product Schema.org JSON-LD for SEO -->
 <%
 const productJsonLd = {
   '@context': 'http://schema.org',
@@ -212,19 +142,23 @@ const productJsonLd = {
     }
   }
 }
+
 if (_.state.brands && _.state.brands[0]) {
   productJsonLd.brand = {
     '@type': 'Brand',
     name: _.state.brands[0].name
   }
 }
+
 if (_.state.pictures && _.state.pictures.length) {
   productJsonLd.image = _.ecomUtils.img(_.state, null, 'zoom').url
     .replace(/(\w+\.)?(ecoms\d)\.com/i, '$2-nyc3.nyc3.cdn.digitaloceanspaces.com')
 }
+
 if (_.state.mpn && _.state.mpn[0]) {
   productJsonLd.mpn = _.state.mpn[0]
 }
+
 if (_.state.gtin && _.state.gtin[0]) {
   productJsonLd.gtin = _.state.gtin[0]
 }
@@ -232,7 +166,11 @@ if (_.state.gtin && _.state.gtin[0]) {
 <script id="product-block-jsonld" type="application/ld+json"><%-
   JSON.stringify(productJsonLd)
 %></script>
-<script type="text/javascript">
+
+<!-- Initialize Product Gallery -->
+<script>
+  document.addEventListener('DOMContentLoaded', function() {
+  // Update JSON-LD for variations
   setTimeout(() => {
     const urlParams = new URLSearchParams(window.location.search);
     const variationId = urlParams.get('variation_id');
@@ -250,4 +188,115 @@ if (_.state.gtin && _.state.gtin[0]) {
       }
     }
   }, 50);
+});
+</script>
+
+
+<section class="tf-sp-4">
+  <div class="container">
+    <div class="flat-animate-tab flat-title-tab-product-des r-8" id="product-description-tabs">
+      <div class="flat-title-tab text-center">
+        <ul class="menu-tab-line m-0 p-0 bg-3 px-md-4 py-md-4 r-8 border-gray" role="tablist" id="product-tabs-nav" style="border-radius:8px 8px 0 0; border-bottom:0">
+          <!-- Tabs serão injetados aqui via JavaScript -->
+        </ul>
+      </div>
+      
+      <div class="tab-content border-gray px-md-4" id="product-tabs-content">
+        <!-- Conteúdo das abas será injetado aqui via JavaScript -->
+      </div>
+    </div>
+  </div>
+</section>
+
+<script>
+    document.addEventListener("DOMContentLoaded", function() {
+      // Variável para armazenar o HTML original da descrição
+      const originalDescription = $('#description').html();
+      
+      if (originalDescription) {
+        // Função para transformar o conteúdo em abas
+        function convertToTabs() {
+          // Limpar as áreas onde inseriremos os novos elementos
+          $('#product-tabs-nav').empty();
+          $('#product-tabs-content').empty();
+          
+          // Encontrar todos os cards no HTML original
+          const cards = $(originalDescription).filter('.card');
+          
+          // Para cada card, criar uma aba
+          cards.each(function(index) {
+            const cardHeader = $(this).find('.card-header');
+            const cardId = cardHeader.attr('href');
+            const tabId = cardId.replace('#', '');
+            const tabTitle = cardHeader.find('span').text();
+            const tabContent = $(this).find('.card-body').html();
+            
+            // Criar aba no nav
+            const isActive = index === 0 ? ' active' : '';
+            const tabNav = `<li class="nav-tab-item" role="presentation">
+              <a href="#tab-${tabId}" class="tab-link product-title fw-semibold${isActive}" data-bs-toggle="tab">${tabTitle.toLowerCase()}</a>
+            </li>`;
+            
+            // Criar conteúdo da aba
+            const tabPane = `<div class="tab-pane${isActive ? ' active show' : ''}" id="tab-${tabId}" role="tabpanel">
+              <div class="tab-main tab-des px-0 pb-0">
+                ${tabContent}
+              </div>
+            </div>`;
+            
+            // Adicionar elementos ao DOM
+            $('#product-tabs-nav').append(tabNav);
+            $('#product-tabs-content').append(tabPane);
+          });
+          
+          // Se não houver cards, exibir o conteúdo completo
+          if (cards.length === 0) {
+            const tabNav = `<li class="nav-tab-item" role="presentation">
+              <a href="#tab-description" class="tab-link product-title fw-semibold active" data-bs-toggle="tab">Descrição</a>
+            </li>`;
+            
+            const tabPane = `<div class="tab-pane active show" id="tab-description" role="tabpanel">
+              <div class="tab-main tab-des">
+                ${originalDescription}
+              </div>
+            </div>`;
+            
+            $('#product-tabs-nav').append(tabNav);
+            $('#product-tabs-content').append(tabPane);
+          }
+        }
+        
+        // Iniciar a conversão
+        convertToTabs();
+        
+        // Adicionar funcionalidade de mudança de abas
+        $(document).on('click', '.menu-tab-line .tab-link', function(e) {
+          e.preventDefault();
+          const target = $(this).attr('href');
+          
+          // Remover classes active das outras abas
+          $('.menu-tab-line .tab-link').removeClass('active');
+          $('.tab-pane').removeClass('active show');
+          
+          // Adicionar classe active às abas selecionadas
+          $(this).addClass('active');
+          $(target).addClass('active show');
+        });
+      }
+   });
+</script>
+
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+  
+  setTimeout(() => {
+    $('.shipping-calculator').appendTo('.shipping')
+  }, 100);
+  setTimeout(() => {
+    $('.shipping-calculator').appendTo('.shipping')
+  }, 500);
+  setTimeout(() => {
+    $('.shipping-calculator').appendTo('.shipping')
+  }, 1000);
+});
 </script>

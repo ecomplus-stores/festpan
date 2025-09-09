@@ -1,14 +1,201 @@
 <% if (Array.isArray(opt.banners) && opt.banners.length) { %>
-  <% const colSize = Math.ceil(12 / opt.banners.length) %>
-  <div class="banners-grid my-3 my-md-4 my-lg-5">
-    <div class="container">
-      <div class="row">
-        <% for (let i = 0; i < opt.banners.length; i++) { %>
-          <div class="col-12 col-lg-<%= colSize %> mb-3 mb-lg-0">
-            <%- await include('@/sections/inc/banner', { _, opt: opt.banners[i] }) %>
-          </div>
-        <% } %>
-      </div>
+  <% const colSize = Math.ceil(12 / opt.banners.length) 
+  
+   let preview = 4;
+    if (opt.banners.length === 2) preview = 2;
+    else if (opt.banners.length < 4) preview = opt.banners.length;
+
+    console.log(opt)
+    if(opt.grid_type == "Mosaico"){  
+      const mosaicBanners = opt.banners.slice(0, 3);
+%>
+    <div class="tf-sp-1 banners-grid">
+        <div class="container">
+            <div class="slide-wrap-2 flex-xl-nowrap m-0">
+                <% if (mosaicBanners[0]) { %>
+                    <div class="banner-slide-product overflow-hidden flex-md-nowrap hover-img has-bg-img p-0" 
+                         >
+                        <a href="<%= mosaicBanners[0].link || '#' %>" class="">
+                              <picture class="img-fluid">
+                                <% if (mosaicBanners[0].mobile_img) { %>
+                                    <source
+                                        srcset="<%= _.assetsPrefix || '' %><%= mosaicBanners[0].mobile_img %>"
+                                        media="(max-width: 767px)"
+                                    >
+                                <% } %>
+                                <img
+                                    src="<%= _.assetsPrefix || '' %><%= mosaicBanners[0].img %>"
+                                    data-src="<%= _.assetsPrefix || '' %><%= mosaicBanners[0].img %>"
+                                    alt="<%= mosaicBanners[0].alt || mosaicBanners[0].title || '' %>"
+                                    class="lazyload"
+                                >
+                            </picture>
+                        </a>
+                       
+                    </div>
+                <% } %>
+                
+                <div class="wrap flex-xl-column">
+                    <% if (mosaicBanners[1]) { %>
+                        <div class="cls-product  overflow-hidden has-bg-img hover-img p-0">
+                            <a href="<%= mosaicBanners[1].link || '#' %>" class="">
+                                <picture class="img-fluid">
+                                    <% if (mosaicBanners[1].mobile_img) { %>
+                                        <source
+                                            srcset="<%= _.assetsPrefix || '' %><%= mosaicBanners[1].mobile_img %>"
+                                            media="(max-width: 767px)"
+                                        >
+                                    <% } %>
+                                    <img
+                                        src="<%= _.assetsPrefix || '' %><%= mosaicBanners[1].img %>"
+                                        data-src="<%= _.assetsPrefix || '' %><%= mosaicBanners[1].img %>"
+                                        alt="<%= mosaicBanners[1].alt || mosaicBanners[1].title || '' %>"
+                                        class="lazyload"
+                                    >
+                                </picture>
+                            </a>
+                            
+                        </div>
+                    <% } %>
+                    
+                    <% if (mosaicBanners[2]) { %>
+                        <div class="cls-product  overflow-hidden style-2 has-bg-img hover-img  p-0">
+                            <a href="<%= mosaicBanners[2].link || '#' %>" class="">
+                                <picture class="img-fluid">
+                                    <% if (mosaicBanners[2].mobile_img) { %>
+                                        <source
+                                            srcset="<%= _.assetsPrefix || '' %><%= mosaicBanners[2].mobile_img %>"
+                                            media="(max-width: 767px)"
+                                        >
+                                    <% } %>
+                                    <img
+                                        src="<%= _.assetsPrefix || '' %><%= mosaicBanners[2].img %>"
+                                        data-src="<%= _.assetsPrefix || '' %><%= mosaicBanners[2].img %>"
+                                        alt="<%= mosaicBanners[2].alt || mosaicBanners[2].title || '' %>"
+                                        class="lazyload"
+                                    >
+                                </picture>
+                            </a>
+                           
+                        </div>
+                    <% } %>
+                </div>
+            </div>
+        </div>
     </div>
-  </div>
-<% } %>
+<%
+
+    }
+    else if(opt.grid_type == "Grupo") {
+        %>
+        <div class="themesFlat">
+            <div class="container">
+                <div class="swiper tf-sw-products" data-preview="3" data-tablet="2" data-mobile-sm="2" data-mobile="1"
+                    data-space-lg="16" data-space-md="15" data-space="15" data-pagination="1" data-pagination-sm="2"
+                    data-pagination-md="3" data-pagination-lg="3">
+                    <div class="swiper-wrapper">
+                        <% opt.banners.forEach((banner, idx) => { %>
+                            <div class="swiper-slide">
+                                <a href="<%= banner.link || '#' %>" class="image wow fadeInLeft overflow-hidden radius-8" data-wow-delay="0.<%= idx %>s">
+                                    <img src="<%= _.assetsPrefix || '' %><%= banner.img %>" 
+                                         data-src="<%= _.assetsPrefix || '' %><%= banner.img %>"
+                                         alt="<%= banner.alt || banner.title || 'product' %>" 
+                                         class="lazyload">
+                                </a>
+                            </div>
+                        <% }) %>
+                    </div>
+                    <div class="d-flex d-xl-none sw-dot-default sw-pagination-products justify-content-center"></div>
+                </div>
+            </div>
+        </div>
+        <%
+    }
+    else if(opt.banners.find(el => el.bn_title != undefined)){
+%>
+<!-- Top Categories Section -->
+<section class="tf-sp-2 pt-0 wow fadeInUp animated" data-wow-delay="0s">
+    <div class="container">
+      
+        <div class="flat-title mb-20 pb-0 border-0">
+          <% if (opt.title) {%>  
+          <h5 class="fw-semibold">
+                <%= opt.title %>
+            </h5>
+          <% } %>
+            <div class="box-btn-slide relative">
+                <div class="swiper-button-prev nav-swiper nav-prev-products">
+                    <i class="icon-arrow-left-lg"></i>
+                </div>
+                <div class="swiper-button-next nav-swiper nav-next-products">
+                    <i class="icon-arrow-right-lg"></i>
+                </div>
+            </div>
+        </div>
+      
+        
+        <!-- Swiper Grid -->
+        <div class="swiper tf-sw-products" data-preview="4" data-tablet="3" data-mobile-sm="2" data-mobile="1"
+                    data-space-lg="30" data-space-md="20" data-space="15" data-pagination="1" data-pagination-sm="2"
+                    data-pagination-md="3" data-pagination-lg="4" data-grid="2">
+            <div class="swiper-wrapper">
+                <% opt.banners.forEach((banner, index) => { %>
+                    <div class="swiper-slide">
+                        <div class="wg-cls hover-img type-abs overflow-hidden radius-8">
+                            <% if (banner.img) { %>
+                                <a href="<%= banner.link || '#' %>" class="img-style d-block">
+                                    <img src="<%= _.assetsPrefix || '' %><%= banner.img %>" 
+                                         alt="<%= banner.alt || banner.bn_title || '' %>"
+                                         class="lazyload">
+                                </a>
+                            <% } else { %>
+                                <a href="<%= banner.link || '#' %>" class="img-style d-block">
+                                    <div class="placeholder-image d-flex align-items-center justify-content-center bg-light" style="height: 200px;">
+                                        <i class="icon-image fs-3 text-muted"></i>
+                                    </div>
+                                </a>
+                            <% } %>
+                            <div class="content">
+                                <h6 class="fw-normal">
+                                    <a href="<%= banner.link || '#' %>" class="link">
+                                        <%= banner.bn_title || banner.title  %>
+                                    </a>
+                                </h6>
+                                <% if (banner.subtitle) { %>
+                                    <p class="body-text-3 text-muted">
+                                        <%= banner.subtitle %>
+                                    </p>
+                                <% } %>
+                            </div>
+                        </div>
+                    </div>
+                <% }) %>
+            </div>
+            
+            <!-- Pagination -->
+            <div class="sw-dot-default sw-pagination-categories-grid justify-content-center"></div>
+        </div>
+    </div>
+</section>
+<%
+    }else{
+      console.log('No title found for banners')
+    %>
+   <section class="">
+      <div class="container">
+        <div class="swiper tf-sw-categories" data-preview="<%= preview %>"  data-tablet="3" data-mobile-sm="2"
+          data-mobile="1" data-space-lg="14" data-space-md="15" data-space="15" data-pagination="1"
+          data-pagination-sm="2" data-pagination-md="3" data-pagination-lg="4">
+          <div class="swiper-wrapper">
+              <% for (let i = 0; i < opt.banners.length; i++) { %>
+                <div class="swiper-slide radius-8 overflow-hidden">
+              
+                  <%- await include('@/sections/inc/banner', { _, opt: opt.banners[i] }) %>
+                </div>
+              <% } %>
+            </div>
+          <div class="sw-dot-default sw-pagination-categories justify-content-center"></div>
+        </div>
+      </div>
+    </section>
+<% }} %>

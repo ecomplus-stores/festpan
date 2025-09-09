@@ -1,0 +1,169 @@
+
+<div>
+ 
+
+  <div
+    class="card-product"
+    :class="{
+      'product-card--inactive': body._id && !isActive,
+      'product-card--small': isSmall
+    }"
+    @mouseover="isHovered = true"
+    :data-product-id="body._id"
+    :data-sku="body.sku"
+    :data-block-type="'card'"
+    :data-grid="grid"
+
+  >
+
+    <!-- <transition :enter-active-class="fadeInLeft"> -->
+      <section v-if="!isLoading">
+        <div class="card-product-wrapper">
+          <a-link
+            class="product-img"
+            :href="`/${body.slug}`"
+            :title="name"
+          >
+          
+            <template v-if="body.pictures && body.pictures.length">
+                <a-picture
+                  class="product-card__picture"
+                  :class="{
+                    'product-card--inactive': body._id && !isActive,
+                    'img-hover lazyload': index > 1,
+                    'img-hover lazyload': index == 1
+                  }"
+                  v-for="(picture, index) in body.pictures.slice(0, 2)"
+
+                  :key="index"
+                  :src="picture"
+                  :can-calc-height="false"
+                  :container-breakpoints="{
+                    zoom:null,
+                    big: 900,
+                    normal: 400
+                  }"
+                />
+            </template>
+            <template v-else>
+              <img class="img-product lazyload" src="images/placeholder.jpg" data-src="images/placeholder.jpg" alt="image-product">
+            </template>
+          </a-link>
+          
+          <!-- Discount tag -->
+          <div v-if="isActive && discount > 0" class="box-sale-wrap">
+            <p class="body-md-2  m-0 ">-{{ discount }}%</p>
+          </div>
+          
+          <!-- Action buttons -->
+          <ul class="list-product-btn">
+            <li>
+              <a href="javascript:void(0);" @click="buy" class="box-icon add-to-cart btn-icon-action hover-tooltip tooltip-left">
+                <span class="icon icon-cart2"></span>
+                <span class="tooltip">{{ strBuy }}</span>
+              </a>
+            </li>
+            <li class="wishlist">
+              <a  :href="isLogged ? null : accountUrl" @click="toggleFavorite" class="box-icon btn-icon-action hover-tooltip tooltip-left">
+                <span :class="['icon', 'icon-heart2', isFavorite ? 'active' : '']"></span>
+                <span class="tooltip">{{ isFavorite ? 'Remover dos Favoritos' : 'Adicionar aos Favoritos' }}</span>
+              </a>
+            </li>
+            <li>
+              <a @click="quickView()" class="box-icon quickview btn-icon-action hover-tooltip tooltip-left">
+                <span class="icon icon-view"></span>
+                <span class="tooltip">Quick View</span>
+              </a>
+            </li>
+          </ul>
+        </div>
+        
+        <div class="card-product-info mt-3">
+          <div class="box-title">
+            <div class="d-flex flex-column">
+              <p v-if="body.categories && body.categories.length" class="caption text-main-2 font-2 m-0">{{ body.categories[0].name }}</p>
+              <a-link              
+                :href="`/${body.slug}`"
+                :title="name"
+              >
+              <component
+                :is="headingTag"
+                class="name-product body-md-2 m-0 fw-semibold text-secondary link"
+              >
+                {{ name }}
+              </component>
+              </a-link>
+            </div>
+            
+            <div class="price-wrap fw-medium">
+              <slot name="prices">
+                <a-prices
+                  class="d-flex align-items-center"
+                  :product="body"
+                  :installments-option="installmentsOption"
+                  :discount-option="discountOption"
+                />
+              </slot>
+            </div>
+          </div>
+          
+          <slot name="rating">
+            <div
+              v-once
+              class="product-card__rating"
+              :data-sku="body.sku"
+              v-html="ratingHtml"
+            ></div>
+          </slot>
+
+          <!-- Product availability states -->
+          <slot name="unavailable" v-if="!body.available || !body.visible">
+            <p class="badge badge-warning mt-auto">{{ i19unavailable }}</p>
+          </slot>
+          <slot name="out-of-stock" v-else-if="!isInStock">
+            <p class="badge badge-dark mt-auto">{{ i19outOfStock }}</p>
+          </slot>
+          <slot name="without-price" v-else-if="isWithoutPrice">
+            <p class="badge badge-info mt-auto">{{ i19uponRequest }}</p>
+          </slot>
+        </div>
+
+        <slot name="footer">
+          <div v-if="footerHtml" v-html="footerHtml"></div>
+        </slot>
+      </section>
+    <!-- </transition> -->
+
+    <template v-if="isLoading">
+      <slot/>
+      <div v-if="error" class="alert alert-warning small" role="alert">
+        {{ error }}
+      </div>
+    </template>
+  
+    <div v-if="body.specs && body.specs.find( el => el.grid == 'promocao')" class="box-infor-detail">
+      <div class="product-progress-sale">
+        <div class="progress-sold progress" role="progressbar" aria-valuemin="0" aria-valuemax="100">
+          <div
+            class="progress-bar bg-primary"
+            :style="{ width: (body.quantity && body.sales && (body.quantity + body.sales) > 0) 
+            ? Math.min(100, Math.max(0, (body.sales / (body.quantity + body.sales)) * 100)) + '%'
+            : '0%' }"
+          ></div>
+        </div>
+        <div class="box-quantity d-flex justify-content-between">
+          <p class="text-avaiable caption">
+            Vendidos:
+            <span class="fw-bold">{{ body.sales }}</span>
+          </p>
+          <p class="text-avaiable caption">
+            Disponíveis:
+            <span class="fw-bold">{{ body.quantity }}</span>
+          </p>
+        </div>
+      </div>
+    </div>
+
+    <div ref="quickview"></div>
+  </div>
+</div>

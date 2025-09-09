@@ -2,7 +2,7 @@
 const title = opt.title || _.state.title || _.state.name
 if (title) {
   %>
-  <div class="page-title container mt-4 mb-4 mb-lg-5">
+  <div class="page-title container mt-4 mb-4 mb-lg-5 wrap">
     <div class="page-title__head">
       <% if (_.state.logo && _.state.logo.url) { %>
         <img
@@ -11,7 +11,7 @@ if (title) {
           alt="<%= _.state.logo.alt %>"
         >
       <% } %>
-      <h1 class="my-0">
+      <h1 class="my-0 h4 fw-semibold">
         <%= title %>
       </h1>
     </div>
@@ -19,7 +19,7 @@ if (title) {
     const description = opt.description || _.state.short_description
     if (description) {
       %>
-      <div class="page-title__short-description lead">
+      <div class="titie-sidebar-2 text-main-2">
         <%= description %>
       </div>
     <% } %>

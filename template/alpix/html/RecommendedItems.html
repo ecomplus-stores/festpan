@@ -1,0 +1,163 @@
+<section class="recommended-items">
+  <transition enter-active-class="animated fadeIn">
+    
+    <div v-if="listType === 'favorites'">
+      <div v-if="items.length == 0" class="recommended-items__empty">
+        
+        <slot name="empty">
+          <p class="lead">Opss... parece que não há itens salvos como favoritos.</p>
+        </slot>
+      </div>
+      
+      <div v-else class="">
+        
+        <div class="container px-0">
+          <div class="tf-wishlist">
+            <table class="tf-table-wishlist">
+              <thead>
+                <tr>
+                  <th class="wishlist-item_remove"></th>
+                  <th class="wishlist-item_image"></th>
+                  <th class="wishlist-item_info">
+                    <p class="product-title fw-semibold">Produto</p>
+                  </th>
+                  <th class="wishlist-item_price">
+                    <p class="product-title fw-semibold">Preço Unitário</p>
+                  </th>
+                  <th class="wishlist-item_stock">
+                    <p class="product-title fw-semibold">Em estoque?</p>
+                  </th>
+                  <th class="wishlist-item_action"></th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr 
+                  v-for="item in items"
+                  :key="item._id"
+                  class="wishlist-item"
+                >
+                  <td class="wishlist-item_remove">
+                    <i 
+                      class="icon-close remove link cs-pointer"
+                      @click="toggleFavorite(item._id)"
+                    ></i>
+                  </td>
+                  <td class="wishlist-item_image" style="background:#fff">
+                    <a :href="`/${item.slug}`">
+                   
+                      <img 
+                        :src="item.pictures && item.pictures[0] ? item.pictures[0].normal.url : '/assets/img-placeholder.png'"
+                        :data-src="item.pictures && item.pictures[0] ? item.pictures[0].normal.url : '/assets/img-placeholder.png'"
+                        :alt="item.name" 
+                        class="lazyload"
+                      >
+                    </a>
+                  </td>
+                  <td class="wishlist-item_info">
+                    <a 
+                      class="text-line-clamp-2 body-md-2 fw-semibold text-secondary link"
+                      :href="`/${item.slug}`"
+                    >
+                      {{ item.name }}
+                    </a>
+                  </td>
+                  <td class="wishlist-item_price">
+                    <div class="price-wrap fw-medium flex-nowrap">
+                      <span 
+                        v-if="item.price_effective_discount"
+                        class="new-price price-text fw-medium mb-0"
+                      >
+                        {{ formatMoney(item.price_effective_discount.value) }}
+                      </span>
+                      <span 
+                        class="price-text fw-medium mb-0"
+                        :class="item.price_effective_discount ? 'old-price body-md-2 text-main-2 fw-normal' : 'new-price'"
+                      >
+                        {{ formatMoney(item.price) }}
+                      </span>
+                    </div>
+                  </td>
+                  <td class="wishlist-item_stock">
+                    <span 
+                      class="wishlist-stock-status"
+                      :class="{
+                        'text-success': item.quantity > 0,
+                        'text-danger': item.quantity === 0
+                      }"
+                    >
+                      {{ item.quantity > 0 ? 'Sim' : 'Não' }}
+                    </span>
+                  </td>
+                  <td class="wishlist-item_action">
+                    <button
+                      v-if="item.quantity > 0"
+                      class="tf-btn btn-gray w-100"
+                      :href="`/${item.slug}`"
+                    >
+                      <span class="text-white">Ver Produto</span>
+                    </button>
+                    <span v-else class="text-muted">Indisponível</span>
+                  </td>
+                </tr>
+              </tbody>
+              <tfoot v-if="!items.length" class="">
+                <tr>
+                  <td colspan="6" class="text-center">
+                    {{ i19noFavorites }}
+                  </td>
+                </tr>
+              </tfoot>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div v-else>
+      <div v-if="items.length">
+        <div
+          v-if="!productIds.length" 
+          class="recommended-items__title"
+        >
+        
+          <slot name="title">
+            <p class="lead">
+              {{ i19weRecommendToYou }}
+            </p>
+          </slot>
+        </div>
+
+        <div :class="rowClassName">
+          <div
+            v-for="item in items"
+            :key="item._id"
+            :class="colClassName"
+          >
+            <slot
+              name="item"
+              v-bind="{ item }"
+            >
+              <product-card
+                :product="item"
+                :is-loaded="true"
+                v-bind="productCardProps"
+              />
+            </slot>
+          </div>
+        </div>
+
+        <div
+          v-if="canLoadMore"
+          class="recommended-items__load-more"
+        >
+          <button
+            v-if="totalCount >= pageSize * (pageNumber + 1)"
+            class="btn btn-sm btn-outline-secondary"
+            @click="pageNumber++"
+          >
+            <i class="i-plus mr-1"></i> {{ i19seeMore }}
+          </button>
+        </div>
+      </div>
+    </div>
+  </transition>
+</section>
