@@ -18,7 +18,7 @@ const barCols = []
   <!-- Iconbox -->
   <div class="tf-sp-2 pt-0">
     <div class="container">
-      <div class="swiper tf-sw-iconbox" data-preview="5" data-tablet="3" data-mobile-sm="2" data-mobile="1"
+      <div class="swiper tf-sw-iconbox" data-preview="<%= barCols.length %>" data-tablet="3" data-mobile-sm="2" data-mobile="1"
            data-space-lg="20" data-space-md="20" data-space="15">
         <div class="swiper-wrapper">
           <% barCols.forEach(({ link, icon, title, text }, index) => { %>
