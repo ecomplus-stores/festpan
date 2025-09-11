@@ -6,12 +6,6 @@
       "full_width": true,
       "slides": [
         {
-          "start": "2025-09-02T12:00:38.449Z",
-          "end": "2025-09-08T02:59:00.000Z",
-          "img": "/img/uploads/fes-140_2025_soc_bnr_sem1_web_01-1-.jpg",
-          "link": "https://loja.festpan.com.br/search?term=fromas+caparroz&utm_source=site&utm_medium=banner&utm_campaign=c-sem1-caparroz"
-        },
-        {
           "start": "2025-09-04T19:45:23.926Z",
           "end": "2025-09-18T03:00:00.000Z",
           "img": "/img/uploads/br_pt_nptrade_ecommbannerfev25fastcake_m-1-1995x525px.jpg",
@@ -21,6 +15,12 @@
           "start": "2025-09-01T12:00:54.335Z",
           "end": "",
           "img": "/img/uploads/fes-140_2025_soc_bnr_sem1_web_02.jpg"
+        },
+        {
+          "start": "2025-09-11T11:34:01.783Z",
+          "end": "2025-10-01T11:34:05.719Z",
+          "img": "/img/uploads/midiakit_seara_2025_set_cukin_web_01.jpg",
+          "link": "https://loja.festpan.com.br/search?term=cukin"
         }
       ]
     },
