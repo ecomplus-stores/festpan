@@ -18,6 +18,11 @@
           "link": "https://loja.festpan.com.br/pk/recheios-forneavel"
         },
         {
+          "start": "2025-09-16T13:53:12.951Z",
+          "end": "2025-09-22T03:00:00.000Z",
+          "img": "/img/uploads/fes-131_2025_bnr_template_web_04-1-.jpg"
+        },
+        {
           "start": "2025-09-15T19:53:42.383Z",
           "end": "2025-09-22T03:00:00.000Z",
           "img": "/img/uploads/fes-131_2025_bnr_template_web_02.jpg",
@@ -34,11 +39,6 @@
           "end": "2025-10-01T11:34:05.719Z",
           "img": "/img/uploads/midiakit_seara_2025_set_cukin_web_01.jpg",
           "link": "https://loja.festpan.com.br/search?term=cukin"
-        },
-        {
-          "start": "2025-09-16T13:53:12.951Z",
-          "end": "2025-09-22T03:00:00.000Z",
-          "img": "/img/uploads/fes-131_2025_bnr_template_web_04-1-.jpg"
         }
       ]
     },
