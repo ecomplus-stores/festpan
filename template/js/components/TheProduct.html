@@ -235,6 +235,13 @@
                   {{ body.short_description }}
                 </p>
               </li>
+              <p
+              v-if="shortShelfLife"
+              class="product__shelf-life alert alert-warning inline-block"
+            >
+              Vencimento em
+              <strong>{{ shortShelfLife }}</strong>
+            </p>
             </ul>
           </div>
 

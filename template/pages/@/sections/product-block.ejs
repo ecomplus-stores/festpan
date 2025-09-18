@@ -74,6 +74,43 @@ if (stamps && Array.isArray(stamps.stamps_list) && stamps.stamps_list.length) {
                         </p>
                       </li>
                     </ul>
+                    <%
+                          let _expDate
+                          if (Array.isArray(_.state.specs)) {
+                            const _spec = _.state.specs.find(({ grid }) => grid === 'validade')
+                            if (_spec && _spec.text) {
+                              _expDate = new Date(_spec.text)
+                            }
+                          }
+                          if (!_expDate) {
+                            const _specifications = _.state.specifications
+                            const _dateStr = _specifications && _specifications.validade &&
+                              _specifications.validade[0] && _specifications.validade[0].text
+                            if (_dateStr) {
+                              _expDate = new Date(_dateStr)
+                            }
+                          }
+                          let _shelfLife = null
+                          if (_expDate) {
+                            const _now = Date.now()
+                            const _ts = _expDate.getTime()
+                            if (
+                              _ts > _now - 1000 * 60 * 60 * 24 * 60 &&
+                              _ts < _now + 1000 * 60 * 60 * 24 * 180
+                            ) {
+                              const _d = String(_expDate.getDate()).padStart(2, '0')
+                              const _m = String(_expDate.getMonth() + 1).padStart(2, '0')
+                              const _y = _expDate.getFullYear()
+                              _shelfLife = `${_d}/${_m}/${_y}`
+                            }
+                          }
+                          %>
+                          <% if (_shelfLife) { %>
+                            <p class="product__shelf-life alert alert-warning inline-block">
+                              Vencimento em
+                              <strong><%= _shelfLife %></strong>
+                            </p>
+                          <% } %>
                   </div>
 
                   <!-- Pricing Info -->
