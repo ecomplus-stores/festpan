@@ -12,16 +12,16 @@
           "link": "https://loja.festpan.com.br/search?term=fini"
         },
         {
-          "start": "2025-10-01T20:27:51.845Z",
-          "end": "2025-10-13T03:00:00.000Z",
-          "img": "/img/uploads/fes-208_2025_out_bnr_sem1_web_03.jpg",
-          "link": "https://loja.festpan.com.br/search?term=nelisul"
-        },
-        {
           "start": "2025-10-01T20:28:29.221Z",
           "end": "2025-10-16T03:00:00.000Z",
           "img": "/img/uploads/fes-208_2025_out_bnr_sem1_web_02.jpg",
           "link": "https://loja.festpan.com.br/search?term=nestl%C3%A9"
+        },
+        {
+          "start": "2025-10-01T20:27:51.845Z",
+          "end": "2025-10-13T03:00:00.000Z",
+          "img": "/img/uploads/fes-208_2025_out_bnr_sem1_web_03.jpg",
+          "link": "https://loja.festpan.com.br/search?term=nelisul"
         }
       ]
     },
