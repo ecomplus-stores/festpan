@@ -1679,3 +1679,21 @@ header #filterShop2{display:none!important}
     box-shadow: 0px 0px 0px;
   }
 }
+
+
+.card-product-wrapper .product-card__shelf-life{
+    position: absolute;
+    z-index: 2;
+    left: 5px;
+    bottom: 5px;
+    top: auto;
+    font-size: 12px;
+    padding: 3px 6px;
+    margin: 0;
+}
+@media(max-width:767.98px){
+  .card-product-wrapper .product-card__shelf-life{
+    font-size: 9px;
+    padding: 2px 5px;    
+  }
+}

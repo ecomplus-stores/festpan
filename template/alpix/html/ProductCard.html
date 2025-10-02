@@ -19,12 +19,19 @@
     <!-- <transition :enter-active-class="fadeInLeft"> -->
       <section v-if="!isLoading">
         <div class="card-product-wrapper">
+          <span
+              v-if="shortShelfLife"
+              class="product-card__shelf-life alert alert-warning"
+            >
+              Vencimento em
+              <strong>{{ shortShelfLife }}</strong>
+            </span>
           <a-link
             class="product-img"
             :href="`/${body.slug}`"
             :title="name"
           >
-          
+            
             <template v-if="body.pictures && body.pictures.length">
                 <a-picture
                   class="product-card__picture"
