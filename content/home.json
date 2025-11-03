@@ -6,16 +6,22 @@
       "full_width": true,
       "slides": [
         {
-          "start": "2025-11-03T20:37:09.331Z",
-          "end": "2025-11-17T03:00:00.000Z",
-          "img": "/img/uploads/midiakit_seara_2025_set_salada_web_01.jpg",
-          "link": "https://loja.festpan.com.br/p/linhasaladaseara"
-        },
-        {
           "start": "2025-11-03T20:38:01.339Z",
           "end": "2025-11-17T03:00:00.000Z",
           "img": "/img/uploads/fes-249_2025_nov_bnr_sem2_web_02-1-.jpg",
           "link": "https://loja.festpan.com.br/pkf/preparo-para-chantilly-mix-supreme-1l-amelia"
+        },
+        {
+          "start": "2025-11-03T20:38:57.467Z",
+          "end": "2025-11-17T03:00:00.000Z",
+          "img": "/img/uploads/fes-249_2025_nov_bnr_sem2_web_03.jpg",
+          "link": "https://loja.festpan.com.br/pk/recheionestle"
+        },
+        {
+          "start": "2025-11-03T20:37:09.331Z",
+          "end": "2025-11-17T03:00:00.000Z",
+          "img": "/img/uploads/midiakit_seara_2025_set_salada_web_01.jpg",
+          "link": "https://loja.festpan.com.br/p/linhasaladaseara"
         }
       ]
     },
