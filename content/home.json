@@ -15,15 +15,8 @@
         {
           "start": "",
           "end": "",
-          "img": "/img/uploads/FESTPAN_BNR_SEARA_SALADA_WEB.jpg",
-          "link": "https://loja.festpan.com.br/p/linhasaladaseara",
-          "alt": "456"
-        },
-        {
-          "start": "",
-          "end": "",
           "img": "/img/uploads/FES-249_2025_NOV_BNR_SEM2_WEB_03.jpg",
-          "link": "https://loja.festpan.com.br/pk/recheionestle&utm_source=BANNER&utm_medium=SITE&utm_campaign=C-SEM02-NESTLÉ",
+          "link": "https://loja.festpan.com.br/pk/recheionestle",
           "alt": "460"
         },
         {
@@ -32,6 +25,13 @@
           "img": "/img/uploads/FES-249_2025_NOV_BNR_SEM2_WEB_01.jpg",
           "link": "https://loja.festpan.com.br/pk/pistache&utm_source=BANNER&utm_medium=SITE&utm_campaign=c-sem02-pistache",
           "alt": "461"
+        },
+        {
+          "start": "",
+          "end": "",
+          "img": "/img/uploads/FESTPAN_BNR_SEARA_SALADA_WEB.jpg",
+          "link": "https://loja.festpan.com.br/p/linhasaladaseara",
+          "alt": "456"
         }
       ]
     },
