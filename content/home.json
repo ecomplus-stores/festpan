@@ -8,6 +8,27 @@
         {
           "start": "",
           "end": "",
+          "img": "/img/uploads/FES-252_2025_NOV_BNR_SEM5_WEB_01.jpg",
+          "link": "&utm_source=SITE&utm_medium=BANNER&utm_campaign=C-05-SEM-NOVEM",
+          "alt": "486"
+        },
+        {
+          "start": "",
+          "end": "",
+          "img": "/img/uploads/FES-252_2025_NOV_BNR_SEM5_WEB_02.jpg",
+          "link": "https://loja.festpan.com.br/pk/embalgensnatalinas",
+          "alt": "487"
+        },
+        {
+          "start": "",
+          "end": "",
+          "img": "/img/uploads/FES-252_2025_NOV_BNR_SEM5_WEB_03.jpg",
+          "link": "&utm_source=SITE&utm_medium=BANNER&utm_campaign=C-05-SEM-NOVEM",
+          "alt": "488"
+        },
+        {
+          "start": "",
+          "end": "",
           "img": "/img/uploads/FES-251_2025_NOV_BNR_SEM4_WEB_02.jpg",
           "link": "https://loja.festpan.com.br/pk/docedeleite",
           "alt": "480"
@@ -25,27 +46,6 @@
           "img": "/img/uploads/FES-251_2025_NOV_BNR_SEM4_WEB_01.jpg",
           "link": "https://loja.festpan.com.br/search?term=panetone",
           "alt": "481"
-        },
-        {
-          "start": "",
-          "end": "",
-          "img": "/img/uploads/FES-252_2025_NOV_BNR_SEM5_WEB_01.jpg",
-          "link": "&utm_source=SITE&utm_medium=BANNER&utm_campaign=C-05-SEM-NOVEM",
-          "alt": "486"
-        },
-        {
-          "start": "",
-          "end": "",
-          "img": "/img/uploads/FES-252_2025_NOV_BNR_SEM5_WEB_02.jpg",
-          "link": "&utm_source=SITE&utm_medium=BANNER&utm_campaign=C-05-SEM-NOVEM",
-          "alt": "487"
-        },
-        {
-          "start": "",
-          "end": "",
-          "img": "/img/uploads/FES-252_2025_NOV_BNR_SEM5_WEB_03.jpg",
-          "link": "&utm_source=SITE&utm_medium=BANNER&utm_campaign=C-05-SEM-NOVEM",
-          "alt": "488"
         }
       ]
     },
