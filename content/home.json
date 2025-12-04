@@ -18,6 +18,12 @@
           "link": "https://loja.festpan.com.br/pk/linhaxamego"
         },
         {
+          "start": "2025-12-04T14:56:43.613Z",
+          "end": "2025-12-08T03:00:00.000Z",
+          "img": "/img/uploads/fes-312_2025_dez_bnr_sem1_web_04.jpg",
+          "link": "https://loja.festpan.com.br/pk/la-crema"
+        },
+        {
           "start": "",
           "end": "",
           "img": "/img/uploads/FES-252_2025_NOV_BNR_SEM5_WEB_01.jpg",
@@ -37,13 +43,6 @@
           "img": "/img/uploads/FES-251_2025_NOV_BNR_SEM4_WEB_01.jpg",
           "link": "https://loja.festpan.com.br/search?term=panetone",
           "alt": "481"
-        },
-        {
-          "start": "",
-          "end": "",
-          "img": "/img/uploads/FES-251_2025_NOV_BNR_SEM4_WEB_02.jpg",
-          "link": "https://loja.festpan.com.br/pk/docedeleite",
-          "alt": "480"
         }
       ]
     },
