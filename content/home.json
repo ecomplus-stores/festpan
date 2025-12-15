@@ -18,17 +18,17 @@
           "link": "https://loja.festpan.com.br/search?term=ovomaltine+"
         },
         {
-          "start": "2025-12-09T21:16:03.728Z",
-          "end": "2025-12-15T03:00:00.000Z",
-          "img": "/img/uploads/fes-313_2025_dez_bnr_sem2_web_01.jpg",
-          "link": "https://loja.festpan.com.br/pk/ultrafest"
-        },
-        {
           "start": "",
           "end": "",
           "img": "/img/uploads/FES-252_2025_NOV_BNR_SEM5_WEB_01.jpg",
           "link": "https://loja.festpan.com.br/pk/art-tart",
           "alt": "486"
+        },
+        {
+          "start": "2025-12-15T11:35:54.440Z",
+          "end": "2025-12-23T03:00:00.000Z",
+          "img": "/img/uploads/fes-314_2025_dez_bnr_sem3_web_02.jpg",
+          "link": "https://loja.festpan.com.br/p/margarinaamelia"
         }
       ]
     },
