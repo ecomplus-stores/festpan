@@ -6,50 +6,11 @@
       "full_width": true,
       "slides": [
         {
-          "start": "2025-12-26T20:11:59.211Z",
+          "start": "",
           "end": "",
-          "img": "/img/uploads/fes-319_2025_dez_bnr_web.jpg"
+          "img": "/img/uploads/FES-318_2025_DEZ_WEB_COMUNICADO_POPUP.jpg‎"
         }
       ]
-    },
-    {
-      "type": "info-bar",
-      "enabled": true
-    },
-    {
-      "type": "collection-shelf",
-      "shuffle": true,
-      "limit": 12,
-      "page": 1,
-      "sort": "offers",
-      "title": "Aqui tem promoção todo dia"
-    },
-    {
-      "autoplay": 0,
-      "page": 1,
-      "title": "Mais Vendidos",
-      "shuffle": true,
-      "headless": false,
-      "type": "collection-shelf",
-      "limit": 12,
-      "collection_id": null,
-      "sort": "sales"
-    },
-    {
-      "type": "collection-shelf",
-      "shuffle": true,
-      "limit": 12,
-      "page": 1,
-      "sort": "news",
-      "title": "Lançamentos"
-    },
-    {
-      "type": "collection-shelf",
-      "shuffle": true,
-      "limit": 12,
-      "page": 1,
-      "sort": "views",
-      "title": "Destaques "
     }
   ],
   "meta_title": "Panificação em Geral | Pré-Misturas, Fermentos e Utensílios | Padarias, Confeitarias e Food Service"
