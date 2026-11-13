@@ -2,7 +2,16 @@ const functions = require('firebase-functions')
 const { initializeApp } = require('firebase-admin/app')
 const { getFirestore } = require('firebase-admin/firestore')
 const axios = require('axios')
-const { ssr } = require('@ecomplus/storefront-renderer/functions/')
+const { ssr: renderSsr } = require('@ecomplus/storefront-renderer/functions/')
+
+// Security: the renderer `/~reverse-proxy/` route forwards visitor headers to any URL,
+// which exposes the GCP metadata server (service account token). Keep it disabled.
+const ssr = (req, res) => {
+  if (/reverse-proxy/i.test(`${req.url}${req.originalUrl || ''}`)) {
+    return res.sendStatus(404)
+  }
+  return renderSsr(req, res)
+}
 
 process.env.STOREFRONT_LONG_CACHE = 'false'
 
